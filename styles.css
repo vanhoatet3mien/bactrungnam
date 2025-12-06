@@ -85,13 +85,12 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
 }
 
 .vietnam-map {
-    height: 100%;       /* luôn full chiều cao */
-    width: auto;        /* không méo ảnh */
+    height: 100%;
+    width: auto;
     object-fit: contain;
+    pointer-events: none; /* không bị kéo khi rê chuột */
 }
 
-
-/* Map points */
 .map-point {
     position: absolute;
     width: 22px;
@@ -105,8 +104,29 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
 }
 
 .map-point:hover {
-    transform: scale(1.3);
+    transform: scale(1.2);
 }
+
+
+/* Map points */
+/* Miền Bắc */
+#point-north {
+    top: 12%;
+    left: 48%;
+}
+
+/* Miền Trung */
+#point-central {
+    top: 44%;
+    left: 52%;
+}
+
+/* Miền Nam */
+#point-south {
+    top: 78%;
+    left: 46%;
+}
+
 
 
 /* Region page content */
@@ -178,4 +198,5 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
     color: #6E1315;
     line-height: 1.5;
 }
+
 
