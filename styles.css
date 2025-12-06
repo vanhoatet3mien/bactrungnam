@@ -111,3 +111,61 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
   .vn-map{height:420px}
   #intro-video{max-width:100%}
 }
+
+.region-page {
+    padding: 40px 8%;
+    background: #FCF2EF;
+    min-height: 100vh;
+}
+
+.region-header h1 {
+    font-size: 36px;
+    color: #AD110C;
+    margin-bottom: 20px;
+}
+
+.region-banner {
+    width: 100%;
+    border-radius: 14px;
+    margin-bottom: 30px;
+}
+
+/* Accordion */
+.accordion-item {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    border: 2px solid #FAB42C;
+}
+
+.accordion-button {
+    width: 100%;
+    text-align: left;
+    padding: 18px;
+    font-size: 18px;
+    color: #6E1315;
+    cursor: pointer;
+    background: #FDE9D6;
+    border: none;
+    outline: none;
+    transition: 0.25s;
+}
+
+.accordion-button:hover {
+    background: #FAB42C;
+    color: white;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 18px;
+    transition: max-height 0.35s ease;
+}
+
+.accordion-content p {
+    padding: 15px 0;
+    color: #6E1315;
+    line-height: 1.5;
+}
