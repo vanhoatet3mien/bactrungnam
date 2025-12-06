@@ -214,3 +214,21 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
   showPage('intro')
 })
+
+// Accordion
+document.querySelectorAll(".accordion-button").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const content = btn.nextElementSibling;
+
+        // Đóng tất cả accordion khác
+        document.querySelectorAll(".accordion-content").forEach(c => {
+            if (c !== content) c.style.maxHeight = null;
+        });
+
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    });
+});
