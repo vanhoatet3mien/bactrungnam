@@ -74,56 +74,58 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
 #unmute-video{background:transparent;color:var(--deep-red);border:2px solid var(--deep-red);}
 
 /* Map */
-/* MAP FULL MÀN HÌNH – ẢNH ĐỨNG */
+/* Container full màn hình */
 .map-container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100vh;     /* FULL chiều cao web */
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: hidden;   /* Ẩn phần dư */
+    background: #fceee8; /* màu nền tùy bạn */
 }
 
+/* Ảnh full chiều cao */
 .vietnam-map {
     height: 100%;
-    width: auto;
+    width: auto;        /* Giữ tỉ lệ */
     object-fit: contain;
     display: block;
-    user-select: none;
-    pointer-events: none; /* để không cản click vào điểm */
 }
 
-/* 3 ĐIỂM MIỀN */
+/* Điểm 3 miền */
 .map-point {
     position: absolute;
-    width: 22px;
-    height: 22px;
-    background-color: #AD110C;
-    border: 3px solid #E87637;
+    width: 26px;
+    height: 26px;
+    background: radial-gradient(circle, #ffd5c2, #9c0606);
     border-radius: 50%;
-    box-shadow: 0 0 12px #AD110C, 0 0 25px #E87637;
+    box-shadow: 0 0 12px rgba(255, 100, 50, 0.9);
     cursor: pointer;
-    transition: transform .2s ease;
-}
-.map-point:hover {
-    transform: scale(1.3);
+    transition: 0.25s;
 }
 
-/* VỊ TRÍ 3 MIỀN (đã tính theo đúng ảnh bạn dùng) */
+/* Hover */
+.map-point:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 20px rgba(255, 80, 40, 1);
+}
+
+/* --- VỊ TRÍ CHUẨN THEO ẢNH FULL MÀN HÌNH --- */
 #point-north {
-    top: 16%;
-    left: 50%;
+    top: 20%;
+    left: 48%;
 }
 
 #point-central {
-    top: 45%;
+    top: 51%;
     left: 55%;
 }
 
 #point-south {
-    top: 82%;
-    left: 48%;
+    top: 86%;
+    left: 50%;
 }
 
 
@@ -202,3 +204,4 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
     max-width: 100% !important;
     padding: 0;
 }
+
