@@ -240,3 +240,41 @@ document.querySelectorAll(".map-point").forEach(point => {
         showPage(region); // gọi trang tương ứng: north / central / south
     });
 });
+
+let map = document.getElementById("map-area");
+let scale = 1;
+let posX = 0, posY = 0;
+let startX, startY;
+let dragging = false;
+
+map.addEventListener("mousedown", e => {
+    dragging = true;
+    map.style.cursor = "grabbing";
+    startX = e.clientX - posX;
+    startY = e.clientY - posY;
+});
+
+window.addEventListener("mouseup", () => {
+    dragging = false;
+    map.style.cursor = "grab";
+});
+
+window.addEventListener("mousemove", e => {
+    if (!dragging) return;
+    posX = e.clientX - startX;
+    posY = e.clientY - startY;
+    update();
+});
+
+function update() {
+    map.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+}
+
+/* Zoom */
+window.addEventListener("wheel", e => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+
+    scale = Math.min(Math.max(0.6, scale + delta), 3);
+    update();
+}, { passive: false });
