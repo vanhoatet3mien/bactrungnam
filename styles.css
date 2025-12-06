@@ -74,14 +74,17 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
 #unmute-video{background:transparent;color:var(--deep-red);border:2px solid var(--deep-red);}
 
 /* Map */
+/* vùng bản đồ full màn hình */
 .map-container {
     position: relative;
-    width: 100%;
-    height: 100vh; /* FULL toàn bộ chiều cao màn hình */
+    width: 100vw;
+    height: 100vh;   /* quan trọng – nếu thiếu ảnh sẽ không hiển thị */
     background-image: url("https://trangtriquangcao.com/wp-content/uploads/2022/12/ban-do-vietnam-vector-03-742x1024.png");
-    background-size: cover;     /* FULL màn hình */
-    background-position: center; 
+    background-size: contain;      /* << đổi từ cover → contain để hiện đủ bản đồ */
+    background-position: center;
     background-repeat: no-repeat;
+    overflow: hidden;
+    background-color: #ffece5;     /* nền ngoài ảnh */
 }
 
 /* Style điểm */
@@ -192,5 +195,6 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
     max-width: 100% !important;
     padding: 0;
 }
+
 
 
