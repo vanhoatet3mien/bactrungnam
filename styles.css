@@ -89,6 +89,9 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
     height: 100%;
     width: auto;
     object-fit: contain;
+    display: block;
+    user-select: none;
+    pointer-events: none; /* để không cản click vào điểm */
 }
 
 /* 3 ĐIỂM MIỀN */
@@ -109,18 +112,18 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
 
 /* VỊ TRÍ 3 MIỀN (đã tính theo đúng ảnh bạn dùng) */
 #point-north {
-    top: 12%;
-    left: 48%;
+    top: 16%;
+    left: 50%;
 }
 
 #point-central {
-    top: 44%;
-    left: 52%;
+    top: 45%;
+    left: 55%;
 }
 
 #point-south {
-    top: 78%;
-    left: 46%;
+    top: 82%;
+    left: 48%;
 }
 
 
@@ -195,4 +198,7 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
 }
 
 
-
+#map-page {
+    max-width: 100% !important;
+    padding: 0;
+}
