@@ -1,215 +1,89 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Tết 3 Miền</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bản đồ Tết 3 Miền</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header class="site-header">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Vietnam_Traditional_Pattern.svg/768px-Vietnam_Traditional_Pattern.svg.png" alt="Logo">
-    <button id="menu-toggle" aria-expanded="false">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/2560px-Flag_of_Vietnam.svg.png" height="40">
+    
+    <button id="menu-toggle">
         <span class="hamburger"></span>
     </button>
 </header>
 
-<nav id="side-menu" class="side-menu" aria-hidden="true">
+<!-- MENU -->
+<nav id="side-menu" class="side-menu">
     <ul>
-        <li><button class="nav-btn" data-target="intro">Trang chủ</button></li>
-        <li><button class="nav-btn" data-target="video-page">Video</button></li>
-        <li><button class="nav-btn" data-target="map">Bản đồ</button></li>
-        <li><button class="nav-btn" data-target="north">Miền Bắc</button></li>
-        <li><button class="nav-btn" data-target="central">Miền Trung</button></li>
-        <li><button class="nav-btn" data-target="south">Miền Nam</button></li>
+        <li><button onclick="showPage('map-page')">Bản đồ</button></li>
+        <li><button onclick="showPage('north-page')">Miền Bắc</button></li>
+        <li><button onclick="showPage('central-page')">Miền Trung</button></li>
+        <li><button onclick="showPage('south-page')">Miền Nam</button></li>
     </ul>
 </nav>
 
-<!-- INTRO PAGE -->
-<div id="intro" class="page active">
-    <div class="intro-card card">
-        <h1>Tết 3 Miền Việt Nam</h1>
-        <p>Khám phá văn hóa Tết Bắc – Trung – Nam</p>
-        <button id="intro-continue">Tiếp tục</button>
-    </div>
-</div>
-
-<!-- VIDEO PAGE -->
-<div id="video-page" class="page">
-    <div class="video-wrap">
-        <video id="intro-video" playsinline>
-            <source src="your-video.mp4" type="video/mp4">
-        </video>
-        <div class="video-controls">
-            <button id="skip-video">Bỏ qua</button>
-            <button id="unmute-video" aria-pressed="false">Bật âm</button>
-        </div>
-    </div>
-</div>
-
-<!-- MAP PAGE -->
-<div id="map" class="page">
+<!-- PAGE 1: BẢN ĐỒ -->
+<section id="map-page" class="page active">
     <div class="map-wrapper">
-        <div id="map-area">
 
-            <img 
-                src="https://trangtriquangcao.com/wp-content/uploads/2022/12/ban-do-vietnam-vector-03-742x1024.png"
-                id="vn-map" alt="Bản đồ Việt Nam">
-
-            <!-- 3 điểm -->
-            <div class="map-point" id="point-north" data-region="north"></div>
-            <div class="map-point" id="point-central" data-region="central"></div>
-            <div class="map-point" id="point-south" data-region="south"></div>
-
-        </div>
-    </div>
-</div>
-
-<!-- REGION: NORTH -->
-<div id="north" class="page region-page">
-    <button class="back-to-map">← Quay lại bản đồ</button>
-    <h1>Miền Bắc</h1>
-
-    <div class="accordion-item">
-        <button class="accordion-button">Phong tục</button>
-        <div class="accordion-content"><p>Đây là nội dung phong tục miền Bắc...</p></div>
-    </div>
-</div>
-
-<!-- REGION: CENTRAL -->
-<div id="central" class="page region-page">
-    <button class="back-to-map">← Quay lại bản đồ</button>
-    <h1>Miền Trung</h1>
-
-    <div class="accordion-item">
-        <button class="accordion-button">Ẩm thực</button>
-        <div class="accordion-content"><p>Đây là nội dung ẩm thực miền Trung...</p></div>
-    </div>
-</div>
-
-<!-- REGION: SOUTH -->
-<section id="south" class="page region-page">
-    <div class="region-header">
-        <h1>Văn Hóa Tết Miền Nam</h1>
-        <!-- GHI CHÚ: bạn thay ảnh banner Tết Miền Nam -->
-        <img src="assets/images/banner-mien-nam.jpg" alt="Tết Miền Nam" class="region-banner">
-    </div>
-
-    <div class="accordion">
-
-        <!-- 1. Không khí Tết -->
-        <div class="accordion-item">
-            <button class="accordion-button">Không khí – Bối cảnh Tết miền Nam</button>
-            <div class="accordion-content">
-                <p>• Trời nắng ấm, không lạnh như miền Bắc.  
-                • Đường phố rực rỡ sắc vàng (hoa mai, cúc), đỏ (lân – rồng), xanh (dừa – kiểng).  
-                • Không khí náo nhiệt, tưng bừng từ 20–28 Tết.</p>
-            </div>
-        </div>
-
-        <!-- 2. Phong tục – tập quán -->
-        <div class="accordion-item">
-            <button class="accordion-button">Phong tục – Tập quán</button>
-            <div class="accordion-content">
-                <p>• Cúng tất niên – rước ông bà về ăn Tết.  
-                • Đêm Giao Thừa: cúng trời đất – cầu bình an.  
-                • Chúc Tết nhẹ nhàng, đơn giản, ưu tiên không khí vui vẻ.  
-                • Đi chùa xin lộc đầu năm.</p>
-            </div>
-        </div>
-
-        <!-- 3. Mâm cỗ -->
-        <div class="accordion-item">
-            <button class="accordion-button">Mâm cỗ Tết miền Nam</button>
-            <div class="accordion-content">
-                <p>• Bánh tét – củ kiệu – thịt kho hột vịt.  
-                • Canh khổ qua nhồi thịt, gỏi tôm thịt, nem chua, heo quay.  
-                • Mâm cúng đầy đủ, nhiều màu sắc, thiên về các món kho – xào – chiên.</p>
-            </div>
-        </div>
-
-        <!-- 4. Kiêng kỵ -->
-        <div class="accordion-item">
-            <button class="accordion-button">Những điều kiêng kỵ</button>
-            <div class="accordion-content">
-                <p>• Tránh cãi vã, nặng lời, làm đổ vỡ.  
-                • Không quét nhà mùng 1.  
-                • Hạn chế vay – mượn đầu năm.</p>
-            </div>
-        </div>
-
-        <!-- 5. Trang phục -->
-        <div class="accordion-item">
-            <button class="accordion-button">Trang phục ngày Tết</button>
-            <div class="accordion-content">
-                <p>• Quần áo thoải mái, thoáng mát vì thời tiết nóng.  
-                • Ưu tiên màu đỏ – vàng để lấy may.  
-                • Áo dài cách tân phổ biến.</p>
-            </div>
-        </div>
-
-        <!-- 6. Hoạt động -->
-        <div class="accordion-item">
-            <button class="accordion-button">Hoạt động – Lễ hội</button>
-          <div class="accordion-content">
-                <p>• Dạo chợ hoa Nguyễn Huệ – Bến Ninh Kiều – công viên Gia Định.  
-                • Xem múa lân – bắn pháo hoa.  
-                • Chúc Tết họ hàng – du xuân vùng sông nước.</p>
-            </div>
-        </div>
-
-        <!-- 7. Trang trí -->
-        <div class="accordion-item">
-            <button class="accordion-button">Trang trí nhà cửa</button>
-            <div class="accordion-content">
-                <p>• Hoa mai vàng là chủ đạo.  
-                • Mâm trái cây lớn – bình rượu – ông Táo – các tượng trang trí.  
-                • Treo bao lì xì trên cây mai để “rước lộc”.</p>
-            </div>
-        </div>
-
-        <!-- 8. Ngũ quả -->
-        <div class="accordion-item">
-            <button class="accordion-button">Mâm ngũ quả miền Nam</button>
-            <div class="accordion-content">
-                <p>Gồm: Mãng cầu – Dừa – Đu đủ – Xoài – Sung  
-                → Ý nghĩa: “Cầu vừa đủ xài – sung túc”.</p>
-            </div>
-        </div>
-
-        <!-- 9. Tâm linh -->
-        <div class="accordion-item">
-            <button class="accordion-button">Quan niệm tâm linh</button>
-            <div class="accordion-content">
-                <p>• Xông đất rất quan trọng – chọn người hợp tuổi.  
-                • Cúng ông bà là nghi lễ chính, thể hiện sự hiếu kính.</p>
-            </div>
-        </div>
-
-        <!-- 10. Giao tiếp -->
-        <div class="accordion-item">
-            <button class="accordion-button">Giao tiếp – lời chúc</button>
-            <div class="accordion-content">
-                <p>• “Năm mới an khang – thịnh vượng”, “Vạn sự như ý”.  
-                • Không nói lời xui, không nhắc chuyện không vui.</p>
-            </div>
-        </div>
-
-        <!-- 11. Tết hiện đại -->
-        <div class="accordion-item">
-            <button class="accordion-button">Sự thay đổi hiện đại</button>
-            <div class="accordion-content">
-                <p>• Giảm lễ nghi, tăng giải trí – du lịch.  
-                • Bánh tét mini, mâm cỗ gọn – sạch – tiện.  
-                • Nhiều gia đình trang trí theo phong cách hiện đại.</p>
-            </div>
+        <!-- BẢN ĐỒ KÉO – ZOOM -->
+        <div id="map" class="map-image">
+            <img id="map-img"
+                 src="https://trangtriquangcao.com/wp-content/uploads/2022/12/ban-do-vietnam-vector-03-742x1024.png">
+            
+            <!-- 3 ĐIỂM -->
+            <div class="map-point" id="point-north" onclick="showPage('north-page')"></div>
+            <div class="map-point" id="point-central" onclick="showPage('central-page')"></div>
+            <div class="map-point" id="point-south" onclick="showPage('south-page')"></div>
         </div>
     </div>
 </section>
 
-<footer class="site-footer">
-    © <span id="year"></span> – Tết 3 Miền
-</footer>
+<!-- PAGE 2: MIỀN NAM -->
+<section id="south-page" class="page region-page">
+    <div class="region-header">
+        <h1>Văn hóa Tết – Miền Nam</h1>
+    </div>
+
+    <img class="region-banner" 
+         src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Ho_Chi_Minh_City_during_Tet.jpg/640px-Ho_Chi_Minh_City_during_Tet.jpg">
+
+    <!-- Accordion -->
+    <div class="accordion-item">
+        <button class="accordion-button">🌼 1. Phong tục – Tập quán</button>
+        <div class="accordion-content">
+            <p>Miền Nam có tiết trời ấm áp nên hoạt động tết sôi nổi, người dân thường chúc tết, lì xì, đi chùa đầu năm,...</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <button class="accordion-button">🍲 2. Ẩm thực ngày Tết</button>
+        <div class="accordion-content">
+            <p>Bánh tét, thịt kho hột vịt, củ kiệu tôm khô,... là những món đặc trưng không thể thiếu.</p>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <button class="accordion-button">🎎 3. Trang phục & màu sắc</button>
+        <div class="accordion-content">
+            <p>Nổi bật với áo dài cách tân, họa tiết hoa mai, sắc vàng – đỏ tượng trưng may mắn.</p>
+        </div>
+    </div>
+</section>
+
+<!-- 2 TRANG CÒN LẠI (để trống cho bạn điền sau) -->
+<section id="north-page" class="page region-page">
+    <h1>Miền Bắc</h1>
+</section>
+
+<section id="central-page" class="page region-page">
+    <h1>Miền Trung</h1>
+</section>
 
 <script src="script.js"></script>
 </body>
