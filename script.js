@@ -232,3 +232,11 @@ document.querySelectorAll(".accordion-button").forEach(btn => {
         }
     });
 });
+
+// Bắt sự kiện click 3 điểm bản đồ
+document.querySelectorAll(".map-point").forEach(point => {
+    point.addEventListener("click", () => {
+        const region = point.dataset.region;
+        showPage(region); // gọi trang tương ứng: north / central / south
+    });
+});
