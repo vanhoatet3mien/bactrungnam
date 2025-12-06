@@ -74,58 +74,46 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
 #unmute-video{background:transparent;color:var(--deep-red);border:2px solid var(--deep-red);}
 
 /* Map */
-/* Container full màn hình */
 .map-container {
     position: relative;
     width: 100%;
-    height: 100vh;     /* FULL chiều cao web */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;   /* Ẩn phần dư */
-    background: #fceee8; /* màu nền tùy bạn */
+    height: 100vh; /* FULL toàn bộ chiều cao màn hình */
+    background-image: url("https://trangtriquangcao.com/wp-content/uploads/2022/12/ban-do-vietnam-vector-03-742x1024.png");
+    background-size: cover;     /* FULL màn hình */
+    background-position: center; 
+    background-repeat: no-repeat;
 }
 
-/* Ảnh full chiều cao */
-.vietnam-map {
-    height: 100%;
-    width: auto;        /* Giữ tỉ lệ */
-    object-fit: contain;
-    display: block;
-}
-
-/* Điểm 3 miền */
+/* Style điểm */
 .map-point {
     position: absolute;
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
     background: radial-gradient(circle, #ffd5c2, #9c0606);
     border-radius: 50%;
-    box-shadow: 0 0 12px rgba(255, 100, 50, 0.9);
+    box-shadow: 0 0 15px rgba(255, 80, 40, 0.9);
     cursor: pointer;
-    transition: 0.25s;
+    transition: 0.25s ease;
 }
 
-/* Hover */
 .map-point:hover {
-    transform: scale(1.3);
-    box-shadow: 0 0 20px rgba(255, 80, 40, 1);
+    transform: scale(1.2);
 }
 
-/* --- VỊ TRÍ CHUẨN THEO ẢNH FULL MÀN HÌNH --- */
+/* Vị trí bằng % theo background */
 #point-north {
-    top: 20%;
-    left: 48%;
+    top: 21%;
+    left: 49%;
 }
 
 #point-central {
-    top: 51%;
-    left: 55%;
+    top: 52%;
+    left: 57%;
 }
 
 #point-south {
     top: 86%;
-    left: 50%;
+    left: 51%;
 }
 
 
@@ -204,4 +192,5 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
     max-width: 100% !important;
     padding: 0;
 }
+
 
