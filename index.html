@@ -1,127 +1,94 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Văn hoá Tết 3 Miền</title>
-
-  <!-- NOTE: thay đường dẫn font nếu muốn dùng custom fonts.
-       Ví dụ: <link href="path/to/font.css" rel="stylesheet"> -->
-  <!-- Ghi chú: nếu dùng Google Fonts, chèn link ở đây -->
-
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <title>Tết 3 Miền</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- GLOBAL HEADER: logo + small menu button -->
-  <header class="site-header">
-    <div class="left">
-      <!-- NOTE: thay 'logo.png' bằng logo của bạn -->
-      <img id="site-logo" src="assets/logo.png" alt="Logo Web - Văn hoá Tết 3 Miền" />
-      <h1 class="visually-hidden">Văn hoá Tết 3 Miền</h1>
-    </div>
-
-    <button id="menu-toggle" aria-label="Mở menu" aria-expanded="false">
-      <span class="hamburger"></span>
+<header class="site-header">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Vietnam_Traditional_Pattern.svg/768px-Vietnam_Traditional_Pattern.svg.png" alt="Logo">
+    <button id="menu-toggle" aria-expanded="false">
+        <span class="hamburger"></span>
     </button>
-  </header>
+</header>
 
-  <!-- SIDE / POPUP MENU -->
-  <nav id="side-menu" class="side-menu" aria-hidden="true">
+<nav id="side-menu" class="side-menu" aria-hidden="true">
     <ul>
-      <li><button class="nav-btn" data-target="map">Bản đồ</button></li>
-      <li class="submenu">Danh sách
-        <ul>
-          <li><button class="nav-btn" data-target="north">Miền Bắc</button></li>
-          <li><button class="nav-btn" data-target="central">Miền Trung</button></li>
-          <li><button class="nav-btn" data-target="south">Miền Nam</button></li>
-        </ul>
-      </li>
-      <li><button class="nav-btn" data-target="about">Giới thiệu web</button></li>
-      <li><button class="nav-btn" data-target="team">Giới thiệu đội ngũ</button></li>
+        <li><button class="nav-btn" data-target="intro">Trang chủ</button></li>
+        <li><button class="nav-btn" data-target="video-page">Video</button></li>
+        <li><button class="nav-btn" data-target="map">Bản đồ</button></li>
+        <li><button class="nav-btn" data-target="north">Miền Bắc</button></li>
+        <li><button class="nav-btn" data-target="central">Miền Trung</button></li>
+        <li><button class="nav-btn" data-target="south">Miền Nam</button></li>
     </ul>
-  </nav>
+</nav>
 
-  <!-- MAIN APP (single-page style with sections) -->
-  <main id="app">
+<!-- INTRO PAGE -->
+<div id="intro" class="page active">
+    <div class="intro-card card">
+        <h1>Tết 3 Miền Việt Nam</h1>
+        <p>Khám phá văn hóa Tết Bắc – Trung – Nam</p>
+        <button id="intro-continue">Tiếp tục</button>
+    </div>
+</div>
 
-    <!-- 1) Landing / Intro page -->
-    <section id="intro" class="page active">
-      <div class="card intro-card">
-        <h2>Chào mừng đến với "Văn hoá Tết 3 Miền"</h2>
-        <p>
-          <!-- NOTE: thay đoạn mô tả ngắn ở đây -->
-          Trang này giới thiệu các phong tục, ẩm thực và hoạt động Tết ở Bắc - Trung - Nam.
-        </p>
-        <div class="controls">
-          <button id="intro-continue">Tiếp tục</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2) Video intro page -->
-    <section id="video-page" class="page">
-      <div class="video-wrap">
-        <!-- NOTE: thay 'teT_intro.mp4' bằng file video của bạn.
-             Để đảm bảo autoplay trên hầu hết trình duyệt, video được mute lúc autoplay.
-             Nếu bạn muốn có âm thanh tự động, cần user gesture (khó guarantee).
-        -->
-        <video id="intro-video" playsinline muted preload="auto" width="1280" height="720">
-          <source src="assets/teT_intro.mp4" type="video/mp4" />
-          <!-- NOTE: có thể thêm <source> cho webm, ogg nếu muốn -->
-          Trình duyệt của bạn không hỗ trợ video.
+<!-- VIDEO PAGE -->
+<div id="video-page" class="page">
+    <div class="video-wrap">
+        <video id="intro-video" playsinline>
+            <source src="your-video.mp4" type="video/mp4">
         </video>
-
         <div class="video-controls">
-          <button id="skip-video">Bỏ qua</button>
-          <button id="unmute-video" aria-pressed="false">Bật âm</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3) Map main page -->
-<section id="map" class="page">
-    <div id="map-page" class="page active">
-    <div class="map-wrapper">
-        <div id="map-area">
-            <img 
-                src="https://trangtriquangcao.com/wp-content/uploads/2022/12/ban-do-vietnam-vector-03-742x1024.png"
-                id="vn-map"
-                alt="Bản đồ Việt Nam"
-            >
-
-            <!-- Các điểm -->
-            <div class="map-point" id="point-north"></div>
-            <div class="map-point" id="point-central"></div>
-            <div class="map-point" id="point-south"></div>
+            <button id="skip-video">Bỏ qua</button>
+            <button id="unmute-video" aria-pressed="false">Bật âm</button>
         </div>
     </div>
 </div>
-</section>
 
-    <!-- 4) Region pages -->
-    <section id="north" class="page region-page">
-      <article>
-        <h2>Miền Bắc</h2>
-        <!-- NOTE: thay nội dung bằng văn bản, ảnh, video, audio theo ý bạn -->
-        <p>Ghi chú: Nội dung miêu tả phong tục, món ăn, trang phục, mâm cỗ, hoạt động ở miền Bắc.</p>
-        <div class="media-note">[Ảnh minh họa: put assets/north.jpg]</div>
-        <button class="back-to-map">Quay lại bản đồ</button>
-      </article>
-    </section>
+<!-- MAP PAGE -->
+<div id="map" class="page">
+    <div class="map-wrapper">
+        <div id="map-area">
 
-    
-    <section id="central" class="page region-page">
-      <article>
-        <h2>Miền Trung</h2>
-        <p>Ghi chú: Nội dung miêu tả miền Trung.</p>
-        <div class="media-note">[Ảnh minh họa: put assets/central.jpg]</div>
-        <button class="back-to-map">Quay lại bản đồ</button>
-      </article>
-    </section>
-    
+            <img 
+                src="https://trangtriquangcao.com/wp-content/uploads/2022/12/ban-do-vietnam-vector-03-742x1024.png"
+                id="vn-map" alt="Bản đồ Việt Nam">
 
-   <section id="south" class="page region-page">
+            <!-- 3 điểm -->
+            <div class="map-point" id="point-north" data-region="north"></div>
+            <div class="map-point" id="point-central" data-region="central"></div>
+            <div class="map-point" id="point-south" data-region="south"></div>
+
+        </div>
+    </div>
+</div>
+
+<!-- REGION: NORTH -->
+<div id="north" class="page region-page">
+    <button class="back-to-map">← Quay lại bản đồ</button>
+    <h1>Miền Bắc</h1>
+
+    <div class="accordion-item">
+        <button class="accordion-button">Phong tục</button>
+        <div class="accordion-content"><p>Đây là nội dung phong tục miền Bắc...</p></div>
+    </div>
+</div>
+
+<!-- REGION: CENTRAL -->
+<div id="central" class="page region-page">
+    <button class="back-to-map">← Quay lại bản đồ</button>
+    <h1>Miền Trung</h1>
+
+    <div class="accordion-item">
+        <button class="accordion-button">Ẩm thực</button>
+        <div class="accordion-content"><p>Đây là nội dung ẩm thực miền Trung...</p></div>
+    </div>
+</div>
+
+<!-- REGION: SOUTH -->
+<section id="south" class="page region-page">
     <div class="region-header">
         <h1>Văn Hóa Tết Miền Nam</h1>
         <!-- GHI CHÚ: bạn thay ảnh banner Tết Miền Nam -->
@@ -184,7 +151,7 @@
         <!-- 6. Hoạt động -->
         <div class="accordion-item">
             <button class="accordion-button">Hoạt động – Lễ hội</button>
-            <div class="accordion-content">
+          <div class="accordion-content">
                 <p>• Dạo chợ hoa Nguyễn Huệ – Bến Ninh Kiều – công viên Gia Định.  
                 • Xem múa lân – bắn pháo hoa.  
                 • Chúc Tết họ hàng – du xuân vùng sông nước.</p>
@@ -240,39 +207,10 @@
     </div>
 </section>
 
+<footer class="site-footer">
+    © <span id="year"></span> – Tết 3 Miền
+</footer>
 
-    <!-- About + Team -->
-    <section id="about" class="page">
-      <div class="card">
-        <h2>Giới thiệu web</h2>
-        <p>Ghi chú: mục giới thiệu web - lịch sử, mục tiêu, nguồn tư liệu, cách dùng.</p>
-      </div>
-    </section>
-
-    <section id="team" class="page">
-      <div class="card">
-        <h2>Giới thiệu đội ngũ</h2>
-        <p>Ghi chú: list thành viên, vai trò, liên hệ. Thêm ảnh cá nhân (assets/team/xxx.jpg).</p>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <small>© <span id="year"></span> Văn hoá Tết 3 Miền — Ghi chú: mọi nội dung thay thế bởi nhóm tác giả</small>
-  </footer>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
