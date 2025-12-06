@@ -82,16 +82,21 @@
     <!-- 3) Map main page -->
     <section id="map" class="page">
       <div class="map-container">
-        <!-- NOTE: thay phần này bằng ảnh SVG bản đồ Việt Nam nếu có (ưu tiên SVG để dễ đặt điểm)
-             Nếu không có SVG, thay background-image ở CSS thành ảnh bản đồ.
-        -->
-        <div id="vn-map" class="vn-map" tabindex="0" aria-label="Bản đồ Việt Nam - di chuyển bằng chuột">
-          <!-- 3 điểm (North, Central, South). Vị trí hiện tại là ví dụ, chỉnh toạ độ theo map thật -->
-          <button class="map-point" data-region="north" style="left:38%; top:16%;" aria-label="Miền Bắc"></button>
-          <button class="map-point" data-region="central" style="left:46%; top:40%;" aria-label="Miền Trung"></button>
-          <button class="map-point" data-region="south" style="left:56%; top:70%;" aria-label="Miền Nam"></button>
-        </div>
-      </div>
+    <img 
+        src="https://trangtriquangcao.com/wp-content/uploads/2022/12/ban-do-vietnam-vector-03-742x1024.png" 
+        alt="Bản đồ Việt Nam" 
+        class="vietnam-map"
+    >
+
+    <!-- Điểm miền Bắc -->
+    <div class="map-point" id="point-north" data-region="north"></div>
+
+    <!-- Điểm miền Trung -->
+    <div class="map-point" id="point-central" data-region="central"></div>
+
+    <!-- Điểm miền Nam -->
+    <div class="map-point" id="point-south" data-region="south"></div>
+</div>
     </section>
 
     <!-- 4) Region pages -->
@@ -261,6 +266,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
