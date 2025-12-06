@@ -1,214 +1,131 @@
 :root{
-  --bg:#FCF2EF;    /* kem */
-  --accent:#FAB42C; /* vàng */
-  --light-red:#E87637;
+  --bg:#FCF2EF;
+  --accent:#FAB42C;
   --deep-red:#AD110C;
   --brownred:#6E1315;
-  --card-bg: #fff;
-  --max-width: 1100px;
+  --card-bg:#fff;
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
 body{
   margin:0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background:var(--bg);
+  font-family:system-ui;
   color:var(--brownred);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.5;
 }
 
-.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-
-/* Header */
+/* HEADER */
 .site-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:8px 16px;
-  gap:12px;
+  padding:12px 18px;
 }
-.site-header img{height:46px; width:auto; display:block}
 
-/* Hamburger */
+/* MENU */
 #menu-toggle{
-  width:44px;height:44px;border-radius:50%;border:2px solid var(--deep-red);
-  background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  background:none;border:2px solid var(--deep-red);
+  width:46px;height:46px;border-radius:50%;cursor:pointer;
 }
-.hamburger{display:block; width:18px; height:2px; background:var(--deep-red); position:relative}
+.hamburger{
+  width:22px;height:3px;background:var(--deep-red);display:block;
+  position:relative;
+}
 .hamburger::before,.hamburger::after{
-  content:""; position:absolute; left:0; right:0; height:2px; background:var(--deep-red);
+  content:"";position:absolute;width:22px;height:3px;background:var(--deep-red);
 }
 .hamburger::before{top:-6px}
 .hamburger::after{top:6px}
 
-/* Side menu */
 .side-menu{
-  position:fixed; top:64px; right:16px; background:var(--card-bg); border-radius:10px; padding:12px;
-  box-shadow:0 8px 24px rgba(0,0,0,0.12); min-width:190px; z-index:50; display:none;
+  display:none;
+  position:fixed;top:60px;right:18px;z-index:10;
+  background:white;padding:14px;border-radius:10px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
 .side-menu.open{display:block}
-.side-menu ul{list-style:none;padding:0;margin:0}
-.side-menu li{margin:8px 0}
-.side-menu button{background:none;border:none;color:var(--brownred);cursor:pointer;font-weight:600}
+.side-menu ul{padding:0;margin:0;list-style:none}
+.side-menu li{margin:10px 0}
+.side-menu button{background:none;border:none;color:var(--brownred);font-size:17px;cursor:pointer}
 
-/* Pages */
-.page{ display:none; padding:24px; max-width:var(--max-width); margin:0 auto; min-height:60vh}
+/* PAGE */
+.page{display:none;min-height:100vh}
 .page.active{display:block}
 
-/* Cards */
-.card{background:var(--card-bg); border-radius:12px; padding:20px; box-shadow:0 6px 18px rgba(0,0,0,0.06)}
-
-/* Intro */
-.intro-card{ text-align:center; margin-top:6vh}
-.controls{margin-top:16px}
-button{padding:10px 16px;border-radius:10px;border:0;cursor:pointer;background:var(--deep-red); color:white}
-button.secondary{background:transparent;border:2px solid var(--deep-red); color:var(--deep-red);}
-
-/* Video */
-.video-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
-#intro-video{ width:100%; max-width:900px; border-radius:12px; background:black}
-.video-controls{display:flex;gap:8px}
-#unmute-video{background:transparent;color:var(--deep-red);border:2px solid var(--deep-red);}
-
-/* Map */
-/* Vùng chứa bản đồ */
-.map-wrapper {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;  /* để kéo bản đồ trong khung */
-    position: relative;
-    background: #ffece5;
+/* MAP FULLSCREEN */
+.map-wrapper{
+  width:100vw;height:100vh;
+  overflow:hidden;position:relative;
+  background:#ffe7d8;
 }
 
-/* Vùng có thể zoom / pan */
-#map-area {
-    position: absolute;
-    left: 0;
-    top: 0;
-    transform-origin: center center;
-    cursor: grab;
+#map{
+  width:100%;height:100%;
+  position:absolute;top:0;left:0;
+  transform-origin:center;
+  cursor:grab;
 }
 
-/* Ảnh bản đồ */
-#vn-map {
-    width: auto;
-    height: 120vh;   /* cho bản đồ cao hơn màn hình một chút */
-    pointer-events: none;
-    display: block;
+#map:active{cursor:grabbing}
+
+#map-img{
+  width:100%;height:auto;
+  pointer-events:none;
 }
 
-/* Điểm */
-.map-point {
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    background: radial-gradient(circle, #ffd5c2, #9c0606);
-    border-radius: 50%;
-    box-shadow: 0 0 12px rgba(255, 80, 40, 0.9);
-    cursor: pointer;
-    transition: 0.25s;
+/* POINTS */
+.map-point{
+  position:absolute;
+  width:26px;height:26px;
+  background:radial-gradient(circle,#ffd4c2,#8d0303);
+  border-radius:50%;
+  box-shadow:0 0 14px rgba(255,80,40,0.9);
+  cursor:pointer;
 }
 
-.map-point:hover {
-    transform: scale(1.25);
+/* VỊ TRÍ CÁC MIỀN */
+#point-north{top:15%;left:47%;}
+#point-central{top:45%;left:55%;}
+#point-south{top:82%;left:50%;}
+
+/* REGION PAGE */
+.region-page{
+  padding:40px 8%;
+  background:#FCF2EF;
 }
 
-/* Vị trí điểm (tính theo ảnh 120vh) */
-#point-north {
-    top: 18%;
-    left: 50%;
+.region-header h1{
+  color:var(--deep-red);
+  font-size:36px;
 }
 
-#point-central {
-    top: 50%;
-    left: 58%;
+.region-banner{
+  width:100%;
+  border-radius:14px;
+  margin-bottom:20px;
 }
 
-#point-south {
-    top: 84%;
-    left: 50%;
+/* ACCORDION */
+.accordion-item{
+  background:white;
+  border-radius:14px;
+  border:2px solid var(--accent);
+  margin-bottom:12px;
 }
-
-
-/* Region page content */
-.region-page .media-note{margin:12px 0;color:#666}
-
-/* Footer */
-.site-footer{padding:14px;text-align:center;color:#5a2b28}
-
-/* Responsive */
-@media (max-width:700px){
-  .vn-map{height:420px}
-  #intro-video{max-width:100%}
+.accordion-button{
+  width:100%;
+  padding:16px;
+  background:#FDE9D6;
+  font-size:18px;
+  border:none;
+  text-align:left;
+  cursor:pointer;
 }
-
-.region-page {
-    padding: 40px 8%;
-    background: #FCF2EF;
-    min-height: 100vh;
+.accordion-content{
+  max-height:0;
+  overflow:hidden;
+  padding:0 18px;
+  transition:0.3s;
 }
-
-.region-header h1 {
-    font-size: 36px;
-    color: #AD110C;
-    margin-bottom: 20px;
+.accordion-content p{
+  padding:12px 0;
 }
-
-.region-banner {
-    width: 100%;
-    border-radius: 14px;
-    margin-bottom: 30px;
-}
-
-/* Accordion */
-.accordion-item {
-    background: white;
-    border-radius: 14px;
-    margin-bottom: 14px;
-    overflow: hidden;
-    border: 2px solid #FAB42C;
-}
-
-.accordion-button {
-    width: 100%;
-    text-align: left;
-    padding: 18px;
-    font-size: 18px;
-    color: #6E1315;
-    cursor: pointer;
-    background: #FDE9D6;
-    border: none;
-    outline: none;
-    transition: 0.25s;
-}
-
-.accordion-button:hover {
-    background: #FAB42C;
-    color: white;
-}
-
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 18px;
-    transition: max-height 0.35s ease;
-}
-
-.accordion-content p {
-    padding: 15px 0;
-    color: #6E1315;
-    line-height: 1.5;
-}
-
-
-#map-page {
-    max-width: 100% !important;
-    padding: 0;
-}
-
-
-
-
