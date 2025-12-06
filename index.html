@@ -81,21 +81,19 @@
 
     <!-- 3) Map main page -->
     <section id="map" class="page">
+    <div class="page active" id="map-page">
     <div class="map-container">
-    <img 
-        src="https://trangtriquangcao.com/wp-content/uploads/2022/12/ban-do-vietnam-vector-03-742x1024.png" 
-        alt="Bản đồ Việt Nam" 
-        class="vietnam-map"
-    >
+        <img 
+            src="https://trangtriquangcao.com/wp-content/uploads/2022/12/ban-do-vietnam-vector-03-742x1024.png" 
+            alt="Bản đồ Việt Nam" 
+            class="vietnam-map"
+        >
 
-    <!-- Miền Bắc -->
-    <div class="map-point" id="point-north" data-region="north"></div>
-
-    <!-- Miền Trung -->
-    <div class="map-point" id="point-central" data-region="central"></div>
-
-    <!-- Miền Nam -->
-    <div class="map-point" id="point-south" data-region="south"></div>
+        <!-- 3 điểm miền -->
+        <div id="point-north"  class="map-point" data-region="north"></div>
+        <div id="point-central" class="map-point" data-region="central"></div>
+        <div id="point-south"  class="map-point" data-region="south"></div>
+    </div>
 </div>
     </section>
 
@@ -266,6 +264,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
