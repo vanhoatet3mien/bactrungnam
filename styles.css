@@ -74,31 +74,40 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
 #unmute-video{background:transparent;color:var(--deep-red);border:2px solid var(--deep-red);}
 
 /* Map */
-.map-container{padding:12px; display:flex; justify-content:center}
-.vn-map{
-  width:100%; max-width:1000px; height:620px; border-radius:14px; position:relative;
-  background-image: url('assets/vn-map-placeholder.jpg'); /* NOTE: thay bằng SVG hoặc ảnh bản đồ thật */
-  background-size:cover; background-position:center; overflow:hidden; cursor:grab;
-  border:6px solid rgba(173,17,12,0.06);
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* full màn hình */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
-.vn-map:active{cursor:grabbing}
+
+.vietnam-map {
+    height: 100%;       /* luôn full chiều cao */
+    width: auto;        /* không méo ảnh */
+    object-fit: contain;
+}
+
 
 /* Map points */
-.map-point{
-  position:absolute; width:18px; height:18px; border-radius:50%; background:var(--light-red);
-  box-shadow:0 0 12px 4px rgba(232,118,55,0.18);
-  border:3px solid var(--deep-red);
-  transform:translate(-50%,-50%);
-  cursor:pointer;
+.map-point {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background-color: #AD110C;
+    border-radius: 50%;
+    border: 3px solid #E87637;
+    box-shadow: 0 0 12px #AD110C, 0 0 25px #E87637;
+    cursor: pointer;
+    transition: transform .2s;
 }
-.map-point.pulse{
-  animation:pulse 1.6s infinite;
+
+.map-point:hover {
+    transform: scale(1.3);
 }
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(232,118,55,0.6)}
-  70%{box-shadow:0 0 0 18px rgba(232,118,55,0)}
-  100%{box-shadow:0 0 0 0 rgba(232,118,55,0)}
-}
+
 
 /* Region page content */
 .region-page .media-note{margin:12px 0;color:#666}
@@ -169,3 +178,4 @@ button.secondary{background:transparent;border:2px solid var(--deep-red); color:
     color: #6E1315;
     line-height: 1.5;
 }
+
