@@ -1,403 +1,268 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Văn hoá Tết 3 Miền</title>
-  <link rel="website icon" type="png"
-  href="https://img.icons8.com/?size=100&id=46361&format=png&color=000000">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Văn Hóa Tết Việt Nam - 3 Miền Kết Nối</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <style>
+        :root {
+            --primary: #f39c12;
+            --accent: #d32f2f;
+            --bg: #ffb84d;
+            --dark: #2c3e50;
+            --white: #ffffff;
+        }
 
-  <!-- NOTE: thay đường dẫn font nếu muốn dùng custom fonts.
-       Ví dụ: <link href="path/to/font.css" rel="stylesheet"> -->
-  <!-- Ghi chú: nếu dùng Google Fonts, chèn link ở đây -->
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg) radial-gradient(circle, #ffcc80 0%, #ffb84d 100%);
+            color: #333; scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
 
-  <link rel="stylesheet" href="styles.css" />
+        /* --- 1. INTRO VIDEO OVERLAY --- */
+        #intro-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex;
+            justify-content: center; align-items: center; transition: 1s ease;
+        }
+        #intro-overlay video { width: 100%; height: 100%; object-fit: cover; }
+        #skip-btn {
+            position: absolute; bottom: 30px; right: 30px;
+            background: rgba(255,255,255,0.2); color: white;
+            border: 1px solid white; padding: 10px 20px;
+            cursor: pointer; border-radius: 5px; z-index: 10000;
+        }
+        .hide-intro { opacity: 0; pointer-events: none; }
+
+        /* --- 2. HIỆU ỨNG HOA RƠI --- */
+        .petal {
+            position: fixed; top: -10%; z-index: 998;
+            user-select: none; pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- 3. NAVIGATION --- */
+        nav {
+            display: flex; justify-content: space-around; align-items: center;
+            background: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav .logo { font-weight: 900; color: var(--accent); font-size: 22px; letter-spacing: 1px; }
+        nav ul { list-style: none; display: flex; margin: 0; }
+        nav ul li { position: relative; padding: 0 15px; }
+        nav ul li a { color: #333; text-decoration: none; font-weight: 700; font-size: 13px; text-transform: uppercase; transition: 0.3s; }
+        nav ul li a:hover { color: var(--primary); }
+
+        /* --- 4. HERO & SEARCH --- */
+        .hero { text-align: center; padding: 60px 20px 20px; color: white; }
+        .hero h1 { font-size: 42px; font-weight: 900; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
+        .search-box {
+            max-width: 600px; margin: 0 auto; background: white;
+            padding: 5px; border-radius: 50px; display: flex; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .search-box input {
+            flex: 1; border: none; padding: 15px 25px; border-radius: 50px; outline: none; font-size: 16px;
+        }
+
+        /* --- 5. SWIPER 3D SLIDER --- */
+        .swiper { width: 100%; padding-top: 50px; padding-bottom: 50px; }
+        .swiper-slide {
+            background-position: center; background-size: cover;
+            width: 320px; height: 450px; border-radius: 20px;
+            overflow: hidden; border: 4px solid white; box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+        }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slide-caption {
+            position: absolute; bottom: 0; width: 100%; padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white; font-weight: bold; text-align: center; box-sizing: border-box;
+        }
+
+        /* --- 6. CONTENT GRID --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section-title {
+            font-size: 28px; font-weight: 900; color: white;
+            margin: 50px 0 25px; border-left: 8px solid var(--accent); padding-left: 15px;
+        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .item-card {
+            background: white; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s;
+        }
+        .item-card:hover { transform: translateY(-10px); }
+        .item-card img { width: 100%; height: 200px; object-fit: cover; }
+        .item-card .info { padding: 20px; }
+        .item-card h3 { margin: 0; color: var(--accent); font-size: 18px; }
+
+        /* --- 7. AUTHOR SECTION --- */
+        .author-section {
+            background: rgba(255,255,255,0.9); border-radius: 20px;
+            padding: 40px; margin: 60px auto; display: flex; align-items: center; gap: 30px; max-width: 800px;
+        }
+        .author-img { width: 130px; height: 130px; border-radius: 50%; border: 5px solid var(--primary); object-fit: cover; }
+
+        /* --- 8. FOOTER --- */
+        footer { background: var(--dark); color: white; padding: 60px 20px; text-align: center; }
+        .footer-content {
+            max-width: 1200px; margin: 0 auto; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: left;
+        }
+        .footer-box h4 { border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
+        .social-links a { color: #ccc; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
+        .social-links a:hover { color: var(--primary); padding-left: 5px; }
+    </style>
 </head>
 <body>
 
-  <!-- GLOBAL HEADER: logo + small menu button -->
-  <header class="site-header">
-    <div class="left">
-      <!-- NOTE: thay 'logo.png' bằng logo của bạn -->
-      <img id="site-logo" src="assets/logo.png" alt="Logo Web - Văn hoá Tết 3 Miền" />
-      <h1 class="visually-hidden">Văn hoá Tết 3 Miền</h1>
-    </div>
-
-    <button id="menu-toggle" aria-label="Mở menu" aria-expanded="false">
-      <span class="hamburger"></span>
-    </button>
-  </header>
-
-  <!-- SIDE / POPUP MENU -->
-  <nav id="side-menu" class="side-menu" aria-hidden="true">
-    <ul>
-      <li><button class="nav-btn" data-target="map">Bản đồ</button></li>
-      <li><button class="nav-btn" data-target="north">Miền Bắc</button></li>
-      <li><button class="nav-btn" data-target="central">Miền Trung</button></li>
-      <li><button class="nav-btn" data-target="south">Miền Nam</button></li>
-      <li><button class="nav-btn" data-target="about">Giới thiệu web</button></li>
-      <li><button class="nav-btn" data-target="team">Giới thiệu đội ngũ</button></li>
-    </ul>
-  </nav>
-
-  <!-- MAIN APP (single-page style with sections) -->
-  <main id="app">
-
-    <!-- 1) Landing / Intro page -->
-    <section id="intro" class="page active">
-      <div class="card intro-card">
-        <h2>Chào mừng đến với "Văn hoá Tết 3 Miền"</h2>
-        <p>
-          <!-- NOTE: thay đoạn mô tả ngắn ở đây -->
-          Trang này giới thiệu các phong tục, ẩm thực và hoạt động Tết ở Bắc - Trung - Nam.
-        </p>
-        <div class="controls">
-          <button id="intro-continue">Tiếp tục</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2) Video intro page -->
-    <section id="video-page" class="page">
-      <div class="video-wrap">
-        <!-- NOTE: thay 'teT_intro.mp4' bằng file video của bạn.
-             Để đảm bảo autoplay trên hầu hết trình duyệt, video được mute lúc autoplay.
-             Nếu bạn muốn có âm thanh tự động, cần user gesture (khó guarantee).
-        -->
-        <video id="intro-video" playsinline muted preload="auto" width="1280" height="720">
-          <source src="assets/teT_intro.mp4" type="video/mp4" />
-          <!-- NOTE: có thể thêm <source> cho webm, ogg nếu muốn -->
-          Trình duyệt của bạn không hỗ trợ video.
+    <div id="intro-overlay">
+        <video id="myVideo" autoplay muted playsinline>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
         </video>
-
-        <div class="video-controls">
-          <button id="skip-video">Bỏ qua</button>
-          <button id="unmute-video" aria-pressed="false">Bật âm</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3) Map main page -->
-    <section id="map" class="page">
-      <div class="map-container">
-        <!-- NOTE: thay phần này bằng ảnh SVG bản đồ Việt Nam nếu có (ưu tiên SVG để dễ đặt điểm)
-             Nếu không có SVG, thay background-image ở CSS thành ảnh bản đồ.
-        -->
-        <div id="vn-map" class="vn-map" tabindex="0" aria-label="Bản đồ Việt Nam - di chuyển bằng chuột">
-          <!-- 3 điểm (North, Central, South). Vị trí hiện tại là ví dụ, chỉnh toạ độ theo map thật -->
-          <button class="map-point" data-region="north" style="left:38%; top:16%;" aria-label="Miền Bắc"></button>
-          <button class="map-point" data-region="central" style="left:46%; top:40%;" aria-label="Miền Trung"></button>
-          <button class="map-point" data-region="south" style="left:56%; top:70%;" aria-label="Miền Nam"></button>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4) Region pages -->
-    <section id="north" class="page region-page">
-
-      <div class="region-header">
-        <h1>Văn Hóa Tết Miền Bắc</h1>
-        <img src="assets/images/banner-mien-bac.jpg"
-             alt="Tết Miền Bắc" class="region-banner">
-      </div>
-
-      <div class="accordion">
-
-        <div class="accordion-item">
-          <button class="accordion-button">Không khí – Bối cảnh Tết miền Bắc</button>
-          <div class="accordion-content">
-            <p>
-              • Thời tiết se lạnh – đôi khi có mưa phùn.  
-              • Không khí trang nghiêm, trầm ấm, giàu tính truyền thống.  
-              • Phố phường ngập tràn sắc đỏ – vàng, hoa đào là biểu tượng chính.
-            </p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button">Phong tục – Tập quán</button>
-          <div class="accordion-content">
-            <p>
-              • Dọn dẹp – sửa sang nhà cửa kỹ lưỡng.  
-              • Cúng ông Công – ông Táo 23 tháng Chạp.  
-              • Cúng tất niên – đón giao thừa linh thiêng.  
-              • Xông đất chọn người hợp tuổi.
-            </p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button">Mâm cỗ Tết miền Bắc</button>
-          <div class="accordion-content">
-            <p>
-              • Bánh chưng – dưa hành – giò lụa – thịt gà luộc.  
-              • Mâm cỗ bày biện theo quy tắc đầy đặn, cân đối âm dương.  
-              • Canh măng – nem rán – mọc – xôi gấc là món đặc trưng.
-            </p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button">Những điều kiêng kỵ</button>
-          <div class="accordion-content">
-            <p>
-              • Không làm đổ vỡ – cãi vã – nói điều xui.  
-              • Kiêng vay mượn – trả nợ đầu năm.  
-              • Tránh trang phục đen – xám trong ngày mùng 1.
-            </p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button">Trang phục ngày Tết</button>
-          <div class="accordion-content">
-            <p>
-              • Ưu tiên màu đỏ – vàng – hồng.  
-              • Áo dài truyền thống rất phổ biến khi đi chúc Tết.  
-              • Trang phục ấm áp vì thời tiết lạnh.
-            </p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button">Hoạt động – Lễ hội</button>
-          <div class="accordion-content">
-            <p>
-              • Đi chợ hoa Xuân – lễ chùa – hái lộc.  
-              • Xem bắn pháo hoa – xin chữ ông đồ.  
-              • Chúc Tết họ hàng – du xuân phố cổ.
-            </p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button">Trang trí nhà cửa</button>
-          <div class="accordion-content">
-            <p>
-              • Hoa đào và cây quýt được ưa chuộng nhất.  
-              • Treo câu đối đỏ, đèn lồng đỏ, tranh Đông Hồ.  
-              • Bàn thờ tổ tiên được lau dọn, bày biện trang trọng.
-            </p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button">Mâm ngũ quả miền Bắc</button>
-          <div class="accordion-content">
-            <p>
-              • Gồm: Chuối xanh – Bưởi – Cam/Quýt – Đu đủ – Hồng/ Táo.  
-              • Chú trọng sự cân đối – hình thức đẹp – đúng chuẩn truyền thống.
-            </p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button">Quan niệm tâm linh</button>
-          <div class="accordion-content">
-            <p>
-              • Rất coi trọng việc thờ cúng tổ tiên.  
-              • Cầu bình an – may mắn – thuận hòa.  
-              • Tâm linh là nét cốt lõi trong Tết miền Bắc.
-            </p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button">Giao tiếp – Lời chúc</button>
-          <div class="accordion-content">
-            <p>
-              • “Chúc mừng năm mới”, “An khang – Thịnh vượng”.  
-              • Nói năng nhẹ nhàng – lịch sự – tránh chuyện buồn.  
-              • Trẻ nhỏ nhận lì xì đỏ tượng trưng may mắn.
-            </p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-button">Sự thay đổi hiện đại</button>
-          <div class="accordion-content">
-            <p>
-              • Trang trí theo phong cách tối giản – hiện đại.  
-              • Nhiều gia đình đi du lịch thay vì nấu cỗ.  
-              • Nhưng vẫn giữ các nghi lễ thờ cúng quan trọng.
-            </p>
-          </div>
-        </div>
-      </div>
-      <button class="back-to-map">Quay lại bản đồ</button>
-    </section>
-
-    <!-- TRUNG -->
-    <section id="central" class="page region-page">
-      <article>
-        <h2>Miền Trung</h2>
-        <p>Ghi chú: nội dung Miền Trung.</p>
-        <button class="back-to-map">Quay lại bản đồ</button>
-      </article>
-    </section>
-
-    
-    <section id="central" class="page region-page">
-      <article>
-        <h2>Miền Trung</h2>
-        <p>Ghi chú: Nội dung miêu tả miền Trung.</p>
-        <div class="media-note">[Ảnh minh họa: put assets/central.jpg]</div>
-        <button class="back-to-map">Quay lại bản đồ</button>
-      </article>
-    </section>
-    
-
-   <section id="south" class="page region-page">
-    <div class="region-header">
-        <h1>Văn Hóa Tết Miền Nam</h1>
-        <!-- GHI CHÚ: bạn thay ảnh banner Tết Miền Nam -->
-        <img src="assets/images/banner-mien-nam.jpg" alt="Tết Miền Nam" class="region-banner">
+        <button id="skip-btn">VÀO TRANG CHỦ ➔</button>
     </div>
 
-    <div class="accordion">
+    <nav>
+        <div class="logo">🧧 TẾT VIỆT NAM</div>
+        <ul>
+            <li><a href="#mien-bac">MIỀN BẮC</a></li>
+            <li><a href="#mien-trung">MIỀN TRUNG</a></li>
+            <li><a href="#mien-nam">MIỀN NAM</a></li>
+            <li><a href="#tac-gia">TÁC GIẢ</a></li>
+        </ul>
+    </nav>
 
-        <!-- 1. Không khí Tết -->
-        <div class="accordion-item">
-            <button class="accordion-button">Không khí – Bối cảnh Tết miền Nam</button>
-            <div class="accordion-content">
-                <p>• Trời nắng ấm, không lạnh như miền Bắc.  
-                • Đường phố rực rỡ sắc vàng (hoa mai, cúc), đỏ (lân – rồng), xanh (dừa – kiểng).  
-                • Không khí náo nhiệt, tưng bừng từ 20–28 Tết.</p>
+    <div class="hero">
+        <h1>VĂN HÓA TẾT 3 MIỀN</h1>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Tìm mâm ngũ quả, bánh chưng, hoa mai...">
+        </div>
+    </div>
+
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="https://vcdn1-dulich.vnecdn.net/2022/01/21/Tet-mien-Bac-1-1642735496.jpg">
+                <div class="slide-caption">Chợ Xuân Hà Nội</div>
+            </div>
+            <div class="swiper-slide">
+                <img src="https://vcdn1-dulich.vnecdn.net/2022/01/21/Tet-mien-Trung-1642735500.jpg">
+                <div class="slide-caption">Tết Cố Đô Huế</div>
+            </div>
+            <div class="swiper-slide">
+                <img src="https://vcdn1-dulich.vnecdn.net/2022/01/21/Tet-mien-Nam-1642735503.jpg">
+                <div class="slide-caption">Mai Vàng Phương Nam</div>
+            </div>
+            <div class="swiper-slide">
+                <img src="https://image.vtc.vn/files/f1/2023/01/18/hoa-dao-1-10523455.jpg">
+                <div class="slide-caption">Hoa Đào Miền Bắc</div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="container">
+        <div id="mien-bac">
+            <h2 class="section-title">Tinh Hoa Miền Bắc</h2>
+            <div class="grid">
+                <div class="item-card">
+                    <img src="https://vcdn1-dulich.vnecdn.net/2022/01/21/Tet-mien-Bac-1-1642735496.jpg">
+                    <div class="info">
+                        <h3>Bánh Chưng Xanh</h3>
+                        <p>Hương vị truyền thống gói ghém sự biết ơn cha ông.</p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <img src="https://image.vtc.vn/files/f1/2023/01/18/hoa-dao-1-10523455.jpg">
+                    <div class="info">
+                        <h3>Hoa Đào Thắm</h3>
+                        <p>Sắc màu đặc trưng của mùa xuân vùng xứ lạnh.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- 2. Phong tục – tập quán -->
-        <div class="accordion-item">
-            <button class="accordion-button">Phong tục – Tập quán</button>
-            <div class="accordion-content">
-                <p>• Cúng tất niên – rước ông bà về ăn Tết.  
-                • Đêm Giao Thừa: cúng trời đất – cầu bình an.  
-                • Chúc Tết nhẹ nhàng, đơn giản, ưu tiên không khí vui vẻ.  
-                • Đi chùa xin lộc đầu năm.</p>
-            </div>
-        </div>
-
-        <!-- 3. Mâm cỗ -->
-        <div class="accordion-item">
-            <button class="accordion-button">Mâm cỗ Tết miền Nam</button>
-            <div class="accordion-content">
-                <p>• Bánh tét – củ kiệu – thịt kho hột vịt.  
-                • Canh khổ qua nhồi thịt, gỏi tôm thịt, nem chua, heo quay.  
-                • Mâm cúng đầy đủ, nhiều màu sắc, thiên về các món kho – xào – chiên.</p>
-            </div>
-        </div>
-
-        <!-- 4. Kiêng kỵ -->
-        <div class="accordion-item">
-            <button class="accordion-button">Những điều kiêng kỵ</button>
-            <div class="accordion-content">
-                <p>• Tránh cãi vã, nặng lời, làm đổ vỡ.  
-                • Không quét nhà mùng 1.  
-                • Hạn chế vay – mượn đầu năm.</p>
-            </div>
-        </div>
-
-        <!-- 5. Trang phục -->
-        <div class="accordion-item">
-            <button class="accordion-button">Trang phục ngày Tết</button>
-            <div class="accordion-content">
-                <p>• Quần áo thoải mái, thoáng mát vì thời tiết nóng.  
-                • Ưu tiên màu đỏ – vàng để lấy may.  
-                • Áo dài cách tân phổ biến.</p>
-            </div>
-        </div>
-
-        <!-- 6. Hoạt động -->
-        <div class="accordion-item">
-            <button class="accordion-button">Hoạt động – Lễ hội</button>
-            <div class="accordion-content">
-                <p>• Dạo chợ hoa Nguyễn Huệ – Bến Ninh Kiều – công viên Gia Định.  
-                • Xem múa lân – bắn pháo hoa.  
-                • Chúc Tết họ hàng – du xuân vùng sông nước.</p>
-            </div>
-        </div>
-
-        <!-- 7. Trang trí -->
-        <div class="accordion-item">
-            <button class="accordion-button">Trang trí nhà cửa</button>
-            <div class="accordion-content">
-                <p>• Hoa mai vàng là chủ đạo.  
-                • Mâm trái cây lớn – bình rượu – ông Táo – các tượng trang trí.  
-                • Treo bao lì xì trên cây mai để “rước lộc”.</p>
-            </div>
-        </div>
-
-        <!-- 8. Ngũ quả -->
-        <div class="accordion-item">
-            <button class="accordion-button">Mâm ngũ quả miền Nam</button>
-            <div class="accordion-content">
-                <p>Gồm: Mãng cầu – Dừa – Đu đủ – Xoài – Sung  
-                → Ý nghĩa: “Cầu vừa đủ xài – sung túc”.</p>
-            </div>
-        </div>
-
-        <!-- 9. Tâm linh -->
-        <div class="accordion-item">
-            <button class="accordion-button">Quan niệm tâm linh</button>
-            <div class="accordion-content">
-                <p>• Xông đất rất quan trọng – chọn người hợp tuổi.  
-                • Cúng ông bà là nghi lễ chính, thể hiện sự hiếu kính.</p>
-            </div>
-        </div>
-
-        <!-- 10. Giao tiếp -->
-        <div class="accordion-item">
-            <button class="accordion-button">Giao tiếp – lời chúc</button>
-            <div class="accordion-content">
-                <p>• “Năm mới an khang – thịnh vượng”, “Vạn sự như ý”.  
-                • Không nói lời xui, không nhắc chuyện không vui.</p>
-            </div>
-        </div>
-
-        <!-- 11. Tết hiện đại -->
-        <div class="accordion-item">
-            <button class="accordion-button">Sự thay đổi hiện đại</button>
-            <div class="accordion-content">
-                <p>• Giảm lễ nghi, tăng giải trí – du lịch.  
-                • Bánh tét mini, mâm cỗ gọn – sạch – tiện.  
-                • Nhiều gia đình trang trí theo phong cách hiện đại.</p>
+        <div id="tac-gia" class="author-section">
+            <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" class="author-img">
+            <div class="author-info">
+                <h2>Về Tác Giả</h2>
+                <p>"Giữ gìn nét đẹp văn hóa là trách nhiệm của mỗi người trẻ."</p>
+                <strong>Nguyễn Văn A</strong> - Designer & Dev
             </div>
         </div>
     </div>
-      <button class="back-to-map">Quay lại bản đồ</button>
-</section>
 
+    <footer>
+        <div class="footer-content">
+            <div class="footer-box">
+                <h4>Thông Tin Web</h4>
+                <p>Website sưu tầm và chia sẻ vẻ đẹp văn hóa Tết Việt Nam 3 miền.</p>
+            </div>
+            <div class="footer-box social-links">
+                <h4>Liên Hệ</h4>
+                <a href="#">🔵 Facebook: Tết Việt 3 Miền</a>
+                <a href="mailto:abc@gmail.com">📧 Gmail: tetviet@gmail.com</a>
+                <p>📍 Địa chỉ: Long Xuyên, An Giang</p>
+            </div>
+        </div>
+        <div class="copy-right">© 2024 VanHoaTet3Mien - Di sản Việt Nam</div>
+    </footer>
 
-    <!-- About + Team -->
-    <section id="about" class="page">
-      <div class="card">
-        <h2>Giới thiệu web</h2>
-        <p>Ghi chú: mục giới thiệu web - lịch sử, mục tiêu, nguồn tư liệu, cách dùng.</p>
-      </div>
-    </section>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // 1. Xử lý Video Intro
+        const intro = document.getElementById('intro-overlay');
+        const video = document.getElementById('myVideo');
+        const skipBtn = document.getElementById('skip-btn');
 
-    <section id="team" class="page">
-      <div class="card">
-        <h2>Giới thiệu đội ngũ</h2>
-        <p>Ghi chú: list thành viên, vai trò, liên hệ. Thêm ảnh cá nhân (assets/team/xxx.jpg).</p>
-      </div>
-    </section>
+        function endIntro() {
+            intro.classList.add('hide-intro');
+            setTimeout(() => { intro.style.display = 'none'; }, 1000);
+        }
 
-  </main>
+        skipBtn.addEventListener('click', endIntro);
+        video.onended = endIntro;
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <small>© <span id="year"></span> Văn hoá Tết 3 Miền — Ghi chú: mọi nội dung thay thế bởi nhóm tác giả</small>
-  </footer>
+        // 2. Khởi tạo Slide 3D (Coverflow)
+        var swiper = new Swiper(".mySwiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            loop: true,
+            autoplay: { delay: 3000 },
+            pagination: { el: ".swiper-pagination", clickable: true }
+        });
 
-  <script src="script.js"></script>
+        // 3. Hiệu ứng hoa đào rơi
+        function createPetal() {
+            const petals = ['🌸', '🌼', '🧧'];
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+            petal.style.fontSize = Math.random() * 10 + 10 + 'px';
+            document.body.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 6000);
+        }
+        setInterval(createPetal, 400);
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
