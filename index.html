@@ -119,6 +119,18 @@
         .footer-box h4 { border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
         .social-links a { color: #ccc; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
         .social-links a:hover { color: var(--primary); padding-left: 5px; }
+        .logo img {
+            height: 50px;    /* Điều chỉnh chiều cao tùy ý */
+            width: auto;     /* Giữ đúng tỉ lệ ảnh */
+            display: block;  /* Loại bỏ khoảng cách thừa dưới ảnh */
+        }
+        /* Đảm bảo nav sử dụng flexbox để logo và menu nằm cùng hàng */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
     </style>
 </head>
 <body>
@@ -131,14 +143,21 @@
     </div>
 
     <nav>
-        <div class="logo">🧧 TẾT VIỆT NAM</div>
-        <ul>
-            <li><a href="#mien-bac">MIỀN BẮC</a></li>
-            <li><a href="#mien-trung">MIỀN TRUNG</a></li>
-            <li><a href="#mien-nam">MIỀN NAM</a></li>
-            <li><a href="#tac-gia">TÁC GIẢ</a></li>
-        </ul>
-    </nav>
+    <div class="logo">
+        <a href="#">
+            <img src="https://scontent.fvca5-1.fna.fbcdn.net/v/t39.30808-6/615884114_122193368420499933_9016153991879918161_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=9QmrsUU1H2AQ7kNvwFSnVRO&_nc_oc=Adm8a2GqxfO4OgSui3Ax7gVYn_1bLP8VtGRqbyYpuOQLsK1XUn-AAeBQzSYq4Bw14u8&_nc_zt=23&_nc_ht=scontent.fvca5-1.fna&_nc_gid=6P64iSK5VdzHrL1RY3x6nA&oh=00_AfpTQW3zwbARj_f6O1tY0Ix1VXXfjIn7ZDatQlByfCpOxw&oe=697264E1" alt="Tết Việt Nam">
+        </a>
+    </div>
+    <ul>
+        <li><a href="indexbac.html">MIỀN BẮC</a></li> 
+        
+        <li><a href="indextrung.html">MIỀN TRUNG</a></li> 
+        
+        <li><a href="indexnam.html">MIỀN NAM</a></li> 
+        
+        <li><a href="indexdoingu.html">TÁC GIẢ</a></li>
+    </ul>
+</nav>
 
     <div class="hero">
         <h1>VĂN HÓA TẾT 3 MIỀN</h1>
@@ -318,3 +337,4 @@
     </script>
 </body>
 </html>
+
