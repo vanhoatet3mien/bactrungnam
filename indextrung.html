@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Văn Hóa Tết Việt Nam - 3 Miền Kết Nối</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <style>
+        :root {
+            --primary: #f39c12;
+            --accent: #d32f2f;
+            --bg: #ffb84d;
+            --dark: #2c3e50;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg) radial-gradient(circle, #ffcc80 0%, #ffb84d 100%);
+            color: #333; scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* --- 1. INTRO VIDEO OVERLAY --- */
+        #intro-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex;
+            justify-content: center; align-items: center; transition: 1s ease;
+        }
+        #intro-overlay video { width: 100%; height: 100%; object-fit: cover; }
+        #skip-btn {
+            position: absolute; bottom: 30px; right: 30px;
+            background: rgba(255,255,255,0.2); color: white;
+            border: 1px solid white; padding: 10px 20px;
+            cursor: pointer; border-radius: 5px; z-index: 10000;
+        }
+        .hide-intro { opacity: 0; pointer-events: none; }
+
+        /* --- 2. HIỆU ỨNG HOA RƠI --- */
+        .petal {
+            position: fixed; top: -10%; z-index: 998;
+            user-select: none; pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- 3. NAVIGATION --- */
+        nav {
+            display: flex; justify-content: space-around; align-items: center;
+            background: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav .logo { font-weight: 900; color: var(--accent); font-size: 22px; letter-spacing: 1px; }
+        nav ul { list-style: none; display: flex; margin: 0; }
+        nav ul li { position: relative; padding: 0 15px; }
+        nav ul li a { color: #333; text-decoration: none; font-weight: 700; font-size: 13px; text-transform: uppercase; transition: 0.3s; }
+        nav ul li a:hover { color: var(--primary); }
+
+        /* --- 4. HERO & SEARCH --- */
+        .hero { text-align: center; padding: 60px 20px 20px; color: white; }
+        .hero h1 { font-size: 42px; font-weight: 900; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
+        .search-box {
+            max-width: 600px; margin: 0 auto; background: white;
+            padding: 5px; border-radius: 50px; display: flex; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .search-box input {
+            flex: 1; border: none; padding: 15px 25px; border-radius: 50px; outline: none; font-size: 16px;
+        }
+
+        /* --- 5. SWIPER 3D SLIDER --- */
+        .swiper {width: 100%;padding-top: 50px;padding-bottom: 50px;
+        /* Đảm bảo không có margin lạ làm lệch slide */
+        margin-left: auto; margin-right: auto;}
+        .swiper-slide {
+          background-position: center;background-size: cover;
+          width: 300px; /* Độ rộng ảnh */
+          height: 450px; /* Chiều cao ảnh */
+          border-radius: 20px;
+          /* Quan trọng: Không để slide tự ý thêm margin */
+          margin: 0 !important; 
+        }
+
+        /* --- 6. CONTENT GRID --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section-title {
+            font-size: 28px; font-weight: 900; color: white;
+            margin: 50px 0 25px; border-left: 8px solid var(--accent); padding-left: 15px;
+        }
+        .grid { 
+          display: flex; 
+          flex-direction: column; /* Xếp các khung theo hàng dọc */
+          gap: 25px; 
+          
+        }
+        .item-card {
+          background: white; 
+          border-radius: 15px; 
+          overflow: hidden;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+          transition: 0.3s;
+          width: 100%; /* Đảm bảo luôn rộng 100% container */
+          
+        }
+        .item-card:hover { transform: translateY(-10px); }
+        .item-card img { width: 100%; height: 200px; object-fit: cover; }
+        .item-card .info { padding: 20px; }
+        .item-card h3 { margin: 0; color: var(--accent); font-size: 18px; }
+
+        /* --- 7. AUTHOR SECTION --- */
+        .author-section {
+            background: rgba(255,255,255,0.9); border-radius: 20px;
+            padding: 40px; margin: 60px auto; display: flex; align-items: center; gap: 30px; max-width: 800px;
+        }
+        .author-img { width: 130px; height: 130px; border-radius: 50%; border: 5px solid var(--primary); object-fit: cover; }
+
+        /* --- 8. FOOTER --- */
+        footer { background: var(--dark); color: white; padding: 60px 20px; text-align: center; }
+        .footer-content {
+            max-width: 1200px; margin: 0 auto; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: left;
+        }
+        .footer-box h4 { border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
+        .social-links a { color: #ccc; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
+        .social-links a:hover { color: var(--primary); padding-left: 5px; }
+        
+        .logo img {
+    height: 50px;    /* Điều chỉnh chiều cao tùy ý */
+    width: auto;     /* Giữ đúng tỉ lệ ảnh */
+    display: block;  /* Loại bỏ khoảng cách thừa dưới ảnh */
+}
+
+/* Đảm bảo nav sử dụng flexbox để logo và menu nằm cùng hàng */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+    </style>
+</head>
+<body>
+
+    <nav>
+    <div class="logo">
+        <a href="#">
+            <img src="https://scontent.fvca5-1.fna.fbcdn.net/v/t39.30808-6/615884114_122193368420499933_9016153991879918161_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=9QmrsUU1H2AQ7kNvwFSnVRO&_nc_oc=Adm8a2GqxfO4OgSui3Ax7gVYn_1bLP8VtGRqbyYpuOQLsK1XUn-AAeBQzSYq4Bw14u8&_nc_zt=23&_nc_ht=scontent.fvca5-1.fna&_nc_gid=6P64iSK5VdzHrL1RY3x6nA&oh=00_AfpTQW3zwbARj_f6O1tY0Ix1VXXfjIn7ZDatQlByfCpOxw&oe=697264E1" alt="Tết Việt Nam">
+        </a>
+    </div>
+    <ul>
+        <li><a href="#mien-bac">MIỀN BẮC</a></li>
+        <li><a href="#mien-trung">MIỀN TRUNG</a></li>
+        <li><a href="#mien-nam">MIỀN NAM</a></li>
+        <li><a href="#tac-gia">TÁC GIẢ</a></li>
+    </ul>
+</nav>
+
+    <div class="container">
+        <div id="mien-bac">
+           <h2 class="section-title">1. Bối Cảnh – Không Khí Tết</h2>
+              <p> <strong>Tết ở miền Trung diễn ra trong bối cảnh thời tiết se lạnh, trưa hửng nắng ấm, có nơi lất phất mưa phùn, tạo nên không khí trầm lắng và rất riêng. Cảnh sắc ngày Tết giản dị nhưng ấm áp với mai vàng, đèn lồng, chợ quê nhộn nhịp và bàn thờ gia tiên trang nghiêm.
+</strong></p>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Trước Tết</h3>
+                       <p>Nhà nào cũng bận rộn: dọn nhà, chăm cây, gói bánh tét, làm mứt gừng, làm bánh thuẫn. Các phiên chợ Tết đông nghịt, nhất là những gánh hàng quê đầy màu sắc. </p>
+                       </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Trong Tết</h3>
+                        <p>Gia đình sum họp, thắp hương mừng xuân, chúc Tết ông bà cha mẹ. <br>
+Trẻ con được lì xì, người lớn quây quần bên mâm cơm có giò, thịt heo ngâm mắm, cá kho, bánh tét, dưa món… <br>
+Nhiều làng ở miền Trung còn có hội bài chòi, hội đua thuyền, lễ hội cầu ngư, tạo nên không khí Tết vừa sôi nổi vừa đậm bản sắc địa phương.<br>
+Đêm mùng Một, mùng Hai thường yên bình, vang lên tiếng p</p>
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title">2. Phong Tục – Tập Quán Đặc Trưng</h2>
+            <p> <strong> Tết ở miền Trung mang đậm dấu ấn của sự mộc mạc, giản dị nhưng rất thiêng liêng. Người miền Trung đặc biệt coi trọng gia tiên, nên các nghi lễ dọn bàn thờ, chuẩn bị lễ vật, gói bánh… đều được thực hiện rất chu đáo. Bên cạnh đó, nhiều gia đình giữ nguyên tục lập cây nêu, treo câu đối đỏ, bày mâm ngũ quả và trang hoàng nhà cửa để xua đuổi điều xấu, đón nhận may mắn.</strong> </p>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Ngày 30 Tết </h3>
+                        <p>Là thời khắc quan trọng nhất, gia đình sum họp để cúng tất niên, mời ông bà tổ tiên về ăn Tết. Nhiều nhà miền Trung còn đốt đèn lồng, đốt trầm và ăn tất niên rất đầm ấm.</p>
+                    </div>
+                </div>
+                 <div class="item-card">
+                    <div class="info">
+                        <h3>Ngày Mùng 1 </h3>
+                        <p>Là ngày quan trọng nhất, dành cho việc xông đất, hái lộc, mặc quần áo mới và chúc Tết họ hàng thân thiết. Người miền Trung kiêng nói điều xui, kiêng làm vỡ đồ, và tránh cãi vã để giữ vận may cho cả năm.</p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Ngày Mùng 2</h3>           <p>Thường dành cho việc đi thăm bên ngoại, hoặc bạn bè thân thiết. Không khí rộn ràng nhưng nhẹ nhàng hơn mùng 1.</p>
+                    </div>
+                </div>
+                 <div class="item-card">
+                    <div class="info">
+                        <h3>Ngày Mùng 3 </h3>
+                        <p>Gia đình bắt đầu cúng hóa vàng, tiễn ông bà trở về cõi âm, kết thúc những nghi lễ chính của Tết.</p>
+                    </div>
+                </div>
+        
+            </div>
+            <h2 class="section-title">3. Mâm Cỗ Tết</h2>
+           <p> <strong>
+           Mâm cỗ Tết miền Trung thường khá giản dị nhưng tinh tế, gồm đầy đủ 4 nhóm: món mặn – món xào – món canh – món bánh. Dù không quá cầu kỳ như miền Bắc hay phong phú như miền Nam, mâm cỗ miền Trung vẫn toát lên sự đậm đà, nồng nàn đúng chất vùng đất gió Lào – cát trắng. </strong> </p>
+            
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Mâm Cúng Gia Tiên</h3>
+                        Bánh chưng miền Trung. <br>
+                        Thịt heo luộc, thịt ngâm nước mắm.<br>
+                        Nem chua, tré.<br>
+                        Dưa món, củ kiệu.<br>
+                        Chè hoa cau hoặc chè đậu xanh.<br>
+                        Giò bò, giò hua.<br>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Món Đặc Trưng Của Từng Miền Trong Trung Bộ</h3>
+                        <p>Huế: Bánh tét Huế, nem chua Huế, giò bò, thịt heo ngâm mắm, tôm chua và nhiều món cung đình.<br>
+
+
+Quảng Nam – Đà Nẵng: Thịt heo ngâm nước mắm, bánh tổ, mì Quảng khô ngày Tết, bánh nậm – lọc.<br>
+
+
+Quảng Ngãi – Bình Định: Bánh ít lá gai, tré, bánh thuẫn, mắm nêm, thịt kho gừng.<br>
+
+
+Khánh Hòa – Phú Yên – Bình Thuận: Các món hải sản như cá thu, cá ngừ, mực rim; bánh hỏi heo quay; bánh in.</p>
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title">4. Ẩm Thực Tết Nổi Bật</h2>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Bánh Chưng-Bánh Tét Miền Trung </h3>
+                        <p>Bánh tét miền Trung có nhân đa dạng: đậu xanh, thịt mỡ, đôi khi có nhân ngọt như chuối hoặc đậu đỏ.<br> 
+
+
+Bánh chưng cũng được một số vùng gói theo kiểu riêng: vuông vắn, lá dong hoặc lá chuối, vị đậm đà.
+
+Những nồi bánh tét đỏ lửa xuyên đêm là hình ảnh quen thuộc, tạo nên không khí quây quần, gắn kết gia đình.
+                        </p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Đồ Uống-Mứt Tết-Trái Cây
+                        </h3>
+                        <p>Đồ uống: trà nóng, rượu gạo, rượu nếp, rượu sim hoặc nước mía lau thanh nhiệt.<br> 
+
+
+Mứt Tết: mứt gừng, mứt dừa, mứt me, mứt bí, mứt hạt sen. Mứt gừng miền Trung đặc biệt thơm, cay nồng – rất được chuộng.<br> 
+
+
+Trái cây: xoài, dừa, quýt, chuối, mãng cầu… bày trong mâm ngũ quả với ý nghĩa cầu may.</p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Món Mặn-Món Ngọt Đặc Trưng </h3>
+                     <p>Món mặn đặc trưng miền Trung thường có vị đậm, cay nhẹ, đưa cơm:<br>
+Thịt heo ngâm nước mắm.<br>
+Nem chua, tré.<br>
+Dưa món, củ kiệu.<br>
+Giò bò, giò hua.<br>
+Thịt kho gừng, cá kho tộ.<br>
+Các món hải sản như mực rim sa tế, cá thu rim.<br>
+Món ngọt:<br>
+Bánh thuẫn, bánh tổ.<br>
+Bánh in, bánh ít lá gai.<br>
+Kẹo mè xửng Huế.<br>
+</p>
+ 
+                    </div>
+                </div>
+            
+          
+            </div>
+            <h2 class="section-title">5. Món Kiêng Kị & Điều Kiêng Trong Ngày Tết</h2>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Những Món Kiêng Kị  </h3>
+                        <p>Người miền Trung có một số món kiêng nhằm tránh xui xẻo trong năm mới:<br>
+
+
+Mực: sợ “đen đủi”, “xui xẻo” trong công việc.<br>
+Chuối tiêu: ở một số nơi kiêng vì chuối mềm dễ “trượt chân”, “khó may mắn”.<br>
+Thịt vịt: bị cho là gây “xáo trộn”, không thuận hòa.<br>
+Tôm: vì tôm hay “giật lùi”, dễ tượng trưng cho việc không tiến bộ.<br>
+Cháo trắng: gắn với tang lễ nên tránh trong mùng 1.<br>
+                          
+                        </p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Điều Cấm Kị Trong Giao Tiếp-Sinh Hoạt
+                        </h3>
+                        <p>Một số điều kiêng nổi bật:<br>
+Không cãi vã, nói năng tiêu cực.<br>
+Không làm vỡ chén, bát để tránh “tan vỡ”.<br
+Không quét nhà trong mùng 1, mùng 2 vì sợ “quét lộc ra khỏi nhà”.<br>
+Tránh cho người khác vay tiền đầu năm.<br>
+Hạn chế mặc đồ tối màu khi đi chúc Tết.<br>
+                          </p>
+                    </div>
+                </div>
+            </div>
+<h2 class="section-title">6. Trang Phục</h2>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Trang Phục Truyền ThốngThống </h3>
+                        <p>
+                          Áo dài (phụ nữ và nam giới).<br>
+Áo bà ba ở các vùng nông thôn.<br>
+
+Áo dài cách tân cho trẻ em.<br>
+Họa tiết thường mang biểu tượng may mắn như hoa mai, hoa sen, chim én.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+            <h2 class="section-title">7. Hoạt Động – Lễ Hội</h2>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3> Lễ Hội Dân Gian </h3>
+                        <p>
+                          Hội vật làng Sình (Huế).<br>
+Lễ hội đua thuyền trên sông Hương, sông Thu Bồn.<br>
+Hội bài chòi ở Quảng Nam – Bình Định (được UNESCO công nhận di sản).<br>
+Hội cầu ngư của ngư dân ven biển từ Thừa Thiên Huế đến Khánh Hòa.<br>
+Những lễ hội này mang hơi thở của vùng đất nắng gió, thể hiện tinh thần kiên cường và đoàn kết của người miền Trung.<br>
+                        </p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Trò Chơi Truyền Thống</h3>
+                        <p>
+                        Vật cổ truyền.<br>Bài chòi.<br>Đánh đu.<br>
+Kéo co.<br>
+Hò giã gạo, hò khoan Lệ Thủy.<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title">8. Đồ Trang Trí Nhà Cửa</h2>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3> Màu Chủ Đạo</h3>
+                        <p>
+                          Miền Trung chuộng các gam màu tươi sáng, ấm áp:<br>
+Đỏ may mắn.<br>
+Vàng thịnh vượng.<br>
+Hồng cam ấm cúng.<br>
+Xanh lá tượng trưng cho sức sống.
+                        </p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>
+                          Vật Trang Trí Đặc Trưng</h3>
+                        <p>Mai vàng.<br>
+
+Đèn lồng Hội An.<br>
+Tràng pháo đỏ.<br>
+Tranh dân gian, mâm ngũ quả thanh nhã.</p>
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title">9. Mâm Ngũ Quả</h2>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Cách Bày Trí </h3>
+                        <p>
+                          Mâm ngũ quả miền Trung bày theo nguyên tắc hài hòa – trang nhã, không nặng nề về quy tắc cố định.
+
+Trái cây được xếp theo từng tầng, quả lớn kê dưới, quả nhỏ đặt trên, xen một vài nhành mai vàng cho tươi sáng.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+            <h2 class="section-title">10. Quan Niệm Tâm Linh – Tín Ngưỡng</h2>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Tục Cúng Tổ Tiên </h3>
+                       <p>
+                         Người miền Trung coi trọng cúng bái gia tiên vì tin rằng tổ tiên sẽ phù hộ cho con cháu. Tết là dịp để mời ông bà về đoàn tụ cùng gia đình.<br>
+Bàn thờ đặt ở vị trí cao nhất và trang trọng nhất.<br>
+Lễ vật gồm: hương, hoa, trà, rượu, mâm ngũ quả, bánh tét, xôi, thịt heo luộc.<br>
+Đèn dầu hoặc nến đỏ thắp sáng suốt ba ngày.<br>
+Người miền Trung coi trọng ba yếu tố:<br>
+Sự đầy đủ (mâm cỗ trọn vẹn, nhà cửa sạch sẽ).<br>
+Sự may mắn (xông đất hợp tuổi).<br>
+Sự bình an (đi chùa đầu năm).<br>
+Đi chùa cầu duyên – cầu tài – cầu lộc.<br>
+
+
+Người trẻ đi chùa cầu duyên; người làm ăn cầu lộc, tài; người lớn tuổi cầu sức khỏe và bình an. Không khí chùa chiền đầu năm luôn rất linh thiêng và yên bình.
+                       </p>
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title">11. Giao Tiếp Ngày Tết</h2>
+<div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3> Chúc Theo Vai Vế
+                    </h3>
+                    <p>
+                      Chúc ông bà: sức khỏe, trường thọ.<br>
+Chúc cha mẹ: bình an, hạnh phúc.<br>
+Chúc thầy cô: thành công, dạy tốt.<br>
+Chúc bạn bè: học tốt, vui vẻ.<br>
+Chúc người làm ăn: phát tài – phát đạt – thuận buồm xuôi gió.<br>
+                    </p>
+                    </div>
+                </div>
+                
+            </div>
+            <h2 class="section-title">12. Sự Thay Đổi Của Tết Hiện Đại</h2>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Xu Hướng Đón Tết Mới
+                        </h3>
+                        <p>
+                          Nhiều gia đình chọn ăn Tết gọn nhẹ, không quá cầu kỳ.<br>
+Giới trẻ thích du lịch Tết hoặc đưa gia đình đi nghỉ dưỡng.<br>
+Các món ăn hiện đại, đồ trang trí tối giản dần phổ biến.<br>
+                        </p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>
+                        Tết Của Giới Trẻ
+                        </h3>
+                        <p>
+                          Giới trẻ thích:<br>
+Check-in với áo dài cách tân.<br>
+Trang trí phòng theo phong cách Hàn – Nhật.<br>
+Chụp bộ ảnh Tết, làm vlog/ngày Tết.<br>
+Chúc Tết online qua mạng xã hội.<br>
+Tổ chức các bữa liên hoan nhẹ thay vì cỗ lớn.<br>
+                        </p>
+                    </div>
+                </div>
+                 <div class="item-card">
+                    <div class="info">
+                        <h3>Tết Kết Hợp Với Du Lịch, Công Nghệ
+                        </h3>
+                      <p>
+                        Nhiều người chọn đi Huế – Đà Nẵng – Hội An để tận hưởng không khí Tết.<br>
+Sử dụng ví điện tử, lì xì online.<br>
+Mua sắm Tết qua thương mại điện tử.<br>
+Dùng AI/ứng dụng chỉnh sửa để làm ảnh – video Tết.<br>
+                      </p>
+                        </h3>
+                    </div>
+                </div>
+            </div> <br> <br> <br>
+            
+    <footer>
+        <div class="footer-content">
+            <div class="footer-box">
+                <h4>Thông Tin Web</h4>
+                <p>Website sưu tầm và chia sẻ vẻ đẹp văn hóa Tết 3 Miền tại Việt Nam.</p>
+            </div>
+            <div class="footer-box social-links">
+                <h4>Liên Hệ</h4>
+                <a href="#">🔵 Facebook: Tết Việt 3 Miền</a>
+                <a href="mailto:abc@gmail.com">📧 Gmail: tet3mien@gmail.com</a>
+                <p>📍 Địa chỉ: Thường Phước, Đồng Tháp</p>
+            </div>
+        </div>
+        <div class="copy-right">© 2026 VanHoaTet3Mien - Truyền Thống Việt Nam</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // 1. Xử lý Video Intro
+        const intro = document.getElementById('intro-overlay');
+        const video = document.getElementById('myVideo');
+        const skipBtn = document.getElementById('skip-btn');
+
+        function endIntro() {
+            intro.classList.add('hide-intro');
+            setTimeout(() => { intro.style.display = 'none'; }, 1000);
+        }
+
+        skipBtn.addEventListener('click', endIntro);
+        video.onended = endIntro;
+
+        // 2. Khởi tạo Slide 3D (Coverflow)
+        var swiper = new Swiper(".mySwiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true, // Bắt buộc phải là true để ảnh chính nằm giữa
+    slidesPerView: "auto", 
+    coverflowEffect: {
+        rotate: 30,      // Độ nghiêng vừa phải
+        stretch: 0,      // Để 0 để khoảng cách 2 bên bằng nhau tuyệt đối
+        depth: 200,      // Tạo độ sâu cho ảnh 2 bên lùi về sau
+        modifier: 1,
+        slideShadows: true,
+    },
+    loop: true,
+    
+    // CẤU HÌNH THEO Ý BẠN:
+    autoplay: {
+        delay: 10000, // 10 giây mới tự chuyển một lần (rất lâu)
+        disableOnInteraction: true, // Khi bạn đã bấm/vuốt, nó sẽ dừng hẳn việc tự động chuyển
+    },
+
+    // Cho phép điều khiển bằng bàn phím hoặc chuột
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+    }
+});
+
+        // 3. Hiệu ứng hoa đào rơi
+        function createPetal() {
+            const petals = ['🌸', '🌼', '🧧'];
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+            petal.style.fontSize = Math.random() * 10 + 10 + 'px';
+            document.body.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 6000);
+        }
+        setInterval(createPetal, 400);
+    </script>
+</body>
+</html>

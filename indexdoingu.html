@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Văn Hóa Tết Việt Nam - 3 Miền Kết Nối</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <style>
+        :root {
+            --primary: #f39c12;
+            --accent: #d32f2f;
+            --bg: #ffb84d;
+            --dark: #2c3e50;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg) radial-gradient(circle, #ffcc80 0%, #ffb84d 100%);
+            color: #333; scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* --- 1. INTRO VIDEO OVERLAY --- */
+        #intro-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex;
+            justify-content: center; align-items: center; transition: 1s ease;
+        }
+        #intro-overlay video { width: 100%; height: 100%; object-fit: cover; }
+        #skip-btn {
+            position: absolute; bottom: 30px; right: 30px;
+            background: rgba(255,255,255,0.2); color: white;
+            border: 1px solid white; padding: 10px 20px;
+            cursor: pointer; border-radius: 5px; z-index: 10000;
+        }
+        .hide-intro { opacity: 0; pointer-events: none; }
+
+        /* --- 2. HIỆU ỨNG HOA RƠI --- */
+        .petal {
+            position: fixed; top: -10%; z-index: 998;
+            user-select: none; pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- 3. NAVIGATION --- */
+        nav {
+            display: flex; justify-content: space-around; align-items: center;
+            background: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav .logo { font-weight: 900; color: var(--accent); font-size: 22px; letter-spacing: 1px; }
+        nav ul { list-style: none; display: flex; margin: 0; }
+        nav ul li { position: relative; padding: 0 15px; }
+        nav ul li a { color: #333; text-decoration: none; font-weight: 700; font-size: 13px; text-transform: uppercase; transition: 0.3s; }
+        nav ul li a:hover { color: var(--primary); }
+
+        /* --- 4. HERO & SEARCH --- */
+        .hero { text-align: center; padding: 60px 20px 20px; color: white; }
+        .hero h1 { font-size: 42px; font-weight: 900; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
+        .search-box {
+            max-width: 600px; margin: 0 auto; background: white;
+            padding: 5px; border-radius: 50px; display: flex; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .search-box input {
+            flex: 1; border: none; padding: 15px 25px; border-radius: 50px; outline: none; font-size: 16px;
+        }
+
+        /* --- 5. SWIPER 3D SLIDER --- */
+        .swiper {width: 100%;padding-top: 50px;padding-bottom: 50px;
+        /* Đảm bảo không có margin lạ làm lệch slide */
+        margin-left: auto; margin-right: auto;}
+        .swiper-slide {
+          background-position: center;background-size: cover;
+          width: 300px; /* Độ rộng ảnh */
+          height: 450px; /* Chiều cao ảnh */
+          border-radius: 20px;
+          /* Quan trọng: Không để slide tự ý thêm margin */
+          margin: 0 !important; 
+        }
+
+        /* --- 6. CONTENT GRID --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section-title {
+            font-size: 28px; font-weight: 900; color: white;
+            margin: 50px 0 25px; border-left: 8px solid var(--accent); padding-left: 15px;
+        }
+        .grid { 
+          display: flex; 
+          flex-direction: column; /* Xếp các khung theo hàng dọc */
+          gap: 25px; 
+          
+        }
+        .item-card {
+          background: white; 
+          border-radius: 15px; 
+          overflow: hidden;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+          transition: 0.3s;
+          width: 100%; /* Đảm bảo luôn rộng 100% container */
+          
+        }
+        .item-card:hover { transform: translateY(-10px); }
+        .item-card img { width: 100%; height: 200px; object-fit: cover; }
+        .item-card .info { padding: 20px; }
+        .item-card h3 { margin: 0; color: var(--accent); font-size: 18px; }
+
+        /* --- 7. AUTHOR SECTION --- */
+        .author-section {
+            background: rgba(255,255,255,0.9); border-radius: 20px;
+            padding: 40px; margin: 60px auto; display: flex; align-items: center; gap: 30px; max-width: 800px;
+        }
+        .author-img { width: 130px; height: 130px; border-radius: 50%; border: 5px solid var(--primary); object-fit: cover; }
+
+        /* --- 8. FOOTER --- */
+        footer { background: var(--dark); color: white; padding: 60px 20px; text-align: center; }
+        .footer-content {
+            max-width: 1200px; margin: 0 auto; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: left;
+        }
+        .footer-box h4 { border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
+        .social-links a { color: #ccc; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
+        .social-links a:hover { color: var(--primary); padding-left: 5px; }
+        
+        .logo img {
+    height: 50px;    /* Điều chỉnh chiều cao tùy ý */
+    width: auto;     /* Giữ đúng tỉ lệ ảnh */
+    display: block;  /* Loại bỏ khoảng cách thừa dưới ảnh */
+}
+
+/* Đảm bảo nav sử dụng flexbox để logo và menu nằm cùng hàng */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+    </style>
+</head>
+<body>
+
+    <nav>
+    <div class="logo">
+        <a href="#">
+            <img src="https://scontent.fvca5-1.fna.fbcdn.net/v/t39.30808-6/615884114_122193368420499933_9016153991879918161_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=9QmrsUU1H2AQ7kNvwFSnVRO&_nc_oc=Adm8a2GqxfO4OgSui3Ax7gVYn_1bLP8VtGRqbyYpuOQLsK1XUn-AAeBQzSYq4Bw14u8&_nc_zt=23&_nc_ht=scontent.fvca5-1.fna&_nc_gid=6P64iSK5VdzHrL1RY3x6nA&oh=00_AfpTQW3zwbARj_f6O1tY0Ix1VXXfjIn7ZDatQlByfCpOxw&oe=697264E1" alt="Tết Việt Nam">
+        </a>
+    </div>
+    <ul>
+        <li><a href="#mien-bac">MIỀN BẮC</a></li>
+        <li><a href="#mien-trung">MIỀN TRUNG</a></li>
+        <li><a href="#mien-nam">MIỀN NAM</a></li>
+        <li><a href="#tac-gia">TÁC GIẢ</a></li>
+    </ul>
+</nav>
+
+    <div class="container">
+        <div id="mien-bac">
+            <h2 class="section-title">Giới Thiệu Đội Ngũ</h2>
+            <section id="tuong-lai" style="padding: 10px; line-height: 1.6;">
+    <h3 style="color: #d32f2f; text-align: center;">MỤC TIÊU CHUNG CỦA NHÓM</h3>
+    <ul>
+        <li><strong>Mục tiêu:</strong> Giới thiệu nét đặc trưng và ý nghĩa của Tết ba miền.</li>
+        <li><strong>Thông điệp:</strong> Tôn vinh sự khác biệt trong văn hóa và không khí sum vầy của dân tộc.</li>
+        <li><strong>Giá trị đạt được:</strong> Vận dụng kiến thức học tập, rèn luyện kỹ năng phối hợp và thể hiện tình yêu văn hóa Việt.</li>
+    </ul>
+</section>
+            <section id="tuong-lai" style="padding: 10px; line-height: 1.5;">
+    <h3 style="color: #d32f2f; text-align: center;">TƯƠNG LAI CỦA DỰ ÁN</h3>
+    <ul>
+        <li><strong>Số hóa văn hóa:</strong> Ứng dụng AR/VR để trải nghiệm không khí Tết ảo.</li>
+        <li><strong>Kết nối cộng đồng:</strong> Nơi mọi người chia sẻ khoảnh khắc sum vầy.</li>
+        <li><strong>Vươn tầm quốc tế:</strong> Đa ngôn ngữ để quảng bá Tết Việt ra thế giới.</li>
+    </ul>
+</section>
+            <p></p>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Đoàn Ngọc Ánh - Trưởng nhóm </h3>
+                        <p><strong>Vai trò:</strong><br>-Điều phối chung và quản lý tiến độ.</p>
+                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Lên ý tưởng chủ đạo cho website.<br> -Xây dựng mã nguồn (Code) và thiết kế giao diện cho website.</p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Nguyễn Thị Ngọc Huyền - Thành viên</h3>
+                        <p><strong>Vai trò:</strong><br>-Nội dung miền Nam</p>
+                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Phụ trách trang văn hóa miền Nam và tìm kiếm tư liệu liên quan.</p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Trần Thị Yến Linh - Thành viên </h3>
+                        <p><strong>Vai trò:</strong><br>-Hỗ trợ Kỹ thuật</p>
+                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Tìm kiếm tư liệu và hỗ trợ xây dựng giao diện website.</p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Phùng Thị Ngọc Lợi - Thành viên </h3>
+                       <p><strong>Vai trò:</strong><br>-Nội dung miền Bắc</p>
+                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Phụ trách trang văn hóa miền Bắc, thiết kế Logo và tìm kiếm tư liệu.</p>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Phạm Phương Thùy - Thành viên </h3>
+                    <p><strong>Vai trò:</strong><br>-Nội dung miền Trung</p>
+                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Phụ trách trang văn hóa miền Nam và tìm kiếm tư liệu liên quan.</p>  
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="info">
+                        <h3>Hồ Thị Kim Hoàng - Thành viên </h3>
+                    <p><strong>Vai trò:</strong><br>-Giới thiệu đội ngũ</p>
+                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Biên soạn nội dung giới thiệu thành viên và tìm kiếm tư liệu.</p>   
+                    </div>
+                </div>
+            </div><br>
+            
+            <footer style="background-color: white; padding: 40px 20px; text-align: center; border-top: 3px solid #d32f2f;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="color: #d32f2f; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Lời Cảm Ơn</h2>
+        <p style="font-style: italic; line-height: 1.8; color: #444; font-size: 1.1rem;">
+            "Cảm ơn bạn đã đồng hành cùng chúng tôi trong chuyến hành trình xuyên suốt dải đất hình chữ S để khám phá nét đẹp Tết ba miền. Chúng tôi tin rằng, dù bạn đang ở đâu hay thuộc miền đất nào, không khí ngày Tết luôn mang lại một sức mạnh kỳ diệu để chúng ta xích lại gần nhau hơn. Sự ủng hộ và quan tâm của bạn chính là nguồn động lực lớn nhất để nhóm tiếp tục hoàn thiện và phát triển dự án này trong tương lai. Chúc bạn một mùa Tết an yên, hạnh phúc bên những người thân yêu!"
+        </p>
+        <p style="margin-top: 20px; font-weight: bold; color: #b71c1c;">— Thân ái, Đội ngũ thực hiện dự án —</p>
+    </div>
+</footer><br><br><br>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-box">
+                <h4>Thông Tin Web</h4>
+                <p>Website sưu tầm và chia sẻ vẻ đẹp văn hóa Tết 3 Miền tại Việt Nam.</p>
+            </div>
+            <div class="footer-box social-links">
+                <h4>Liên Hệ</h4>
+                <a href="#">🔵 Facebook: Tết Việt 3 Miền</a>
+                <a href="mailto:abc@gmail.com">📧 Gmail: tet3mien@gmail.com</a>
+                <p>📍 Địa chỉ: Thường Phước, Đồng Tháp</p>
+            </div>
+        </div>
+        <div class="copy-right">© 2026 VanHoaTet3Mien - Truyền Thống Việt Nam</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // 1. Xử lý Video Intro
+        const intro = document.getElementById('intro-overlay');
+        const video = document.getElementById('myVideo');
+        const skipBtn = document.getElementById('skip-btn');
+
+        function endIntro() {
+            intro.classList.add('hide-intro');
+            setTimeout(() => { intro.style.display = 'none'; }, 1000);
+        }
+
+        skipBtn.addEventListener('click', endIntro);
+        video.onended = endIntro;
+
+        // 2. Khởi tạo Slide 3D (Coverflow)
+        var swiper = new Swiper(".mySwiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true, // Bắt buộc phải là true để ảnh chính nằm giữa
+    slidesPerView: "auto", 
+    coverflowEffect: {
+        rotate: 30,      // Độ nghiêng vừa phải
+        stretch: 0,      // Để 0 để khoảng cách 2 bên bằng nhau tuyệt đối
+        depth: 200,      // Tạo độ sâu cho ảnh 2 bên lùi về sau
+        modifier: 1,
+        slideShadows: true,
+    },
+    loop: true,
+    
+    // CẤU HÌNH THEO Ý BẠN:
+    autoplay: {
+        delay: 10000, // 10 giây mới tự chuyển một lần (rất lâu)
+        disableOnInteraction: true, // Khi bạn đã bấm/vuốt, nó sẽ dừng hẳn việc tự động chuyển
+    },
+
+    // Cho phép điều khiển bằng bàn phím hoặc chuột
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+    }
+});
+
+        // 3. Hiệu ứng hoa đào rơi
+        function createPetal() {
+            const petals = ['🌸', '🌼', '🧧'];
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+            petal.style.fontSize = Math.random() * 10 + 10 + 'px';
+            document.body.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 6000);
+        }
+        setInterval(createPetal, 400);
+    </script>
+</body>
+</html>
