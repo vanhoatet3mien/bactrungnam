@@ -102,13 +102,37 @@ nav ul li a:hover { color: var(--accent); }
                         url('https://www.transparenttextures.com/patterns/red-dots.png'), var(--accent);
             color: white; padding: 80px 20px; text-align: center;
         }
-        .timer { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
-        .time-box {
-            background: rgba(255,255,255,0.2); padding: 20px; border-radius: 20px; min-width: 90px;
-            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);
-        }
-        .time-box span { display: block; font-size: 40px; font-weight: 900; }
-        .time-box label { font-size: 14px; text-transform: uppercase; font-weight: 700; }
+        
+        .timer {
+    display: flex;
+    justify-content: center;
+    gap: 8px; /* Khoảng cách nhỏ lại để vừa màn hình điện thoại */
+    margin-top: 30px;
+    flex-wrap: nowrap; /* Ép buộc không được xuống dòng */
+}
+
+.time-box {
+    background: rgba(255,255,255,0.2);
+    padding: 10px 5px; /* Giảm padding */
+    border-radius: 15px;
+    flex: 1; /* Mỗi ô chiếm tỉ lệ bằng nhau */
+    max-width: 80px; /* Giới hạn độ rộng tối đa */
+    min-width: 60px; /* Độ rộng tối thiểu để không bị méo */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.time-box span {
+    display: block;
+    font-size: 24px; /* Giảm cỡ chữ số trên mobile */
+    font-weight: 900;
+}
+
+.time-box label {
+    font-size: 10px; /* Thu nhỏ nhãn (Ngày, Giờ, Phút...) */
+    text-transform: uppercase;
+    font-weight: 700;
+}
 
         .gallery-container { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
         .gallery-header { text-align: center; margin-bottom: 40px; }
@@ -608,6 +632,7 @@ document.onkeydown = function(e) {
 </body>
 
 </html>
+
 
 
 
