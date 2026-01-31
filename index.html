@@ -202,6 +202,21 @@ nav ul li a:hover { color: var(--accent); }
         .petal { position: fixed; top: -10%; z-index: 998; pointer-events: none; animation: fall linear infinite; }
         @keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
         input[type="file"] { display: none; }
+
+        /* --- RESPONSIVE FIX --- */
+@media (max-width: 768px) {
+    nav { padding: 10px 15px; }
+    nav ul li { padding: 0 5px; }
+    nav ul li a { font-size: 10px; }
+
+    .time-box { min-width: 65px; padding: 10px; }
+    .time-box span { font-size: 24px; }
+    
+    .music-panel { width: 80vw; max-width: 280px; }
+    
+    .upload-area { padding: 20px; }
+    .folder-input { width: 100%; margin-bottom: 10px; }
+}
     </style>
 </head>
 <body>
@@ -593,6 +608,7 @@ document.onkeydown = function(e) {
 </body>
 
 </html>
+
 
 
 
