@@ -21,16 +21,19 @@
             color: #333; scroll-behavior: smooth;
             overflow-x: hidden;
         }
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            background: white; padding: 10px 20px; position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        
+        /* --- 2. THANH MENU (NAV) --- */
+        nav { 
+            display: flex; justify-content: space-around; align-items: center; 
+            background: white; padding: 10px 0; position: sticky; top: 0; 
+            z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.1); 
         }
-        .logo img { height: 50px; width: auto; display: block; }
-        nav ul { list-style: none; display: flex; margin: 0; }
+        nav .logo { height: 50px; width: 50px; } /* Giữ chỗ cho logo */
+        nav .logo img { height: 100%; width: auto; border-radius: 10px; }
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
         nav ul li { padding: 0 15px; }
         nav ul li a { color: #333; text-decoration: none; font-weight: 700; font-size: 13px; text-transform: uppercase; transition: 0.3s; }
-        nav ul li a:hover { color: var(--primary); }
+        nav ul li a:hover { color: var(--accent); }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .section-title {
@@ -38,41 +41,63 @@
             margin: 50px 0 25px; border-left: 8px solid var(--accent); padding-left: 15px;
         }
 
-        /* --- CẤU TRÚC ZIC-ZAC MỚI --- */
-        .grid { display: flex; flex-direction: column; gap: 30px; }
-        
-        .item-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            display: flex; /* Kích hoạt hiển thị song song */
-            align-items: stretch;
-            min-height: 300px;
-        }
+        /* --- CẤU TRÚC ZIC-ZAC ĐÃ TỐI ƯU --- */
+.grid { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 40px; 
+    align-items: center; /* Căn giữa các card nhỏ */
+}
 
-        /* Tự động đảo bên cho các khung chẵn để tạo hiệu ứng zic-zac */
-        .grid .item-card:nth-child(even) {
-            flex-direction: row-reverse;
-        }
+.item-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    display: flex;
+    align-items: stretch;
+    /* CHỈNH TẠI ĐÂY: Thu nhỏ khung lại */
+    max-width: 850px; 
+    width: 100%;
+}
 
-        .item-card img {
-            width: 50%; /* Ảnh chiếm 1 nửa */
-            object-fit: cover;
-            display: block;
-        }
+/* Tự động đảo bên cho các khung chẵn */
+.grid .item-card:nth-child(even) {
+    flex-direction: row-reverse;
+}
 
-        .item-card .info {
-            width: 50%; /* Chữ chiếm 1 nửa */
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Căn giữa văn bản trong khoảng trống */
-        }
+.item-card img {
+    width: 45%; /* Giảm tỉ lệ ảnh một chút để cân đối */
+    /* CHỈNH TẠI ĐÂY: Giúp ảnh không bị méo/cắt quá nhiều */
+    object-fit: cover; 
+    aspect-ratio: 4/3; /* Ép ảnh về tỉ lệ chuẩn 4:3 */
+    display: block;
+}
 
-        .item-card h3 { margin: 0 0 15px 0; color: var(--accent); font-size: 22px; }
-        .item-card p { margin: 0; line-height: 1.6; }
+.item-card .info {
+    width: 55%; 
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Responsive cho điện thoại */
+@media (max-width: 768px) {
+    .item-card, .grid .item-card:nth-child(even) { 
+        flex-direction: column; 
+        max-width: 100%;
+    }
+    .item-card img { 
+        width: 100%; 
+        aspect-ratio: 16/9; /* Trên điện thoại để ảnh ngang sẽ đẹp hơn */
+    }
+    .item-card .info { 
+        width: 100%;
+        padding: 20px; 
+    }
+}
 
         /* Responsive cho điện thoại */
         @media (max-width: 768px) {
@@ -229,14 +254,14 @@ Giữ gìn lời nói, hành động mang ý nghĩa may mắn.</p>
             <h2 class="section-title">6. Trang Phục</h2>
             <div class="grid">
                 <div class="item-card">
-                    <img src="https://i.pinimg.com/736x/8a/a5/8a/8aa58a2d1e57c674e26217469a93077e.jpg" alt="..">
+                    <img src="https://sf-static.upanhlaylink.com/img/image_20260131c2063f4dc115bc11034de58de3e24c8a.jpg" alt="a1-3064.jpg">
                     <div class="info">
                         <h3>Áo dài truyền thống</h3>
                         <p>Có kiểu dáng mềm mại, thoải mái, may bằng lụa hoặc gấm nhẹ. Màu sắc tươi sáng như đỏ, vàng, xanh với họa tiết hoa mai, hoa đào, mang ý nghĩa may mắn, sung túc trong năm mới.</p>
                     </div>
                 </div>
                 <div class="item-card">
-                    <img src="https://vcdn1-giadinh.vnecdn.net/2022/02/01/495b6a1bc21a40aabcdda163-cut-8-1134-2609-1643682248.jpg?w=680&h=0&q=100&dpr=2&fit=crop&s=wpKpws0AGitkmJ8MX8wzAQ" alt="..">
+                    <img src="https://sf-static.upanhlaylink.com/img/image_20260131667bd08927194e8a82b5b05b70de505a.jpg" alt="218661314ac460d9d50e640120b1c53d.jpg">
                     <div class="info">
                         <h3>Quần áo mới</h3>
                         <p>Gồm áo sơ mi, áo thun lịch sự, váy, quần tây hoặc áo bà ba cách tân. Trang phục có màu sắc tươi sáng, chất liệu nhẹ, tạo cảm giác thoải mái, tượng trưng cho sự tươi mới và may mắn trong năm mới.</p>
@@ -341,15 +366,14 @@ Giữ gìn lời nói, hành động mang ý nghĩa may mắn.</p>
             </div>
             <div class="footer-box social-links">
                 <h4>Liên Hệ</h4>
-                <p>Facebook: <a href="https://www.facebook.com/share/1DMGDp4r8c/">Tết 3 Miền</a></p>
-                <p>Gmail: <a href="mailto:abc@gmail.com">tet3mienvn@gmail.com</a></p>
+                <p>Facebook: <a href="https://www.facebook.com/share/1DMGDp4r8c/" style="color:var(--primary)">Tết 3 Miền</a></p>
+                <p>Gmail: <a href="mailto:tet3mienvn@gmail.com" style="color:var(--primary)">tet3mienvn@gmail.com</a></p>
                 <p>Địa chỉ: Thường Phước, Đồng Tháp</p>
             </div>
         </div>
         <div class="copy-right">© 2026 VanHoaTet3Mien - Truyền Thống Việt Nam</div>
     </footer>
+    
 </body>
 
 </html>
-
-

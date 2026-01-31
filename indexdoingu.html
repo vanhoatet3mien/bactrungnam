@@ -51,17 +51,18 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- 3. NAVIGATION --- */
-        nav {
-            display: flex; justify-content: space-around; align-items: center;
-            background: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        /* --- 2. THANH MENU (NAV) --- */
+        nav { 
+            display: flex; justify-content: space-around; align-items: center; 
+            background: white; padding: 10px 0; position: sticky; top: 0; 
+            z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.1); 
         }
-        nav .logo img { height: 50px; }
-        nav ul { list-style: none; display: flex; margin: 0; }
-        nav ul li { position: relative; padding: 0 15px; }
+        nav .logo { height: 50px; width: 50px; } /* Giữ chỗ cho logo */
+        nav .logo img { height: 100%; width: auto; border-radius: 10px; }
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+        nav ul li { padding: 0 15px; }
         nav ul li a { color: #333; text-decoration: none; font-weight: 700; font-size: 13px; text-transform: uppercase; transition: 0.3s; }
-        nav ul li a:hover { color: var(--primary); }
+        nav ul li a:hover { color: var(--accent); }
 
         /* --- 4. HERO & SEARCH --- */
         .hero { text-align: center; padding: 60px 20px 20px; color: white; }
@@ -168,68 +169,138 @@ nav {
 
     <div class="container">
         <div id="doi-ngu">
-            <h2 class="section-title">Giới Thiệu</h2>
-            <section id="tuong-lai" style="padding: 10px; line-height: 1.6;">
-    <h3 style="color: #d32f2f; text-align: center;">MỤC TIÊU CHUNG CỦA NHÓM</h3>
-    <ul>
-        <li><strong>Mục tiêu:</strong> Giới thiệu nét đặc trưng và ý nghĩa của Tết ba miền.</li>
-        <li><strong>Thông điệp:</strong> Tôn vinh sự khác biệt trong văn hóa và không khí sum vầy của dân tộc.</li>
-        <li><strong>Giá trị đạt được:</strong> Vận dụng kiến thức học tập, rèn luyện kỹ năng phối hợp và thể hiện tình yêu văn hóa Việt.</li>
-    </ul>
+          
+            <h2 class="section-title">GIỚI THIỆU</h2>
+<section id="muc-tieu" style="padding: 25px; background: rgba(255,255,255,0.7); border-radius: 20px; margin-bottom: 30px; border: 1px solid rgba(211, 47, 47, 0.2);">
+    <h3 style="color: #d32f2f; text-align: center; font-size: 26px; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">
+        Mục Tiêu Chung Của Nhóm
+    </h3>
+    
+    <div style="display: flex; gap: 20px; justify-content: space-between;">
+        
+        <div style="flex: 1; display: flex; align-items: flex-start; gap: 12px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <span style="font-size: 30px;">🎯</span>
+            <div>
+                <h4 style="margin: 0 0 5px 0; color: #d32f2f; font-size: 16px;">Sứ mệnh</h4>
+                <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #444;">Hệ thống hóa và giới thiệu trọn vẹn giá trị Tết 3 miền.</p>
+            </div>
+        </div>
+
+        <div style="flex: 1; display: flex; align-items: flex-start; gap: 12px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <span style="font-size: 30px;">✨</span>
+            <div>
+                <h4 style="margin: 0 0 5px 0; color: #d32f2f; font-size: 16px;">Kết nối</h4>
+                <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #444;">Khẳng định giá trị đoàn viên và lan tỏa tình yêu cội nguồn.</p>
+            </div>
+        </div>
+
+        <div style="flex: 1; display: flex; align-items: flex-start; gap: 12px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <span style="font-size: 30px;">🚀</span>
+            <div>
+                <h4 style="margin: 0 0 5px 0; color: #d32f2f; font-size: 16px;">Kỹ năng</h4>
+                <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #444;">Vận dụng công nghệ và tư duy làm việc nhóm sáng tạo.</p>
+            </div>
+        </div>
+
+    </div>
 </section>
-            <section id="tuong-lai" style="padding: 10px; line-height: 1.5;">
-    <h3 style="color: #d32f2f; text-align: center;">TƯƠNG LAI CỦA DỰ ÁN</h3>
-    <ul>
-        <li><strong>Số hóa văn hóa:</strong> Ứng dụng AR/VR để trải nghiệm không khí Tết ảo.</li>
-        <li><strong>Kết nối cộng đồng:</strong> Nơi mọi người chia sẻ khoảnh khắc sum vầy.</li>
-        <li><strong>Vươn tầm quốc tế:</strong> Đa ngôn ngữ để quảng bá Tết Việt ra thế giới.</li>
-    </ul>
+            
+<section id="tuong-lai" style="padding: 25px; background: rgba(255,255,255,0.7); border-radius: 20px; margin-bottom: 30px; border: 1px solid rgba(211, 47, 47, 0.2);">
+    <h3 style="color: #d32f2f; text-align: center; font-size: 26px; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">
+        Tầm Nhìn & Tương Lai
+    </h3>
+    
+    <div style="display: flex; gap: 20px; justify-content: space-between;">
+
+        <div style="flex: 1; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
+            <div style="font-size: 35px; margin-bottom: 10px;">🌐</div>
+            <h4 style="color: #d32f2f; margin-bottom: 10px; font-size: 16px;">Số hóa VR</h4>
+            <p style="margin: 0; font-size: 13px; color: #555;">Ứng dụng <b>AR/VR</b> tái hiện không gian Tết xưa sống động.</p>
+        </div>
+
+        <div style="flex: 1; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
+            <div style="font-size: 35px; margin-bottom: 10px;">🤝</div>
+            <h4 style="color: #d32f2f; margin-bottom: 10px; font-size: 16px;">Cộng đồng</h4>
+            <p style="margin: 0; font-size: 13px; color: #555;">Nền tảng lưu giữ ký ức và chia sẻ khoảnh khắc sum họp.</p>
+        </div>
+
+        <div style="flex: 1; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
+            <div style="font-size: 35px; margin-bottom: 10px;">🌍</div>
+            <h4 style="color: #d32f2f; margin-bottom: 10px; font-size: 16px;">Quốc tế</h4>
+            <p style="margin: 0; font-size: 13px; color: #555;">Giới thiệu tinh hoa văn hóa Việt ra khắp thế giới.</p>
+        </div>
+
+    </div>
 </section>
-            <p></p>
+          <h2 class="section-title">THÀNH VIÊN</h2>
+            
             <div class="grid">
-                <div class="item-card">
-                    <div class="info">
-                        <h3>Đoàn Ngọc Ánh - Trưởng nhóm </h3>
-                        <p><strong>Vai trò:</strong><br>-Điều phối chung và quản lý tiến độ.</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Lên ý tưởng chủ đạo cho website.<br> -Xây dựng mã nguồn (Code) và thiết kế giao diện cho website.</p>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <div class="info">
-                        <h3>Nguyễn Thị Ngọc Huyền - Thành viên</h3>
-                        <p><strong>Vai trò:</strong><br>-Nội dung miền Nam</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Phụ trách trang văn hóa miền Nam và tìm kiếm tư liệu liên quan.</p>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <div class="info">
-                        <h3>Trần Thị Yến Linh - Thành viên </h3>
-                        <p><strong>Vai trò:</strong><br>-Hỗ trợ Kỹ thuật</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Tìm kiếm tư liệu và hỗ trợ xây dựng giao diện website.</p>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <div class="info">
-                        <h3>Phùng Thị Ngọc Lợi - Thành viên </h3>
-                       <p><strong>Vai trò:</strong><br>-Nội dung miền Bắc</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Phụ trách trang văn hóa miền Bắc, thiết kế Logo và tìm kiếm tư liệu.</p>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <div class="info">
-                        <h3>Phạm Phương Thùy - Thành viên </h3>
-                    <p><strong>Vai trò:</strong><br>-Nội dung miền Trung</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Phụ trách trang văn hóa miền Nam và tìm kiếm tư liệu liên quan.</p>  
-                    </div>
-                </div>
-                <div class="item-card">
-                    <div class="info">
-                        <h3>Hồ Thị Kim Hoàng - Thành viên </h3>
-                    <p><strong>Vai trò:</strong><br>-Giới thiệu đội ngũ</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>-Biên soạn nội dung giới thiệu thành viên và tìm kiếm tư liệu.</p>   
-                    </div>
-                </div>
-            </div><br>
+    <div class="item-card">
+        <div class="info">
+            <h3>Đoàn Ngọc Ánh - Trưởng nhóm</h3>
+            <p><strong>Vai trò:</strong> Điều phối và Quản lý dự án</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Thiết lập kiến trúc hệ thống (Trang chủ) và sơ đồ luồng dữ liệu.<br>
+                - Tối ưu hóa hiệu năng vận hành và trải nghiệm người dùng trên website.<br>
+                - Giám sát tiến độ thực hiện và phê duyệt nội dung tổng thể.
+            </p>
+        </div>
+    </div>
+
+    <div class="item-card">
+        <div class="info">
+            <h3>Phùng Thị Ngọc Lợi - Thành viên</h3>
+            <p><strong>Vai trò:</strong> Biên tập Nội dung Miền Bắc</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Phụ trách ý tưởng và thiết kế Logo nhận diện cho dự án.<br>
+                - Tổng hợp, nghiên cứu và biên soạn tư liệu văn hóa Tết miền Bắc.<br>
+            </p>
+        </div>
+    </div>
+
+    <div class="item-card">
+        <div class="info">
+            <h3>Nguyễn Thị Ngọc Huyền - Thành viên</h3>
+            <p><strong>Vai trò:</strong> Biên tập Nội dung Miền Nam</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Khai thác tư liệu và biên soạn nội dung chuyên sâu về Tết miền Nam.<br>
+            </p>
+        </div>
+    </div>
+
+    <div class="item-card">
+        <div class="info">
+            <h3>Phạm Phương Thùy - Thành viên</h3>
+            <p><strong>Vai trò:</strong> Biên tập Nội dung Miền Trung</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Nghiên cứu các phong tục đặc sắc và biên soạn nội dung về Tết miền Trung.<br>
+            </p>
+        </div>
+    </div>
+    
+    <div class="item-card">
+        <div class="info">
+            <h3>Hồ Thị Kim Hoàng - Thành viên</h3>
+            <p><strong>Vai trò:</strong> Quản trị Nội dung Đội ngũ</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Xây dựng hồ sơ thông tin và giới thiệu chi tiết về các thành viên.<br>
+                - Phụ trách ý tưởng và triển khai thiết kế đoạn phim Intro của dự án.<br>
+            </p>
+        </div>
+    </div>
+
+    <div class="item-card">
+        <div class="info">
+            <h3>Trần Thị Yến Linh - Thành viên</h3>
+            <p><strong>Vai trò:</strong> Phát triển Giao diện</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Hỗ trợ xây dựng và hoàn thiện các thành phần giao diện trên website.<br>
+            </p>
+        </div>
+    </div>
+</div>
+
+    <br>
             
             <footer style="background-color: white; padding: 40px 20px; text-align: center; border-top: 3px solid #d32f2f;">
     <div style="max-width: 800px; margin: 0 auto;">
@@ -249,8 +320,8 @@ nav {
             </div>
             <div class="footer-box social-links">
                 <h4>Liên Hệ</h4>
-                <p>Facebook: <a href="https://www.facebook.com/share/1DMGDp4r8c/">Tết 3 Miền</a></p>
-                <p>Gmail: <a href="mailto:abc@gmail.com">tet3mienvn@gmail.com</a></p>
+                <p>Facebook: <a href="https://www.facebook.com/share/1DMGDp4r8c/" style="color:var(--primary)">Tết 3 Miền</a></p>
+                <p>Gmail: <a href="mailto:tet3mienvn@gmail.com" style="color:var(--primary)">tet3mienvn@gmail.com</a></p>
                 <p>Địa chỉ: Thường Phước, Đồng Tháp</p>
             </div>
         </div>
@@ -321,6 +392,3 @@ nav {
 </body>
 
 </html>
-
-
-
