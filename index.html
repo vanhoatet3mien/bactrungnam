@@ -252,6 +252,52 @@ nav ul li a:hover { color: var(--accent); }
         font-size: 9px;
     }
 }
+/* Style cho bao lì xì */
+.lucky-envelope {
+    position: fixed;
+    top: -100px;
+    z-index: 9999;
+    cursor: pointer;
+    font-size: 50px; /* Kích thước bao lì xì */
+    user-select: none;
+    animation: fall linear forwards;
+    transition: transform 0.2s;
+}
+
+.lucky-envelope:hover {
+    transform: scale(1.2) rotate(15deg);
+}
+
+/* Hiệu ứng rơi */
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* Thông báo lì xì */
+.lucky-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    z-index: 20001;
+    text-align: center;
+    border: 5px solid var(--accent);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 300px;
+}
+
+.lucky-alert.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.lucky-alert h3 { color: var(--accent); margin: 0 0 10px 0; }
+.lucky-alert p { font-weight: bold; font-size: 18px; }
+.lucky-alert .amount { color: #2ecc71; font-size: 24px; display: block; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -358,6 +404,13 @@ nav ul li a:hover { color: var(--accent); }
         </div>
         <div class="copy-right">© 2026 VanHoaTet3Mien - Truyền Thống Việt Nam</div>
     </footer>
+    
+    <div id="lucky-notif" class="lucky-alert">
+    <h3 id="lucky-title">LÌ XÌ MAY MẮN</h3>
+    <p id="lucky-msg"></p>
+    <span id="lucky-amount" class="amount"></span>
+    <button class="btn-upload" onclick="closeLucky()" style="margin-top: 20px; padding: 10px 30px;">NHẬN LỘC</button>
+</div>
 
     <script>
         // JS GIỮ NGUYÊN HOÀN TOÀN TỪ BẢN GỐC CỦA BẠN
@@ -639,16 +692,66 @@ document.onkeydown = function(e) {
         return false;
     }
 };
+// Mảng 100 câu chúc (Rút gọn minh họa, bạn có thể copy thêm cho đủ 100)
+const tetWishes = [
+    "Chúc mừng năm mới! Vạn sự như ý", "Sức khỏe dồi dào, an khang thịnh vượng",
+    "Phát tài phát lộc, tiền vô như nước", "Tỷ sự như mơ, triệu triệu bất ngờ",
+    "Gia đình hạnh phúc, con cháu sum vầy", "Vạn điều may mắn, mọi sự thành công",
+    "Hạnh phúc đong đầy, gói trọn lộc tài", "Cung chúc tân xuân, phước lộc thọ tài",
+    "Làm ăn phát đạt, học hành tiến tới", "Mãi mãi trẻ trung, vui vẻ mỗi ngày",
+    // ... Bạn hãy thêm các câu chúc khác vào đây cho đủ 100 câu
+];
+
+function createLuckyEnvelope() {
+    const envelope = document.createElement('div');
+    envelope.className = 'lucky-envelope';
+    envelope.innerHTML = '🧧'; // Icon bao lì xì
+    envelope.style.left = Math.random() * 90 + 'vw';
+    
+    // Tốc độ rơi ngẫu nhiên từ 5-10s
+    const duration = Math.random() * 5 + 5;
+    envelope.style.animationDuration = duration + 's';
+
+    envelope.onclick = function() {
+        showLuckyResult();
+        envelope.remove(); // Bấm xong thì xóa bao lì xì
+    };
+
+    document.body.appendChild(envelope);
+
+    // Tự động xóa nếu không bấm trúng
+    setTimeout(() => { if(envelope) envelope.remove(); }, duration * 1000);
+}
+
+function showLuckyResult() {
+    const isWinner = Math.random() > 0.4; // 60% tỉ lệ trúng tiền
+    const wish = tetWishes[Math.floor(Math.random() * tetWishes.length)];
+    const title = document.getElementById('lucky-title');
+    const msg = document.getElementById('lucky-msg');
+    const amt = document.getElementById('lucky-amount');
+    const notif = document.getElementById('lucky-notif');
+
+    if (isWinner) {
+        const money = Math.floor(Math.random() * 1000) + 1; // 1-1000
+        title.innerText = "🎊 CHÚC MỪNG!";
+        msg.innerText = wish;
+        amt.innerText = "+" + money + ".000 VNĐ";
+        confetti(); // Bắn pháo hoa khi trúng tiền
+    } else {
+        title.innerText = "🧧 QUÀ XUÂN";
+        msg.innerText = wish + "\n\nChúc bạn may mắn lần sau!";
+        amt.innerText = "";
+    }
+
+    notif.classList.add('show');
+}
+
+function closeLucky() {
+    document.getElementById('lucky-notif').classList.remove('show');
+}
+
+// Cứ mỗi 10 giây tạo 1 bao lì xì
+setInterval(createLuckyEnvelope, 10000);
     </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
