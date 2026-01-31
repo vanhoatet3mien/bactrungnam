@@ -24,16 +24,32 @@
         
         /* --- 2. THANH MENU (NAV) --- */
         nav { 
-            display: flex; justify-content: space-around; align-items: center; 
-            background: white; padding: 10px 0; position: sticky; top: 0; 
-            z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.1); 
-        }
-        nav .logo { height: 50px; width: 50px; } /* Giữ chỗ cho logo */
-        nav .logo img { height: 100%; width: auto; border-radius: 10px; }
-        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
-        nav ul li { padding: 0 15px; }
-        nav ul li a { color: #333; text-decoration: none; font-weight: 700; font-size: 13px; text-transform: uppercase; transition: 0.3s; }
-        nav ul li a:hover { color: var(--accent); }
+    display: flex; 
+    justify-content: space-between; /* Giúp logo một bên, menu một bên */
+    align-items: center; 
+    background: white; 
+    padding: 10px 40px; /* Tăng khoảng cách hai bên cho thoáng */
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1); 
+}
+
+nav .logo { height: 50px; }
+nav .logo img { height: 100%; width: auto; border-radius: 5px; }
+
+nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+nav ul li { padding: 0 15px; }
+nav ul li a { 
+    color: #333; 
+    text-decoration: none; 
+    font-weight: 700; 
+    font-size: 13px; 
+    text-transform: uppercase; 
+    transition: 0.3s; 
+}
+
+nav ul li a:hover { color: var(--accent); }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .section-title {
@@ -375,5 +391,6 @@ Giữ gìn lời nói, hành động mang ý nghĩa may mắn.</p>
     </footer>
     
 </body>
+
 
 </html>
