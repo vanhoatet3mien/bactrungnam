@@ -569,9 +569,28 @@ nav ul li a:hover { color: var(--accent); }
             setTimeout(() => { p.remove(); }, 10000);
         }
         setInterval(createPetal, 600);
+
+        // Chống chuột phải
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+}, false);
+
+// Chống tổ hợp phím Ctrl+U (Xem nguồn trang) và F12 (Kiểm tra phần tử)
+document.onkeydown = function(e) {
+    if (e.ctrlKey && 
+        (e.keyCode === 67 || 
+         e.keyCode === 86 || 
+         e.keyCode === 85 || 
+         e.keyCode === 117)) {
+        return false;
+    } else if (e.keyCode === 123) { // F12
+        return false;
+    }
+};
     </script>
 </body>
 
 </html>
+
 
 
