@@ -25,20 +25,38 @@
             overflow-x: hidden;
         }
 
-        /* --- 1. INTRO VIDEO OVERLAY --- */
+        /* --- 1. INTRO VIDEO OVERLAY (ĐÃ CẬP NHẬT HIỆU ỨNG) --- */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999; display: flex;
-            justify-content: center; align-items: center; transition: 1s ease;
+            justify-content: center; align-items: center; 
+            transition: all 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            transform: scale(1);
         }
-        #intro-overlay video { width: 100%; height: 100%; object-fit: cover; }
+
+        #intro-overlay video { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transition: filter 1s ease;
+        }
+
         #skip-btn {
             position: absolute; bottom: 30px; right: 30px;
             background: rgba(255,255,255,0.2); color: white;
             border: 1px solid white; padding: 10px 20px;
             cursor: pointer; border-radius: 5px; z-index: 10000;
+            transition: 0.3s;
         }
-        .hide-intro { opacity: 0; pointer-events: none; }
+        
+        #skip-btn:hover { background: rgba(255,255,255,0.4); }
+
+        /* Hiệu ứng biến mất: Mờ dần + Phóng to nhẹ + Nhòe hình */
+        .hide-intro { 
+            opacity: 0 !important; 
+            transform: scale(1.1) !important;
+            filter: blur(15px);
+            pointer-events: none; 
+        }
 
         /* --- 2. HIỆU ỨNG HOA RƠI --- */
         .petal {
@@ -75,17 +93,14 @@
         }
 
         /* --- 5. SWIPER 3D SLIDER --- */
-        .swiper {width: 100%;padding-top: 50px;padding-bottom: 50px;
-        /* Đảm bảo không có margin lạ làm lệch slide */
-        margin-left: auto; margin-right: auto;}
+        .swiper {width: 100%;padding-top: 50px;padding-bottom: 50px; margin-left: auto; margin-right: auto;}
         .swiper-slide {
           background-position: center;background-size: cover;
-          width: 300px; /* Độ rộng ảnh */
-          height: 450px; /* Chiều cao ảnh */
-          border-radius: 20px;
-          /* Quan trọng: Không để slide tự ý thêm margin */
+          width: 300px; height: 450px; border-radius: 20px;
           margin: 0 !important; 
         }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
+        .slide-caption { position: absolute; bottom: 20px; left: 20px; color: white; font-weight: bold; text-shadow: 1px 1px 5px black; }
 
         /* --- 6. CONTENT GRID --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
@@ -119,47 +134,31 @@
         .footer-box h4 { border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
         .social-links a { color: #ccc; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
         .social-links a:hover { color: var(--primary); padding-left: 5px; }
-        .logo img {
-            height: 50px;    /* Điều chỉnh chiều cao tùy ý */
-            width: auto;     /* Giữ đúng tỉ lệ ảnh */
-            display: block;  /* Loại bỏ khoảng cách thừa dưới ảnh */
-        }
-        /* Đảm bảo nav sử dụng flexbox để logo và menu nằm cùng hàng */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
+        .copy-right { margin-top: 40px; opacity: 0.6; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <div id="intro-overlay">
-        <video id="myVideo" autoplay muted playsinline>
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        <video id="myVideo" autoplay playsinline>
+            <source src="https://github.com/vanhoatet3mien/bactrungnam/raw/refs/heads/main/intro.mp4" type="video/mp4">
         </video>
         <button id="skip-btn">VÀO TRANG CHỦ ➔</button>
     </div>
 
     <nav>
-    <div class="logo">
+        <div class="logo">
         <a href="#">
             <img src="https://github.com/vanhoatet3mien/bactrungnam/blob/main/logo.jpg?raw=true" alt="Tết Việt Nam">
         </a>
     </div>
-    <ul>
-        <li><a href="./index.html">TRANG CHỦ</a></li>
-        
-        <li><a href="./indexbac.html">MIỀN BẮC</a></li> 
-        
-        <li><a href="./indextrung.html">MIỀN TRUNG</a></li> 
-        
-        <li><a href="./indexnam.html">MIỀN NAM</a></li> 
-        
-        <li><a href="./indexdoingu.html">GIỚI THIỆU</a></li>
-    </ul>
-</nav>
+        <ul>
+            <li><a href="#mien-bac">MIỀN BẮC</a></li>
+            <li><a href="#mien-trung">MIỀN TRUNG</a></li>
+            <li><a href="#mien-nam">MIỀN NAM</a></li>
+            <li><a href="#tac-gia">TÁC GIẢ</a></li>
+        </ul>
+    </nav>
 
     <div class="hero">
         <h1>VĂN HÓA TẾT 3 MIỀN</h1>
@@ -209,6 +208,7 @@
                     </div>
                 </div>
             </div>
+        </div>
             
         <div id="mien-trung">
             <h2 class="section-title">Tinh Hoa Miền Trung</h2>
@@ -231,7 +231,7 @@
         </div>
         
         <div id="mien-nam">
-            <h2 class="section-title">Tinh Hoa Miền NamNam</h2>
+            <h2 class="section-title">Tinh Hoa Miền Nam</h2>
             <div class="grid">
                 <div class="item-card">
                     <img src="https://vcdn1-dulich.vnecdn.net/2022/01/21/Tet-mien-Bac-1-1642735496.jpg">
@@ -278,52 +278,64 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // 1. Xử lý Video Intro
-        const intro = document.getElementById('intro-overlay');
-        const video = document.getElementById('myVideo');
-        const skipBtn = document.getElementById('skip-btn');
+        // 1. XỬ LÝ VIDEO INTRO (ÂM THANH & HIỆU ỨNG KÉO DÀI)
+const intro = document.getElementById('intro-overlay');
+const video = document.getElementById('myVideo');
+const skipBtn = document.getElementById('skip-btn');
 
-        function endIntro() {
-            intro.classList.add('hide-intro');
-            setTimeout(() => { intro.style.display = 'none'; }, 1000);
-        }
-
-        skipBtn.addEventListener('click', endIntro);
-        video.onended = endIntro;
-
-        // 2. Khởi tạo Slide 3D (Coverflow)
-        var swiper = new Swiper(".mySwiper", {
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true, // Bắt buộc phải là true để ảnh chính nằm giữa
-    slidesPerView: "auto", 
-    coverflowEffect: {
-        rotate: 30,      // Độ nghiêng vừa phải
-        stretch: 0,      // Để 0 để khoảng cách 2 bên bằng nhau tuyệt đối
-        depth: 200,      // Tạo độ sâu cho ảnh 2 bên lùi về sau
-        modifier: 1,
-        slideShadows: true,
-    },
-    loop: true,
-    
-    // CẤU HÌNH THEO Ý BẠN:
-    autoplay: {
-        delay: 10000, // 10 giây mới tự chuyển một lần (rất lâu)
-        disableOnInteraction: true, // Khi bạn đã bấm/vuốt, nó sẽ dừng hẳn việc tự động chuyển
-    },
-
-    // Cho phép điều khiển bằng bàn phím hoặc chuột
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true
+function endIntro() {
+    // Giảm âm thanh từ từ (Fade out) kéo dài khoảng 2 giây
+    if (!video.muted) {
+        let vol = 1;
+        let fadeAudio = setInterval(() => {
+            if (vol > 0.05) {
+                vol -= 0.025; // Mỗi bước giảm 2,5%
+                video.volume = vol;
+            } else {
+                video.volume = 0;
+                video.pause();
+                clearInterval(fadeAudio);
+            }
+        }, 100); // Mỗi 0.1 giây giảm một lần -> tổng cộng ~2 giây
+    } else {
+        video.pause();
     }
-});
 
-        // 3. Hiệu ứng hoa đào rơi
+    // Kích hoạt hiệu ứng biến mất trong CSS
+    intro.classList.add('hide-intro');
+    
+    // Đợi hiệu ứng CSS (2.5s) xong mới xóa thẻ
+    setTimeout(() => { 
+        intro.style.display = 'none'; 
+    }, 2500);
+}
+
+skipBtn.addEventListener('click', endIntro);
+video.onended = endIntro;
+
+        // Tự động mở tiếng sau click đầu tiên để lách luật trình duyệt
+        document.addEventListener('click', function() {
+            if(video.muted) {
+                video.muted = false;
+                video.volume = 1;
+            }
+        }, { once: true });
+
+        // 2. KHỞI TẠO SLIDE 3D
+        var swiper = new Swiper(".mySwiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto", 
+            coverflowEffect: {
+                rotate: 30, stretch: 0, depth: 200, modifier: 1, slideShadows: true,
+            },
+            loop: true,
+            autoplay: { delay: 10000, disableOnInteraction: true },
+            pagination: { el: ".swiper-pagination", clickable: true }
+        });
+
+        // 3. HIỆU ỨNG HOA RƠI
         function createPetal() {
             const petals = ['🌸', '🌼', '🧧'];
             const petal = document.createElement('div');
@@ -339,7 +351,3 @@
     </script>
 </body>
 </html>
-
-
-
-
