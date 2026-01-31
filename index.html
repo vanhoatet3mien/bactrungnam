@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Văn Hóa Tết Việt Nam - 3 Miền Kết Nối</title>
+    <title>Văn Hóa Tết Việt Nam - Kỷ Niệm 3 Miền</title>
+    
+    <link rel="preload" as="image" href="https://github.com/vanhoatet3mien/bactrungnam/blob/main/logo.jpg?raw=true">
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
         :root {
@@ -15,291 +17,261 @@
             --bg: #ffb84d;
             --dark: #2c3e50;
             --white: #ffffff;
+            --gold: #FFF0B0;
         }
 
         body {
             margin: 0; padding: 0;
             font-family: 'Montserrat', sans-serif;
-            background: var(--bg) radial-gradient(circle, #ffcc80 0%, #ffb84d 100%);
+            background: var(--bg) radial-gradient(circle, #ffcc80 0%, #FFF0B0 100%);
             color: #333; scroll-behavior: smooth;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* --- 1. MASTER OVERLAY (KẾT HỢP STYLE 1 & 2) --- */
+        /* --- 1. MASTER OVERLAY & INTRO --- */
         #master-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 10000; transition: all 2.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        /* TRANG CỬA NGÕ (START PAGE) */
         #start-page {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg) url('https://www.transparenttextures.com/patterns/pinstripe.png');
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            z-index: 10002; transition: opacity 0.8s ease, visibility 0.8s;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            z-index: 10002; transition: opacity 0.8s ease;
         }
         
-        .start-decor {
-            position: absolute; width: 350px; height: 350px;
-            background: radial-gradient(circle, rgba(211, 47, 47, 0.2) 0%, transparent 70%);
-            border-radius: 50%; z-index: -1;
+        /* Cố định kích thước khung logo để tránh giật */
+        .logo-intro-container {
+            width: 120px; height: 120px; margin-bottom: 20px;
+            background: #eee; border-radius: 20px; overflow: hidden;
         }
-        .decor-1 { top: -100px; left: -100px; }
-        .decor-2 { bottom: -100px; right: -100px; }
 
         .btn-start {
             padding: 22px 60px; font-size: 22px; font-weight: 900;
             background: var(--accent); color: white; border: none;
-            border-radius: 50px; cursor: pointer;
-            box-shadow: 0 10px 30px rgba(211, 47, 47, 0.4);
-            transition: 0.3s; animation: pulse 2s infinite;
-            text-transform: uppercase; letter-spacing: 1px;
+            border-radius: 50px; cursor: pointer; box-shadow: 0 10px 30px rgba(211, 47, 47, 0.4);
+            transition: 0.3s; animation: pulse 2s infinite; text-transform: uppercase;
         }
-        .btn-start:hover { transform: scale(1.05); background: #b71c1c; }
-
-        /* VIDEO INTRO CONTAINER */
         #intro-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 10001;
-            display: flex; justify-content: center; align-items: center;
+            background: #000; z-index: 10001; display: flex; justify-content: center; align-items: center;
         }
-        #intro-container video { 
-            width: 100%; height: 100%; object-fit: cover; 
-            transition: filter 1s ease;
-        }
-
+        #intro-container video { width: 100%; height: 100%; object-fit: cover; }
         #skip-btn {
-            position: absolute; bottom: 40px; right: 40px;
-            background: rgba(255,255,255,0.2); color: white;
-            border: 1px solid white; padding: 12px 25px;
-            cursor: pointer; border-radius: 5px; z-index: 10003;
-            transition: 0.3s; font-weight: 700;
+            position: absolute; bottom: 40px; right: 40px; background: rgba(255,255,255,0.2);
+            color: white; border: 1px solid white; padding: 12px 25px; cursor: pointer; border-radius: 5px; z-index: 10003;
         }
-        #skip-btn:hover { background: rgba(255,255,255,0.4); }
-
-        /* Hiệu ứng biến mất điện ảnh */
-        .exit-overlay { 
-            opacity: 0 !important; 
-            transform: scale(1.15) !important; 
-            filter: blur(25px); 
-            pointer-events: none; 
-        }
-
-        /* --- 2. NỘI DUNG CHÍNH (STYLE 2) --- */
+        .exit-overlay { opacity: 0 !important; transform: scale(1.15); filter: blur(25px); pointer-events: none; }
+        
+        /* --- 2. THANH MENU (NAV) --- */
         nav { 
             display: flex; justify-content: space-around; align-items: center; 
-            background: white; padding: 15px 0; position: sticky; top: 0; 
+            background: white; padding: 10px 0; position: sticky; top: 0; 
             z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.1); 
         }
-        nav .logo img { height: 50px; transition: 0.3s; }
+        nav .logo { height: 50px; width: 50px; } /* Giữ chỗ cho logo */
+        nav .logo img { height: 100%; width: auto; border-radius: 10px; }
         nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
         nav ul li { padding: 0 15px; }
         nav ul li a { color: #333; text-decoration: none; font-weight: 700; font-size: 13px; text-transform: uppercase; transition: 0.3s; }
-        nav ul li a:hover { color: var(--primary); }
+        nav ul li a:hover { color: var(--accent); }
 
-        .hero { text-align: center; padding: 80px 20px 40px; color: white; }
-        .hero h1 { font-size: 48px; font-weight: 900; margin-bottom: 25px; text-shadow: 2px 2px 15px rgba(0,0,0,0.3); }
+        /* --- CÁC PHẦN KHÁC GIỮ NGUYÊN --- */
+        .countdown-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://www.transparenttextures.com/patterns/red-dots.png'), var(--accent);
+            color: white; padding: 80px 20px; text-align: center;
+        }
+        .timer { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
+        .time-box {
+            background: rgba(255,255,255,0.2); padding: 20px; border-radius: 20px; min-width: 90px;
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);
+        }
+        .time-box span { display: block; font-size: 40px; font-weight: 900; }
+        .time-box label { font-size: 14px; text-transform: uppercase; font-weight: 700; }
+
+        .gallery-container { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
+        .gallery-header { text-align: center; margin-bottom: 40px; }
+        .gallery-header h2 { font-size: 36px; font-weight: 900; color: var(--accent); margin-bottom: 10px; }
         
-        .search-box {
-            max-width: 650px; margin: 0 auto; background: white;
-            padding: 6px; border-radius: 50px; display: flex; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        .upload-area {
+            background: white; padding: 40px; border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; margin-bottom: 50px;
         }
-        .search-box input {
-            flex: 1; border: none; padding: 15px 30px; border-radius: 50px; 
-            outline: none; font-size: 16px; font-family: 'Montserrat';
+        .folder-controls { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+        .folder-input { padding: 12px 20px; border-radius: 25px; border: 1px solid #ddd; width: 250px; outline: none; }
+        
+        #folder-list { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; margin-bottom: 20px; }
+        .folder-tab { 
+            padding: 10px 20px; background: #eee; border-radius: 20px; cursor: pointer; 
+            white-space: nowrap; font-weight: 700; transition: 0.3s; 
+            display: flex; align-items: center; gap: 10px;
+        }
+        .folder-tab.active { background: var(--accent); color: white; }
+        .folder-actions { display: flex; gap: 5px; }
+        .btn-mini { background: rgba(0,0,0,0.1); border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .btn-mini:hover { background: rgba(0,0,0,0.2); }
+        .folder-tab.active .btn-mini { background: rgba(255,255,255,0.2); color: white; }
+
+        .btn-upload {
+            background: var(--accent); color: white; padding: 15px 40px;
+            border-radius: 50px; cursor: pointer; display: inline-block; font-weight: 900;
+            transition: 0.3s; box-shadow: 0 8px 20px rgba(211, 47, 47, 0.3); border: none;
+        }
+        .btn-upload:hover { transform: translateY(-3px); background: #b71c1c; }
+
+        .photo-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;
+        }
+        .photo-card {
+            background: white; padding: 12px; border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); position: relative;
+            transition: 0.4s; animation: fadeIn 0.5s ease; overflow: hidden;
+        }
+        .photo-card img { width: 100%; height: 250px; object-fit: cover; border-radius: 15px; cursor: pointer; }
+        .photo-caption { 
+            padding: 10px 5px; font-size: 14px; color: var(--accent); 
+            font-weight: 700; text-align: center; font-style: italic;
+        }
+        .delete-btn {
+            position: absolute; top: 15px; right: 15px; background: rgba(211, 47, 47, 0.9);
+            color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer;
+            font-weight: bold; z-index: 10;
         }
 
-        /* SWIPER 3D */
-        .swiper { width: 100%; padding-top: 50px; padding-bottom: 70px; }
-        .swiper-slide {
-            background-position: center; background-size: cover;
-            width: 320px; height: 480px; border-radius: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        #editor-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 20000; justify-content: center; align-items: center;
+            flex-direction: column; padding: 20px;
         }
-        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; border-radius: 25px; }
-        .slide-caption { 
-            position: absolute; bottom: 30px; left: 25px; color: white; 
-            font-weight: 900; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); font-size: 20px;
-        }
+        #editor-canvas { max-width: 100%; max-height: 70vh; border-radius: 10px; border: 5px solid white; }
+        .editor-tools { margin-top: 20px; width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 10px; }
 
-        /* GRID & CARDS */
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-        .section-title {
-            font-size: 32px; font-weight: 900; color: white;
-            margin: 60px 0 30px; border-left: 10px solid var(--accent); padding-left: 20px;
+        .music-player-fixed { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
+        #music-toggle {
+            width: 65px; height: 65px; border-radius: 50%; background: var(--accent);
+            color: white; border: none; font-size: 28px; cursor: pointer;
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.5); display: flex; align-items: center; justify-content: center;
         }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
-        .item-card {
-            background: white; border-radius: 20px; overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.4s ease;
+        .music-panel {
+            position: absolute; bottom: 85px; right: 0; width: 300px;
+            background: white; padding: 25px; border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3); display: none;
         }
-        .item-card:hover { transform: translateY(-15px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-        .item-card img { width: 100%; height: 220px; object-fit: cover; }
-        .item-card .info { padding: 25px; }
-        .item-card h3 { margin: 0 0 10px; color: var(--accent); font-size: 20px; font-weight: 900; }
+        .music-panel.active { display: block; animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        
+        .playlist { margin-bottom: 15px; max-height: 150px; overflow-y: auto; }
+        .track { 
+            padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; 
+            font-size: 15px; transition: 0.2s; display: flex; align-items: center;
+        }
+        .track:hover { background: #fff5e6; color: var(--accent); }
+        .track.playing { font-weight: 900; color: var(--accent); background: #fff5e6; }
 
-        /* AUTHOR */
-        .author-section {
-            background: rgba(255,255,255,0.95); border-radius: 25px;
-            padding: 50px; margin: 80px auto; display: flex; align-items: center; 
-            gap: 40px; max-width: 850px; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-        }
-        .author-img { width: 150px; height: 150px; border-radius: 50%; border: 6px solid var(--primary); object-fit: cover; }
-
-        /* FOOTER */
         footer { background: var(--dark); color: white; padding: 80px 20px; text-align: center; }
         .footer-content {
             max-width: 1200px; margin: 0 auto; display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 50px; text-align: left;
         }
         .footer-box h4 { border-bottom: 3px solid var(--primary); padding-bottom: 12px; margin-bottom: 25px; font-size: 20px; }
+        .copy-right { margin-top: 40px; opacity: 0.6; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
-        /* HOA RƠI & ANIMATION */
-        .petal { position: fixed; top: -10%; z-index: 998; user-select: none; pointer-events: none; animation: fall linear infinite; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(211, 47, 47, 0); } 100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); } }
+        .petal { position: fixed; top: -10%; z-index: 998; pointer-events: none; animation: fall linear infinite; }
         @keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7); } 70% { box-shadow: 0 0 0 25px rgba(211, 47, 47, 0); } 100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); } }
+        input[type="file"] { display: none; }
     </style>
 </head>
 <body>
 
     <div id="master-overlay">
         <div id="start-page">
-            <div class="start-decor decor-1"></div>
-            <div class="start-decor decor-2"></div>
-            <div class="start-content">
-                <img src="https://github.com/vanhoatet3mien/bactrungnam/blob/main/logo.jpg?raw=true" style="height: 120px; margin-bottom: 20px; border-radius: 20px;">
-                <h2 style="color: var(--accent); font-size: 45px; font-weight: 900; margin:0;">CHÚC MỪNG NĂM MỚI</h2>
-                <p style="color: var(--dark); font-weight: 700; letter-spacing: 2px; margin-bottom: 30px;">XUÂN 2026 - KẾT NỐI DI SẢN 3 MIỀN</p>
-                <button class="btn-start" id="btn-discover">KHÁM PHÁ NGAY ➔</button>
+            <div class="logo-intro-container">
+                <img src="https://github.com/vanhoatet3mien/bactrungnam/blob/main/logo.jpg?raw=true" 
+                     style="width: 100%; height: 100%; object-fit: cover;" 
+                     fetchpriority="high" alt="Logo Tết">
             </div>
+            <h2 style="color: var(--accent); font-size: 45px; font-weight: 900; margin:0;">CHÚC MỪNG NĂM MỚI</h2>
+            <p style="color: var(--dark); font-weight: 700; letter-spacing: 2px; margin-bottom: 30px;">XUÂN 2026 - KẾT NỐI DI SẢN 3 MIỀN</p>
+            <button class="btn-start" id="btn-discover">KHÁM PHÁ NGAY ➔</button>
         </div>
 
         <div id="intro-container">
             <video id="myVideo" playsinline>
                 <source src="https://github.com/vanhoatet3mien/bactrungnam/raw/refs/heads/main/intro.mp4" type="video/mp4">
             </video>
-            <button id="skip-btn">VÀO TRANG CHỦ ➔</button>
+            <button id="skip-btn">BỎ QUA INTRO ➔</button>
         </div>
     </div>
 
     <nav>
-    <div class="logo">
-        <a href="#">
-            <img src="https://github.com/vanhoatet3mien/bactrungnam/blob/main/logo.jpg?raw=true" alt="Tết Việt Nam">
-        </a>
-    </div>
-    <ul>
-        <li><a href="./index.html">TRANG CHỦ</a></li>
-        
-        <li><a href="./indexbac.html">MIỀN BẮC</a></li> 
-        
-        <li><a href="./indextrung.html">MIỀN TRUNG</a></li> 
-        
-        <li><a href="./indexnam.html">MIỀN NAM</a></li> 
-        
-        <li><a href="./indexdoingu.html">GIỚI THIỆU</a></li>
-    </ul>
-</nav>
+        <div class="logo">
+            <a href="#"><img src="https://github.com/vanhoatet3mien/bactrungnam/blob/main/logo.jpg?raw=true" fetchpriority="high" alt="Tết Việt Nam"></a>
+        </div>
+        <ul>
+            <li><a href="#">TRANG CHỦ</a></li>
+            <li><a href="./indexbac.html">MIỀN BẮC</a></li>
+            <li><a href="./indextrung.html">MIỀN TRUNG</a></li> 
+            <li><a href="./indexnam.html">MIỀN NAM</a></li> 
+            <li><a href="./indexdoingu.html">GIỚI THIỆU</a></li>
+        </ul>
+    </nav>
 
-    <div class="hero">
-        <h1>VĂN HÓA TẾT 3 MIỀN</h1>
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Tìm mâm ngũ quả, bánh chưng, hoa mai...">
+    <div class="countdown-section">
+        <h2 style="font-size: 32px; font-weight: 900; margin: 0;">TẾT BÍNH NGỌ 2026</h2>
+        <div class="timer">
+            <div class="time-box"><span id="days">00</span><label>Ngày</label></div>
+            <div class="time-box"><span id="hours">00</span><label>Giờ</label></div>
+            <div class="time-box"><span id="minutes">00</span><label>Phút</label></div>
+            <div class="time-box"><span id="seconds">00</span><label>Giây</label></div>
         </div>
     </div>
 
-    <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img src="https://vcdn1-dulich.vnecdn.net/2022/01/21/Tet-mien-Bac-1-1642735496.jpg">
-                <div class="slide-caption">Chợ Xuân Hà Nội</div>
+    <div class="gallery-container">
+        <div class="gallery-header">
+            <h2>📷 NHẬT KÝ NGÀY XUÂN</h2>
+            <p>Tạo album, viết lời chúc</p>
+        </div>
+        <div class="upload-area">
+            <div class="folder-controls">
+                <input type="text" id="new-folder-name" class="folder-input" placeholder="Tên thư mục mới...">
+                <button class="btn-upload" onclick="createNewFolder()" style="padding: 10px 25px; font-size: 14px;">+ TẠO THƯ MỤC</button>
             </div>
-            <div class="swiper-slide">
-                <img src="https://vcdn1-dulich.vnecdn.net/2022/01/21/Tet-mien-Trung-1642735500.jpg">
-                <div class="slide-caption">Tết Cố Đô Huế</div>
-            </div>
-            <div class="swiper-slide">
-                <img src="https://vcdn1-dulich.vnecdn.net/2022/01/21/Tet-mien-Nam-1642735503.jpg">
-                <div class="slide-caption">Mai Vàng Phương Nam</div>
-            </div>
-            <div class="swiper-slide">
-                <img src="https://image.vtc.vn/files/f1/2023/01/18/hoa-dao-1-10523455.jpg">
-                <div class="slide-caption">Hoa Đào Miền Bắc</div>
+            <div id="folder-list"></div>
+            <div id="active-upload-zone" style="display: none; border-top: 1px dashed #ddd; padding-top: 20px;">
+                <p>Thư mục đang chọn: <strong id="current-folder-name" style="color: var(--accent);"></strong></p>
+                <label for="img-input" class="btn-upload">TẢI ẢNH VÀO THƯ MỤC NÀY</label>
+                <input type="file" id="img-input" accept="image/*">
             </div>
         </div>
-        <div class="swiper-pagination"></div>
+        <div class="photo-grid" id="photo-grid"></div>
     </div>
 
-    <div class="container">
-        <div id="mien-bac">
-            <h2 class="section-title">Tinh Hoa Miền Bắc</h2>
-            <div class="grid">
-                <div class="item-card">
-                    <img src="https://vcdn1-dulich.vnecdn.net/2022/01/21/Tet-mien-Bac-1-1642735496.jpg">
-                    <div class="info">
-                        <h3>Bánh Chưng Xanh</h3>
-                        <p>Hương vị truyền thống gói ghém sự biết ơn cha ông.</p>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <img src="https://image.vtc.vn/files/f1/2023/01/18/hoa-dao-1-10523455.jpg">
-                    <div class="info">
-                        <h3>Hoa Đào Thắm</h3>
-                        <p>Sắc màu đặc trưng của mùa xuân vùng xứ lạnh.</p>
-                    </div>
-                </div>
-            </div>
-            
-        <div id="mien-trung">
-            <h2 class="section-title">Tinh Hoa Miền Trung</h2>
-            <div class="grid">
-                <div class="item-card">
-                    <img src="https://vcdn1-dulich.vnecdn.net/2022/01/21/Tet-mien-Bac-1-1642735496.jpg">
-                    <div class="info">
-                        <h3>Bánh Chưng Xanh</h3>
-                        <p>Hương vị truyền thống gói ghém sự biết ơn cha ông.</p>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <img src="https://image.vtc.vn/files/f1/2023/01/18/hoa-dao-1-10523455.jpg">
-                    <div class="info">
-                        <h3>Hoa Đào Thắm</h3>
-                        <p>Sắc màu đặc trưng của mùa xuân vùng xứ lạnh.</p>
-                    </div>
-                </div>
+    <div id="editor-modal">
+        <canvas id="editor-canvas"></canvas>
+        <div class="editor-tools">
+            <input type="text" id="custom-wish" class="folder-input" style="width: 100%; box-sizing: border-box;" placeholder="Nhập lời chúc của bạn..." oninput="drawEditor()">
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-upload" style="flex:1" onclick="downloadImage()">💾 TẢI ẢNH VỀ</button>
+                <button class="btn-upload" style="flex:1; background: #7f8c8d;" onclick="closeEditor()">ĐÓNG</button>
             </div>
         </div>
-        
-        <div id="mien-nam">
-            <h2 class="section-title">Tinh Hoa Miền NamNam</h2>
-            <div class="grid">
-                <div class="item-card">
-                    <img src="https://vcdn1-dulich.vnecdn.net/2022/01/21/Tet-mien-Bac-1-1642735496.jpg">
-                    <div class="info">
-                        <h3>Bánh Chưng Xanh</h3>
-                        <p>Hương vị truyền thống gói ghém sự biết ơn cha ông.</p>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <img src="https://image.vtc.vn/files/f1/2023/01/18/hoa-dao-1-10523455.jpg">
-                    <div class="info">
-                        <h3>Hoa Đào Thắm</h3>
-                        <p>Sắc màu đặc trưng của mùa xuân vùng xứ lạnh.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
 
-        <div id="tac-gia" class="author-section">
-            <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" class="author-img">
-            <div class="author-info">
-                <h2>Về Tác Giả</h2>
-                <p>"Giữ gìn nét đẹp văn hóa là trách nhiệm của mỗi người trẻ."</p>
-                <strong>Nguyễn Văn A</strong> - Designer & Dev
+    <div class="music-player-fixed">
+        <div class="music-panel" id="music-panel">
+            <h4 style="margin: 0 0 10px 0; color: var(--accent);">📻 Playlist Tết 2026</h4>
+            <div class="playlist" id="playlist-container"></div>
+            <audio id="main-audio" controls style="width: 100%; height: 40px;"></audio>
+            <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+                <label for="music-input" style="font-size: 12px; color: var(--primary); cursor: pointer; font-weight: 700;">📁 TẢI NHẠC TỪ MÁY</label>
+                <input type="file" id="music-input" accept="audio/*">
             </div>
         </div>
+        <button id="music-toggle">🎵</button>
     </div>
 
     <footer>
@@ -310,124 +282,276 @@
             </div>
             <div class="footer-box social-links">
                 <h4>Liên Hệ</h4>
-                <p>Facebook: <a href="https://www.facebook.com/share/1DMGDp4r8c/">Tết 3 Miền</a></p>
-                <p>Gmail: <a href="mailto:abc@gmail.com">tet3mienvn@gmail.com</a></p>
+                <p>Facebook: <a href="https://www.facebook.com/share/1DMGDp4r8c/" style="color:var(--primary)">Tết 3 Miền</a></p>
+                <p>Gmail: <a href="mailto:tet3mienvn@gmail.com" style="color:var(--primary)">tet3mienvn@gmail.com</a></p>
                 <p>Địa chỉ: Thường Phước, Đồng Tháp</p>
             </div>
         </div>
         <div class="copy-right">© 2026 VanHoaTet3Mien - Truyền Thống Việt Nam</div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-    // --- 1. KHAI BÁO CÁC PHẦN TỬ ---
-    const masterOverlay = document.getElementById('master-overlay');
-    const startPage = document.getElementById('start-page');
-    const video = document.getElementById('myVideo');
-    const btnDiscover = document.getElementById('btn-discover');
-    const skipBtn = document.getElementById('skip-btn');
+    <script>
+        // JS GIỮ NGUYÊN HOÀN TOÀN TỪ BẢN GỐC CỦA BẠN
+        const defaultSongs = [
+            { name: "🌸 Tết Này Con Sẽ Về", src: "tetnayconseve.mp3" },
+            { name: "🌸 Vạn Sự Như Ý", src: "vansunhuy.mp3" },
+            { name: "🌸 Một Năm Mới Bình An", src: "motnammoibinhan.mp3" },
+            { name: "🌸 Tết Đông Đầy", src: "tetdongday.mp3" },
+            { name: "🌸 Tết Ơi Tết À", src: "tetoiteta.mp3" }
+        ];
 
-    // --- 2. XỬ LÝ SỰ KIỆN BẤM "KHÁM PHÁ" ---
-    btnDiscover.addEventListener('click', () => {
-        // Làm mờ trang cửa ngõ
-        startPage.style.opacity = '0';
-        
-        // Phát video ngay lập tức
-        video.play();
-        video.muted = false;
-        video.volume = 1;
-        
-        // Xóa hẳn trang start sau khi mờ để người dùng có thể tương tác với video (nếu cần)
-        setTimeout(() => { 
-            startPage.style.display = 'none'; 
-        }, 800);
-    });
+        const wishes = [
+            "Chúc bạn năm mới Vạn Sự Như Ý!",
+            "Cung Chúc Tân Xuân - Phước Lộc Thọ Tài!",
+            "Năm mới An Khang Thịnh Vượng!",
+            "Chúc gia đình Hòa Thuận - Hạnh Phúc.",
+            "Phát Tài Phát Lộc - Tiền Vô Như Nước.",
+            "Sức Khỏe Dồi Dào - Vạn Điều May Mắn.",
+            "Tết sum vầy - Xuân tràn đầy niềm vui."
+        ];
 
-    // --- 3. HÀM THOÁT INTRO (DÙNG CHO CẢ NÚT BỎ QUA VÀ KHI KẾT THÚC VIDEO) ---
-    function exitIntro() {
-        // Hiệu ứng giảm âm thanh từ từ (Fade out) kéo dài ~2 giây
-        if (!video.muted) {
-            let vol = 1;
-            let fadeAudio = setInterval(() => {
-                if (vol > 0.05) {
-                    vol -= 0.025; // Giảm mỗi bước 2.5%
-                    video.volume = vol;
-                } else {
-                    video.volume = 0;
-                    video.pause();
-                    clearInterval(fadeAudio);
-                }
-            }, 100); 
-        } else {
+        const masterOverlay = document.getElementById('master-overlay');
+        const startPage = document.getElementById('start-page');
+        const video = document.getElementById('myVideo');
+        const btnDiscover = document.getElementById('btn-discover');
+
+        btnDiscover.onclick = () => {
+            startPage.style.opacity = '0';
+            video.play();
+            setTimeout(() => { startPage.style.display = 'none'; }, 800);
+        };
+
+        function exitIntro() {
             video.pause();
+            masterOverlay.classList.add('exit-overlay');
+            setTimeout(() => { masterOverlay.style.display = 'none'; }, 2500);
+        }
+        video.onended = exitIntro;
+        document.getElementById('skip-btn').onclick = exitIntro;
+
+        const tetDate = new Date("Feb 17, 2026 00:00:00").getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const gap = tetDate - now;
+            const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
+            if (gap > 0) {
+                document.getElementById("days").innerText = Math.floor(gap / day);
+                document.getElementById("hours").innerText = Math.floor((gap % day) / hour);
+                document.getElementById("minutes").innerText = Math.floor((gap % hour) / minute);
+                document.getElementById("seconds").innerText = Math.floor((gap % minute) / second);
+            }
+        }
+        setInterval(updateCountdown, 1000);
+
+        let albums = JSON.parse(localStorage.getItem('tet2026_folders') || '{"Kỷ niệm chung": []}');
+        let currentFolder = "Kỷ niệm chung";
+
+        function renderFolders() {
+            const list = document.getElementById('folder-list');
+            list.innerHTML = '';
+            Object.keys(albums).forEach(name => {
+                const tab = document.createElement('div');
+                tab.className = `folder-tab ${name === currentFolder ? 'active' : ''}`;
+                tab.innerHTML = `
+                    <span onclick="selectFolder('${name}')">${name} (${albums[name].length})</span>
+                    <div class="folder-actions">
+                        <button class="btn-mini" onclick="renameFolder('${name}')" title="Đổi tên">✏️</button>
+                        ${name !== 'Kỷ niệm chung' ? `<button class="btn-mini" onclick="deleteFolder('${name}')" title="Xóa">🗑️</button>` : ''}
+                    </div>
+                `;
+                list.appendChild(tab);
+            });
         }
 
-        // Kích hoạt hiệu ứng mờ dần + phóng to của lớp phủ tổng (CSS exit-overlay)
-        masterOverlay.classList.add('exit-overlay');
-        
-        // Xóa hoàn toàn lớp phủ sau khi hiệu ứng CSS hoàn tất (2.5 giây)
-        setTimeout(() => { 
-            masterOverlay.style.display = 'none'; 
-        }, 2500);
-    }
-
-    // Gán sự kiện kết thúc
-    video.onended = exitIntro;
-    skipBtn.addEventListener('click', exitIntro);
-
-    // --- 4. KHỞI TẠO SWIPER 3D (STYLE ĐẸP NHẤT) ---
-    const swiper = new Swiper(".mySwiper", {
-        effect: "coverflow",
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: "auto", 
-        coverflowEffect: {
-            rotate: 30, 
-            stretch: 0, 
-            depth: 200, 
-            modifier: 1, 
-            slideShadows: true,
-        },
-        loop: true,
-        autoplay: { 
-            delay: 5000, 
-            disableOnInteraction: false 
-        },
-        pagination: { 
-            el: ".swiper-pagination", 
-            clickable: true 
+        function createNewFolder() {
+            const name = document.getElementById('new-folder-name').value.trim();
+            if (name && !albums[name]) {
+                albums[name] = [];
+                saveAlbums();
+                renderFolders();
+                document.getElementById('new-folder-name').value = '';
+                selectFolder(name);
+            }
         }
-    });
 
-    // --- 5. HIỆU ỨNG HOA RƠI & LÌ XÌ ---
-    function createPetal() {
-        const icons = ['🌸', '🌼', '🧧'];
-        const p = document.createElement('div');
-        p.className = 'petal';
-        
-        // Chọn ngẫu nhiên biểu tượng
-        p.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-        
-        // Vị trí ngẫu nhiên theo chiều ngang
-        p.style.left = Math.random() * 100 + 'vw';
-        
-        // Thời gian rơi ngẫu nhiên
-        p.style.animationDuration = Math.random() * 8 + 13 + 's';
-        
-        // Kích thước ngẫu nhiên
-        p.style.fontSize = Math.random() * 8 + 13 + 'px';
-        
-        document.body.appendChild(p);
-        
-        // Xóa phần tử sau khi rơi xong để tránh nặng máy
-        setTimeout(() => { 
-            p.remove(); 
-        }, 8000);
-    }
+        function deleteFolder(name) {
+            if (name === "Kỷ niệm chung") return;
+            if (confirm(`Bạn có chắc muốn xóa album "${name}" không?`)) {
+                delete albums[name];
+                if (currentFolder === name) currentFolder = "Kỷ niệm chung";
+                saveAlbums();
+                renderFolders();
+                selectFolder(currentFolder);
+            }
+        }
 
-    // Tạo hoa rơi mỗi 400ms
-    setInterval(createPetal, 400);
-</script>
+        function renameFolder(oldName) {
+            const newName = prompt(`Nhập tên mới cho album "${oldName}":`, oldName);
+            if (newName && newName.trim() !== "" && newName !== oldName) {
+                if (albums[newName]) { alert("Tên album này đã tồn tại!"); return; }
+                albums[newName] = albums[oldName];
+                delete albums[oldName];
+                if (currentFolder === oldName) currentFolder = newName;
+                saveAlbums();
+                renderFolders();
+                selectFolder(currentFolder);
+            }
+        }
 
+        function selectFolder(name) {
+            currentFolder = name;
+            document.getElementById('active-upload-zone').style.display = 'block';
+            document.getElementById('current-folder-name').innerText = name;
+            renderFolders();
+            renderPhotos();
+        }
+
+        document.getElementById('img-input').onchange = (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const wish = wishes[Math.floor(Math.random() * wishes.length)];
+                    albums[currentFolder].push({src: reader.result, wish: wish});
+                    saveAlbums();
+                    renderPhotos();
+                    renderFolders();
+                    confetti();
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        function renderPhotos() {
+            const photoGrid = document.getElementById('photo-grid');
+            photoGrid.innerHTML = '';
+            albums[currentFolder].forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'photo-card';
+                div.innerHTML = `
+                    <button class="delete-btn" onclick="deletePhoto(${index})">×</button>
+                    <img src="${item.src}" onclick="openEditor(${index})">
+                    <div class="photo-caption">✨ ${item.wish}</div>
+                    <button onclick="openEditor(${index})" style="width:100%; border:none; background:var(--gold); color:var(--dark); padding:8px; border-radius:10px; cursor:pointer; font-weight:700">🎨 GHÉP KHUNG & TẢI VỀ</button>
+                `;
+                photoGrid.appendChild(div);
+            });
+        }
+
+        function deletePhoto(index) {
+            albums[currentFolder].splice(index, 1);
+            saveAlbums();
+            renderPhotos();
+            renderFolders();
+        }
+
+        function saveAlbums() { localStorage.setItem('tet2026_folders', JSON.stringify(albums)); }
+
+        const modal = document.getElementById('editor-modal');
+        const canvas = document.getElementById('editor-canvas');
+        const ctx = canvas.getContext('2d');
+        let editImg = new Image();
+
+        function openEditor(index) {
+            const item = albums[currentFolder][index];
+            document.getElementById('custom-wish').value = item.wish;
+            editImg = new Image();
+            editImg.onload = () => {
+                modal.style.display = 'flex';
+                drawEditor();
+            };
+            editImg.src = item.src;
+        }
+
+        function drawEditor() {
+            canvas.width = 800; canvas.height = 1000;
+            const wish = document.getElementById('custom-wish').value;
+            ctx.fillStyle = "#EB4577";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const pad = 25;
+            const drawW = canvas.width - pad*2, drawH = 750;
+            const imgR = editImg.width / editImg.height, canvasR = drawW / drawH;
+            let sx, sy, sw, sh;
+            if (imgR > canvasR) {
+                sh = editImg.height; sw = editImg.height * canvasR;
+                sx = (editImg.width - sw)/2; sy = 0;
+            } else {
+                sw = editImg.width; sh = editImg.width / canvasR;
+                sx = 0; sy = (editImg.height - sh)/2;
+            }
+            ctx.drawImage(editImg, sx, sy, sw, sh, pad, pad, drawW, drawH);
+            ctx.strokeStyle = "#FFFFFD"; ctx.lineWidth = 15;
+            ctx.strokeRect(pad/2, pad/2, canvas.width-pad, canvas.height-pad);
+            ctx.fillStyle = "white"; ctx.textAlign = "center";
+            ctx.font = "bold 32px Montserrat";
+            ctx.fillText(wish, canvas.width/2, 850);
+            ctx.font = "italic 20px Montserrat";
+            ctx.fillText("🌸 Xuân Bính Ngọ 2026 - VanHoaTet3Mien 🌸", canvas.width/2, 930);
+        }
+
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.download = 'Tet2026_KyNiem.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        function closeEditor() { modal.style.display = 'none'; }
+
+        const audio = document.getElementById('main-audio');
+        const musicToggle = document.getElementById('music-toggle');
+        const musicPanel = document.getElementById('music-panel');
+        musicToggle.onclick = () => musicPanel.classList.toggle('active');
+
+        function renderPlaylist() {
+            const container = document.getElementById('playlist-container');
+            container.innerHTML = '';
+            defaultSongs.forEach((song, index) => {
+                const div = document.createElement('div');
+                div.className = 'track';
+                div.innerHTML = song.name;
+                div.onclick = () => playTrack(index, div);
+                container.appendChild(div);
+            });
+        }
+
+        function playTrack(index, element) {
+            audio.src = defaultSongs[index].src;
+            audio.play().catch(e => alert("Hãy bấm vào trang web trước khi phát nhạc!"));
+            document.querySelectorAll('.track').forEach(t => t.classList.remove('playing'));
+            element.classList.add('playing');
+        }
+
+        document.getElementById('music-input').onchange = (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    audio.src = reader.result;
+                    audio.play();
+                    document.querySelectorAll('.track').forEach(t => t.classList.remove('playing'));
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        window.onload = () => {
+            renderFolders();
+            selectFolder(currentFolder);
+            renderPlaylist();
+        };
+
+        function createPetal() {
+            const icons = ['🌸', '🌼', '🧧'];
+            const p = document.createElement('div');
+            p.className = 'petal';
+            p.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = Math.random() * 5 + 8 + 's';
+            p.style.fontSize = Math.random() * 10 + 15 + 'px';
+            document.body.appendChild(p);
+            setTimeout(() => { p.remove(); }, 10000);
+        }
+        setInterval(createPetal, 600);
+    </script>
 </body>
 </html>
