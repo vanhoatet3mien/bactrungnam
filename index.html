@@ -23,6 +23,13 @@
             color-scheme: light;
         }
 
+        html {
+    /* Màu nền này sẽ hiển thị khi quẹt quá đà ở đỉnh hoặc đáy trang */
+    background-color: #FFFFFF; 
+    /* Chống giật lag khi cuộn trên iOS */
+    -webkit-overflow-scrolling: touch;
+}
+
         body {
             margin: 0; padding: 0;
             font-family: 'Montserrat', sans-serif;
@@ -30,6 +37,7 @@
             color: #333 !important; scroll-behavior: smooth;
             overflow-x: hidden;
             min-height: 100vh;
+            overscroll-behavior-y: none;
         }
 
         /* --- 1. MASTER OVERLAY & INTRO --- */
@@ -212,7 +220,8 @@ nav ul li a:hover { color: var(--accent); }
         .track:hover { background: #fff5e6; color: var(--accent); }
         .track.playing { font-weight: 900; color: var(--accent); background: #fff5e6; }
 
-        footer { background: var(--dark); color: white; padding: 80px 20px; text-align: center; }
+        footer { background: var(--dark); color: white; padding: 80px 20px; text-align: center; position: relative;
+    margin-top: -1px; }
         .footer-content {
             max-width: 1200px; margin: 0 auto; display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 50px; text-align: left;
@@ -756,4 +765,5 @@ setInterval(createLuckyEnvelope, 10000);
 </body>
 
 </html>
+
 
