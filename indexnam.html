@@ -393,6 +393,103 @@ Giữ gìn lời nói, hành động mang ý nghĩa may mắn.</p>
     </footer>
 
     <script>
+    /* --- HIỆU ỨNG HOA RƠI (Chậm, thưa, mờ dần) --- */
+    const canvas = document.getElementById('flower-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Hàm cập nhật kích thước canvas
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const flowers = [];
+    const flowerCount = 15; // Giảm số lượng xuống để trông "thưa" hơn
+
+    class Flower {
+        constructor() {
+            this.init();
+        }
+
+        init() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height - canvas.height;
+            this.size = Math.random() * 8 + 5;
+            // Tốc độ giảm xuống (0.3 - 0.8) để hoa rơi "chậm" hơn
+            this.speed = Math.random() * 0.5 + 0.3; 
+            this.angle = Math.random() * 360;
+            this.spin = (Math.random() - 0.5) * 0.8; // Xoay nhẹ nhàng hơn
+            this.opacity = 1; 
+        }
+
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle * Math.PI / 180);
+            
+            // Hiệu ứng mờ dần dựa trên giá trị opacity
+            ctx.globalAlpha = this.opacity; 
+
+            // Vẽ hoa mai vàng 5 cánh
+            ctx.fillStyle = "#FFD700"; 
+            for(let i=0; i<5; i++) {
+                ctx.beginPath();
+                ctx.ellipse(0, -this.size/2, this.size/3, this.size/2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.rotate(72 * Math.PI / 180);
+            }
+            
+            // Nhụy hoa
+            ctx.beginPath();
+            ctx.fillStyle = "#e67e22";
+            ctx.arc(0, 0, this.size/4, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.restore();
+        }
+
+        update() {
+            this.y += this.speed;
+            this.x += Math.sin(this.y / 100) * 0.5; // Lắc lư nhẹ nhàng
+            this.angle += this.spin;
+
+            // Tính toán hiệu ứng mờ dần: 
+            // Khi hoa rơi quá 70% chiều cao màn hình, opacity sẽ giảm dần về 0
+            let fadeStart = canvas.height * 0.7;
+            if (this.y > fadeStart) {
+                this.opacity = Math.max(0, 1 - (this.y - fadeStart) / (canvas.height - fadeStart));
+            } else {
+                this.opacity = 1;
+            }
+
+            // Nếu hoa biến mất hoàn toàn hoặc rơi quá màn hình thì reset
+            if (this.y > canvas.height || this.opacity <= 0) {
+                this.init();
+                this.y = -20; // Xuất hiện lại từ phía trên
+            }
+        }
+    }
+
+    function init() {
+        for (let i = 0; i < flowerCount; i++) {
+            flowers.push(new Flower());
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        flowers.forEach(f => {
+            f.update();
+            f.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+        
     // Chống chuột phải
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
@@ -416,6 +513,7 @@ document.onkeydown = function(e) {
 
 
 </html>
+
 
 
 
