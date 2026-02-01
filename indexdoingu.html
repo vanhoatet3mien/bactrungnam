@@ -53,58 +53,93 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- 3. THANH MENU (NAV) --- */
+        /* --- 2. THANH MENU (NAV) --- */
         nav { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: white; 
-            padding: 10px 40px; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1); 
+    display: flex; 
+    justify-content: space-between; /* Giúp logo một bên, menu một bên */
+    align-items: center; 
+    background: white; 
+    padding: 10px 40px; /* Tăng khoảng cách hai bên cho thoáng */
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1); 
+}
+
+nav .logo { height: 50px; }
+nav .logo img { height: 100%; width: auto; border-radius: 5px; }
+
+nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+nav ul li { padding: 0 15px; }
+nav ul li a { 
+    color: #333; 
+    text-decoration: none; 
+    font-weight: 700; 
+    font-size: 13px; 
+    text-transform: uppercase; 
+    transition: 0.3s; 
+}
+
+nav ul li a:hover { color: var(--accent); }
+
+        /* --- 4. HERO & SEARCH --- */
+        .hero { text-align: center; padding: 60px 20px 20px; color: white; }
+        .hero h1 { font-size: 42px; font-weight: 900; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
+        .search-box {
+            max-width: 600px; margin: 0 auto; background: white;
+            padding: 5px; border-radius: 50px; display: flex; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .search-box input {
+            flex: 1; border: none; padding: 15px 25px; border-radius: 50px; outline: none; font-size: 16px;
         }
 
-        nav .logo { height: 50px; }
-        nav .logo img { height: 100%; width: auto; border-radius: 5px; }
-
-        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
-        nav ul li { padding: 0 15px; }
-        nav ul li a { 
-            color: #333; 
-            text-decoration: none; 
-            font-weight: 700; 
-            font-size: 13px; 
-            text-transform: uppercase; 
-            transition: 0.3s; 
+        /* --- 5. SWIPER 3D SLIDER --- */
+        .swiper {width: 100%;padding-top: 50px;padding-bottom: 50px;
+        /* Đảm bảo không có margin lạ làm lệch slide */
+        margin-left: auto; margin-right: auto;}
+        .swiper-slide {
+          background-position: center;background-size: cover;
+          width: 300px; /* Độ rộng ảnh */
+          height: 450px; /* Chiều cao ảnh */
+          border-radius: 20px;
+          /* Quan trọng: Không để slide tự ý thêm margin */
+          margin: 0 !important; 
         }
-        nav ul li a:hover { color: var(--accent); }
 
-        /* --- 4. CONTENT GRID --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
+        /* --- 6. CONTENT GRID --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .section-title {
             font-size: 28px; font-weight: 900; color: white;
             margin: 50px 0 25px; border-left: 8px solid var(--accent); padding-left: 15px;
         }
         .grid { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 25px; 
+          display: flex; 
+          flex-direction: column; /* Xếp các khung theo hàng dọc */
+          gap: 25px; 
+          
         }
         .item-card {
-            background: white; 
-            border-radius: 15px; 
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
-            transition: 0.3s;
-            width: 100%; 
+          background: white; 
+          border-radius: 15px; 
+          overflow: hidden;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+          transition: 0.3s;
+          width: 100%; /* Đảm bảo luôn rộng 100% container */
+          
         }
-        .item-card:hover { transform: translateY(-5px); }
+        .item-card:hover { transform: translateY(-10px); }
+        .item-card img { width: 100%; height: 200px; object-fit: cover; }
         .item-card .info { padding: 20px; }
-        .item-card h3 { margin: 0 0 10px 0; color: var(--accent); font-size: 18px; }
+        .item-card h3 { margin: 0; color: var(--accent); font-size: 18px; }
 
-        /* --- 5. FOOTER --- */
+        /* --- 7. AUTHOR SECTION --- */
+        .author-section {
+            background: rgba(255,255,255,0.9); border-radius: 20px;
+            padding: 40px; margin: 60px auto; display: flex; align-items: center; gap: 30px; max-width: 800px;
+        }
+        .author-img { width: 130px; height: 130px; border-radius: 50%; border: 5px solid var(--primary); object-fit: cover; }
+
+        /* --- 8. FOOTER --- */
         footer { background: var(--dark); color: white; padding: 60px 20px; text-align: center; }
         .footer-content {
             max-width: 1200px; margin: 0 auto; display: grid;
@@ -113,30 +148,25 @@
         .footer-box h4 { border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
         .social-links a { color: #ccc; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
         .social-links a:hover { color: var(--primary); padding-left: 5px; }
-        .copy-right { margin-top: 30px; opacity: 0.6; font-size: 13px; }
+        
+        .logo img {
+    height: 50px;    /* Điều chỉnh chiều cao tùy ý */
+    width: auto;     /* Giữ đúng tỉ lệ ảnh */
+    display: block;  /* Loại bỏ khoảng cách thừa dưới ảnh */
+}
 
-        /* --- 6. RESPONSIVE OPTIMIZATION --- */
-        @media (max-width: 768px) {
-            nav { flex-direction: column; padding: 10px; }
-            nav ul { flex-wrap: wrap; justify-content: center; margin-top: 10px; }
-            nav ul li { padding: 5px 10px; }
-            
-            /* Sửa lỗi tràn cho các Section Giới thiệu */
-            .intro-flex-container { 
-                flex-direction: column !important; 
-            }
-            .intro-flex-item { 
-                width: 100% !important; 
-                margin-bottom: 10px;
-            }
-            
-            .section-title { font-size: 22px; margin: 30px 0 15px; }
-        }
+/* Đảm bảo nav sử dụng flexbox để logo và menu nằm cùng hàng */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
     </style>
 </head>
 <body>
 
-<nav>
+    <nav>
     <div class="logo">
         <a href="#">
             <img src="https://github.com/vanhoatet3mien/bactrungnam/blob/main/logo.jpg?raw=true" alt="Tết Việt Nam">
@@ -144,194 +174,257 @@
     </div>
     <ul>
         <li><a href="./index.html">TRANG CHỦ</a></li>
+        
         <li><a href="./indexbac.html">MIỀN BẮC</a></li> 
+        
         <li><a href="./indextrung.html">MIỀN TRUNG</a></li> 
+        
         <li><a href="./indexnam.html">MIỀN NAM</a></li> 
+        
         <li><a href="./indexdoingu.html">GIỚI THIỆU</a></li>
     </ul>
 </nav>
 
-<div class="container">
-    <div id="doi-ngu">
-        <h2 class="section-title">GIỚI THIỆU</h2>
-
-        <section style="padding: 25px; background: rgba(255,255,255,0.7); border-radius: 20px; margin-bottom: 30px; border: 1px solid rgba(211, 47, 47, 0.2);">
-            <h3 style="color: #d32f2f; text-align: center; font-size: 26px; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">
-                Mục Tiêu Chung Của Nhóm
-            </h3>
-            
-            <div class="intro-flex-container" style="display: flex; gap: 20px; justify-content: space-between;">
-                <div class="intro-flex-item" style="flex: 1; display: flex; align-items: flex-start; gap: 12px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <span style="font-size: 30px;">🎯</span>
-                    <div>
-                        <h4 style="margin: 0 0 5px 0; color: #d32f2f; font-size: 16px;">Sứ mệnh</h4>
-                        <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #444;">Hệ thống hóa và giới thiệu trọn vẹn giá trị Tết 3 miền.</p>
-                    </div>
-                </div>
-
-                <div class="intro-flex-item" style="flex: 1; display: flex; align-items: flex-start; gap: 12px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <span style="font-size: 30px;">✨</span>
-                    <div>
-                        <h4 style="margin: 0 0 5px 0; color: #d32f2f; font-size: 16px;">Kết nối</h4>
-                        <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #444;">Khẳng định giá trị đoàn viên và lan tỏa tình yêu cội nguồn.</p>
-                    </div>
-                </div>
-
-                <div class="intro-flex-item" style="flex: 1; display: flex; align-items: flex-start; gap: 12px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                    <span style="font-size: 30px;">🚀</span>
-                    <div>
-                        <h4 style="margin: 0 0 5px 0; color: #d32f2f; font-size: 16px;">Kỹ năng</h4>
-                        <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #444;">Vận dụng công nghệ và tư duy làm việc nhóm sáng tạo.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-                
-        <section style="padding: 25px; background: rgba(255,255,255,0.7); border-radius: 20px; margin-bottom: 30px; border: 1px solid rgba(211, 47, 47, 0.2);">
-            <h3 style="color: #d32f2f; text-align: center; font-size: 26px; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">
-                Tầm Nhìn & Tương Lai
-            </h3>
-            
-            <div class="intro-flex-container" style="display: flex; gap: 20px; justify-content: space-between;">
-                <div class="intro-flex-item" style="flex: 1; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
-                    <div style="font-size: 35px; margin-bottom: 10px;">🌐</div>
-                    <h4 style="color: #d32f2f; margin-bottom: 10px; font-size: 16px;">Số hóa VR</h4>
-                    <p style="margin: 0; font-size: 13px; color: #555;">Ứng dụng <b>AR/VR</b> tái hiện không gian Tết xưa sống động.</p>
-                </div>
-
-                <div class="intro-flex-item" style="flex: 1; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
-                    <div style="font-size: 35px; margin-bottom: 10px;">🤝</div>
-                    <h4 style="color: #d32f2f; margin-bottom: 10px; font-size: 16px;">Cộng đồng</h4>
-                    <p style="margin: 0; font-size: 13px; color: #555;">Nền tảng lưu giữ ký ức và chia sẻ khoảnh khắc sum họp.</p>
-                </div>
-
-                <div class="intro-flex-item" style="flex: 1; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
-                    <div style="font-size: 35px; margin-bottom: 10px;">🌍</div>
-                    <h4 style="color: #d32f2f; margin-bottom: 10px; font-size: 16px;">Quốc tế</h4>
-                    <p style="margin: 0; font-size: 13px; color: #555;">Giới thiệu tinh hoa văn hóa Việt ra khắp thế giới.</p>
-                </div>
-            </div>
-        </section>
-
-        <h2 class="section-title">THÀNH VIÊN</h2>
-                
-        <div class="grid">
-            <div class="item-card">
-                <div class="info">
-                    <h3>Đoàn Ngọc Ánh - Trưởng nhóm</h3>
-                    <p><strong>Vai trò:</strong> Điều phối và Quản lý dự án</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>
-                        - Thiết lập kiến trúc hệ thống (Trang chủ) và sơ đồ luồng dữ liệu.<br>
-                        - Tối ưu hóa hiệu năng vận hành và trải nghiệm người dùng trên website.<br>
-                        - Giám sát tiến độ thực hiện và phê duyệt nội dung tổng thể.
-                    </p>
-                </div>
-            </div>
-
-            <div class="item-card">
-                <div class="info">
-                    <h3>Phùng Thị Ngọc Lợi - Thành viên</h3>
-                    <p><strong>Vai trò:</strong> Biên tập Nội dung Miền Bắc</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>
-                        - Phụ trách ý tưởng và thiết kế Logo nhận diện cho dự án.<br>
-                        - Tổng hợp, nghiên cứu và biên soạn tư liệu văn hóa Tết miền Bắc.<br>
-                    </p>
-                </div>
-            </div>
-
-            <div class="item-card">
-                <div class="info">
-                    <h3>Nguyễn Thị Ngọc Huyền - Thành viên</h3>
-                    <p><strong>Vai trò:</strong> Biên tập Nội dung Miền Nam</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>
-                        - Khai thác tư liệu và biên soạn nội dung chuyên sâu về Tết miền Nam.<br>
-                    </p>
-                </div>
-            </div>
-
-            <div class="item-card">
-                <div class="info">
-                    <h3>Phạm Phương Thùy - Thành viên</h3>
-                    <p><strong>Vai trò:</strong> Biên tập Nội dung Miền Trung</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>
-                        - Nghiên cứu các phong tục đặc sắc và biên soạn nội dung về Tết miền Trung.<br>
-                    </p>
-                </div>
-            </div>
-            
-            <div class="item-card">
-                <div class="info">
-                    <h3>Hồ Thị Kim Hoàng - Thành viên</h3>
-                    <p><strong>Vai trò:</strong> Quản trị Nội dung Đội ngũ</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>
-                        - Xây dựng hồ sơ thông tin và giới thiệu chi tiết về các thành viên.<br>
-                        - Phụ trách ý tưởng và triển khai thiết kế đoạn phim Intro của dự án.<br>
-                    </p>
-                </div>
-            </div>
-
-            <div class="item-card">
-                <div class="info">
-                    <h3>Trần Thị Yến Linh - Thành viên</h3>
-                    <p><strong>Vai trò:</strong> Phát triển Giao diện</p>
-                    <p><strong>Nhiệm vụ cụ thể:</strong><br>
-                        - Hỗ trợ xây dựng và hoàn thiện các thành phần giao diện trên website.<br>
-                    </p>
-                </div>
+    <div class="container">
+        <div id="doi-ngu">
+          
+            <h2 class="section-title">GIỚI THIỆU</h2>
+<section id="muc-tieu" style="padding: 25px; background: rgba(255,255,255,0.7); border-radius: 20px; margin-bottom: 30px; border: 1px solid rgba(211, 47, 47, 0.2);">
+    <h3 style="color: #d32f2f; text-align: center; font-size: 26px; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">
+        Mục Tiêu Chung Của Nhóm
+    </h3>
+    
+    <div style="display: flex; gap: 20px; justify-content: space-between;">
+        
+        <div style="flex: 1; display: flex; align-items: flex-start; gap: 12px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <span style="font-size: 30px;">🎯</span>
+            <div>
+                <h4 style="margin: 0 0 5px 0; color: #d32f2f; font-size: 16px;">Sứ mệnh</h4>
+                <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #444;">Hệ thống hóa và giới thiệu trọn vẹn giá trị Tết 3 miền.</p>
             </div>
         </div>
 
-        <br>
-        <footer style="background-color: white; padding: 40px 20px; text-align: center; border-top: 3px solid #d32f2f; border-radius: 15px;">
-            <div style="max-width: 800px; margin: 0 auto;">
-                <h2 style="color: #d32f2f;">Lời Cảm Ơn</h2>
-                <p style="font-style: italic; line-height: 1.8; color: #444; font-size: 1.1rem;">
-                    "Cảm ơn bạn đã đồng hành cùng chúng tôi trong chuyến hành trình xuyên suốt dải đất hình chữ S để khám phá nét đẹp Tết ba miền. Chúng tôi tin rằng, dù bạn đang ở đâu hay thuộc miền đất nào, không khí ngày Tết luôn mang lại một sức mạnh kỳ diệu để chúng ta xích lại gần nhau hơn. Sự ủng hộ và quan tâm của bạn chính là nguồn động lực lớn nhất để nhóm tiếp tục hoàn thiện và phát triển dự án này trong tương lai. Chúc bạn một mùa Tết an yên, hạnh phúc bên những người thân yêu!"
-                </p>
-                <p style="margin-top: 20px; font-weight: bold; color: #b71c1c;">— Thân ái, Đội ngũ thực hiện dự án —</p>
+        <div style="flex: 1; display: flex; align-items: flex-start; gap: 12px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <span style="font-size: 30px;">✨</span>
+            <div>
+                <h4 style="margin: 0 0 5px 0; color: #d32f2f; font-size: 16px;">Kết nối</h4>
+                <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #444;">Khẳng định giá trị đoàn viên và lan tỏa tình yêu cội nguồn.</p>
             </div>
-        </footer>
-        <br><br>
+        </div>
+
+        <div style="flex: 1; display: flex; align-items: flex-start; gap: 12px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <span style="font-size: 30px;">🚀</span>
+            <div>
+                <h4 style="margin: 0 0 5px 0; color: #d32f2f; font-size: 16px;">Kỹ năng</h4>
+                <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #444;">Vận dụng công nghệ và tư duy làm việc nhóm sáng tạo.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+            
+<section id="tuong-lai" style="padding: 25px; background: rgba(255,255,255,0.7); border-radius: 20px; margin-bottom: 30px; border: 1px solid rgba(211, 47, 47, 0.2);">
+    <h3 style="color: #d32f2f; text-align: center; font-size: 26px; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px;">
+        Tầm Nhìn & Tương Lai
+    </h3>
+    
+    <div style="display: flex; gap: 20px; justify-content: space-between;">
+
+        <div style="flex: 1; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
+            <div style="font-size: 35px; margin-bottom: 10px;">🌐</div>
+            <h4 style="color: #d32f2f; margin-bottom: 10px; font-size: 16px;">Số hóa VR</h4>
+            <p style="margin: 0; font-size: 13px; color: #555;">Ứng dụng <b>AR/VR</b> tái hiện không gian Tết xưa sống động.</p>
+        </div>
+
+        <div style="flex: 1; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
+            <div style="font-size: 35px; margin-bottom: 10px;">🤝</div>
+            <h4 style="color: #d32f2f; margin-bottom: 10px; font-size: 16px;">Cộng đồng</h4>
+            <p style="margin: 0; font-size: 13px; color: #555;">Nền tảng lưu giữ ký ức và chia sẻ khoảnh khắc sum họp.</p>
+        </div>
+
+        <div style="flex: 1; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
+            <div style="font-size: 35px; margin-bottom: 10px;">🌍</div>
+            <h4 style="color: #d32f2f; margin-bottom: 10px; font-size: 16px;">Quốc tế</h4>
+            <p style="margin: 0; font-size: 13px; color: #555;">Giới thiệu tinh hoa văn hóa Việt ra khắp thế giới.</p>
+        </div>
+
+    </div>
+</section>
+          <h2 class="section-title">THÀNH VIÊN</h2>
+            
+            <div class="grid">
+    <div class="item-card">
+        <div class="info">
+            <h3>Đoàn Ngọc Ánh - Trưởng nhóm</h3>
+            <p><strong>Vai trò:</strong> Điều phối và Quản lý dự án</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Thiết lập kiến trúc hệ thống (Trang chủ) và sơ đồ luồng dữ liệu.<br>
+                - Tối ưu hóa hiệu năng vận hành và trải nghiệm người dùng trên website.<br>
+                - Giám sát tiến độ thực hiện và phê duyệt nội dung tổng thể.
+            </p>
+        </div>
+    </div>
+
+    <div class="item-card">
+        <div class="info">
+            <h3>Phùng Thị Ngọc Lợi - Thành viên</h3>
+            <p><strong>Vai trò:</strong> Biên tập Nội dung Miền Bắc</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Phụ trách ý tưởng và thiết kế Logo nhận diện cho dự án.<br>
+                - Tổng hợp, nghiên cứu và biên soạn tư liệu văn hóa Tết miền Bắc.<br>
+            </p>
+        </div>
+    </div>
+
+    <div class="item-card">
+        <div class="info">
+            <h3>Nguyễn Thị Ngọc Huyền - Thành viên</h3>
+            <p><strong>Vai trò:</strong> Biên tập Nội dung Miền Nam</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Khai thác tư liệu và biên soạn nội dung chuyên sâu về Tết miền Nam.<br>
+            </p>
+        </div>
+    </div>
+
+    <div class="item-card">
+        <div class="info">
+            <h3>Phạm Phương Thùy - Thành viên</h3>
+            <p><strong>Vai trò:</strong> Biên tập Nội dung Miền Trung</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Nghiên cứu các phong tục đặc sắc và biên soạn nội dung về Tết miền Trung.<br>
+            </p>
+        </div>
+    </div>
+    
+    <div class="item-card">
+        <div class="info">
+            <h3>Hồ Thị Kim Hoàng - Thành viên</h3>
+            <p><strong>Vai trò:</strong> Quản trị Nội dung Đội ngũ</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Xây dựng hồ sơ thông tin và giới thiệu chi tiết về các thành viên.<br>
+                - Phụ trách ý tưởng và triển khai thiết kế đoạn phim Intro của dự án.<br>
+            </p>
+        </div>
+    </div>
+
+    <div class="item-card">
+        <div class="info">
+            <h3>Trần Thị Yến Linh - Thành viên</h3>
+            <p><strong>Vai trò:</strong> Phát triển Giao diện</p>
+            <p><strong>Nhiệm vụ cụ thể:</strong><br>
+                - Hỗ trợ xây dựng và hoàn thiện các thành phần giao diện trên website.<br>
+            </p>
+        </div>
     </div>
 </div>
 
-<footer>
-    <div class="footer-content">
-        <div class="footer-box">
-            <h4>Thông Tin Web</h4>
-            <p>Website sưu tầm và chia sẻ vẻ đẹp văn hóa Tết 3 Miền tại Việt Nam.</p>
-        </div>
-        <div class="footer-box social-links">
-            <h4>Liên Hệ</h4>
-            <p>Facebook: <a href="https://www.facebook.com/share/1DMGDp4r8c/" style="color:var(--primary)">Tết 3 Miền</a></p>
-            <p>Gmail: <a href="mailto:tet3mienvn@gmail.com" style="color:var(--primary)">tet3mienvn@gmail.com</a></p>
-            <p>Địa chỉ: Thường Phước, Đồng Tháp</p>
-        </div>
+    <br>
+            
+            <footer style="background-color: white; padding: 40px 20px; text-align: center; border-top: 3px solid #d32f2f;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="color: #d32f2f; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Lời Cảm Ơn</h2>
+        <p style="font-style: italic; line-height: 1.8; color: #444; font-size: 1.1rem;">
+            "Cảm ơn bạn đã đồng hành cùng chúng tôi trong chuyến hành trình xuyên suốt dải đất hình chữ S để khám phá nét đẹp Tết ba miền. Chúng tôi tin rằng, dù bạn đang ở đâu hay thuộc miền đất nào, không khí ngày Tết luôn mang lại một sức mạnh kỳ diệu để chúng ta xích lại gần nhau hơn. Sự ủng hộ và quan tâm của bạn chính là nguồn động lực lớn nhất để nhóm tiếp tục hoàn thiện và phát triển dự án này trong tương lai. Chúc bạn một mùa Tết an yên, hạnh phúc bên những người thân yêu!"
+        </p>
+        <p style="margin-top: 20px; font-weight: bold; color: #b71c1c;">— Thân ái, Đội ngũ thực hiện dự án —</p>
     </div>
-    <div class="copy-right">© 2026 VanHoaTet3Mien - Truyền Thống Việt Nam</div>
-</footer>
+</footer><br><br><br>
 
-<script>
-    // 1. Hiệu ứng hoa đào rơi
-    function createPetal() {
-        const petals = ['🌸', '🌼', '🧧'];
-        const petal = document.createElement('div');
-        petal.className = 'petal';
-        petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
-        petal.style.left = Math.random() * 100 + 'vw';
-        petal.style.animationDuration = Math.random() * 3 + 4 + 's';
-        petal.style.fontSize = Math.random() * 10 + 10 + 'px';
-        document.body.appendChild(petal);
-        setTimeout(() => { petal.remove(); }, 6000);
+    <footer>
+        <div class="footer-content">
+            <div class="footer-box">
+                <h4>Thông Tin Web</h4>
+                <p>Website sưu tầm và chia sẻ vẻ đẹp văn hóa Tết 3 Miền tại Việt Nam.</p>
+            </div>
+            <div class="footer-box social-links">
+                <h4>Liên Hệ</h4>
+                <p>Facebook: <a href="https://www.facebook.com/share/1DMGDp4r8c/" style="color:var(--primary)">Tết 3 Miền</a></p>
+                <p>Gmail: <a href="mailto:tet3mienvn@gmail.com" style="color:var(--primary)">tet3mienvn@gmail.com</a></p>
+                <p>Địa chỉ: Thường Phước, Đồng Tháp</p>
+            </div>
+        </div>
+        <div class="copy-right">© 2026 VanHoaTet3Mien - Truyền Thống Việt Nam</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // 1. Xử lý Video Intro
+        const intro = document.getElementById('intro-overlay');
+        const video = document.getElementById('myVideo');
+        const skipBtn = document.getElementById('skip-btn');
+
+        function endIntro() {
+            intro.classList.add('hide-intro');
+            setTimeout(() => { intro.style.display = 'none'; }, 1000);
+        }
+
+        skipBtn.addEventListener('click', endIntro);
+        video.onended = endIntro;
+
+        // 2. Khởi tạo Slide 3D (Coverflow)
+        var swiper = new Swiper(".mySwiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true, // Bắt buộc phải là true để ảnh chính nằm giữa
+    slidesPerView: "auto", 
+    coverflowEffect: {
+        rotate: 30,      // Độ nghiêng vừa phải
+        stretch: 0,      // Để 0 để khoảng cách 2 bên bằng nhau tuyệt đối
+        depth: 200,      // Tạo độ sâu cho ảnh 2 bên lùi về sau
+        modifier: 1,
+        slideShadows: true,
+    },
+    loop: true,
+    
+    // CẤU HÌNH THEO Ý BẠN:
+    autoplay: {
+        delay: 10000, // 10 giây mới tự chuyển một lần (rất lâu)
+        disableOnInteraction: true, // Khi bạn đã bấm/vuốt, nó sẽ dừng hẳn việc tự động chuyển
+    },
+
+    // Cho phép điều khiển bằng bàn phím hoặc chuột
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true
     }
-    setInterval(createPetal, 400);
+});
 
-    // 2. Bảo mật
-    document.addEventListener('contextmenu', e => e.preventDefault(), false);
-    document.onkeydown = function(e) {
-        if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 85 || e.keyCode === 117)) return false;
-        if (e.keyCode === 123) return false;
-    };
-</script>
+        // 3. Hiệu ứng hoa đào rơi
+        function createPetal() {
+            const petals = ['🌸', '🌼', '🧧'];
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+            petal.style.fontSize = Math.random() * 10 + 10 + 'px';
+            document.body.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 6000);
+        }
+        setInterval(createPetal, 400);
+
+        // Chống chuột phải
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+}, false);
+
+// Chống tổ hợp phím Ctrl+U (Xem nguồn trang) và F12 (Kiểm tra phần tử)
+document.onkeydown = function(e) {
+    if (e.ctrlKey && 
+        (e.keyCode === 67 || 
+         e.keyCode === 86 || 
+         e.keyCode === 85 || 
+         e.keyCode === 117)) {
+        return false;
+    } else if (e.keyCode === 123) { // F12
+        return false;
+    }
+};
+    </script>
 </body>
+
 </html>
