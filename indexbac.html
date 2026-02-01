@@ -159,6 +159,28 @@ nav ul li a:hover { color: var(--accent); }
         .social-links a:hover { color: var(--primary); padding-left: 5px; }
         .copy-right { margin-top: 40px; opacity: 0.7; font-size: 14px; }
         
+        .music-player-fixed { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
+#music-toggle {
+    width: 65px; height: 65px; border-radius: 50%; background: #d32f2f;
+    color: white; border: none; font-size: 28px; cursor: pointer;
+    box-shadow: 0 8px 25px rgba(211, 47, 47, 0.5); display: flex; align-items: center; justify-content: center;
+}
+.music-panel {
+    position: absolute; bottom: 85px; right: 0; width: 300px;
+    background: white; padding: 25px; border-radius: 25px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.3); display: none;
+}
+.music-panel.active { display: block; animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.playlist { margin-bottom: 15px; max-height: 150px; overflow-y: auto; }
+.track { 
+    padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; 
+    font-size: 15px; transition: 0.2s; display: flex; align-items: center; color: #333;
+}
+.track:hover { background: #fff5e6; color: #d32f2f; }
+.track.playing { font-weight: 900; color: #d32f2f; background: #fff5e6; }
+
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
     </style>
 </head>
 <body>
@@ -427,6 +449,19 @@ nav ul li a:hover { color: var(--accent); }
             </div>
         </div>
     </div>
+    
+    <div class="music-player-fixed">
+    <div class="music-panel" id="music-panel">
+        <h4 style="margin: 0 0 10px 0; color: #d32f2f;">📻 Playlist Tết 2026</h4>
+        <div class="playlist" id="playlist-container"></div>
+        <audio id="main-audio" controls style="width: 100%; height: 40px;"></audio>
+        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+            <label for="music-input" style="font-size: 12px; color: #f39c12; cursor: pointer; font-weight: 700;">📁 TẢI NHẠC TỪ MÁY</label>
+            <input type="file" id="music-input" accept="audio/*" style="display:none;">
+        </div>
+    </div>
+    <button id="music-toggle">🎵</button>
+</div>
 
     <footer>
         <div class="footer-content">
@@ -492,8 +527,60 @@ document.onkeydown = function(e) {
     }
 };
 
+const defaultSongs = [
+    { name: "🌸 Tết Này Con Sẽ Về", src: "tetnayconseve.mp3" },
+    { name: "🌸 Vạn Sự Như Ý", src: "vansunhuy.mp3" },
+    { name: "🌸 Một Năm Mới Bình An", src: "motnammoibinhan.mp3" },
+    { name: "🌸 Tết Đông Đầy", src: "tetdongday.mp3" },
+    { name: "🌸 Tết Ơi Tết À", src: "tetoiteta.mp3" }
+];
+
+const audio = document.getElementById('main-audio');
+const musicToggle = document.getElementById('music-toggle');
+const musicPanel = document.getElementById('music-panel');
+
+// Đóng mở bảng điều khiển
+musicToggle.onclick = () => musicPanel.classList.toggle('active');
+
+// Tạo danh sách bài hát
+function renderPlaylist() {
+    const container = document.getElementById('playlist-container');
+    container.innerHTML = '';
+    defaultSongs.forEach((song, index) => {
+        const div = document.createElement('div');
+        div.className = 'track';
+        div.innerHTML = song.name;
+        div.onclick = () => playTrack(index, div);
+        container.appendChild(div);
+    });
+}
+
+// Chạy bài hát được chọn
+function playTrack(index, element) {
+    audio.src = defaultSongs[index].src;
+    audio.play().catch(e => console.log("Cần tương tác với trang trước khi phát nhạc"));
+    document.querySelectorAll('.track').forEach(t => t.classList.remove('playing'));
+    element.classList.add('playing');
+}
+
+// Xử lý khi tải file nhạc từ máy
+document.getElementById('music-input').onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            audio.src = reader.result;
+            audio.play();
+            document.querySelectorAll('.track').forEach(t => t.classList.remove('playing'));
+        };
+        reader.readAsDataURL(file);
+    }
+};
+
+// Khởi chạy khi tải trang xong
+window.addEventListener('load', renderPlaylist);
+
     </script>
 </body>
 
 </html>
-
