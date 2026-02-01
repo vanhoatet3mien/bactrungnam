@@ -5,53 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
     <title>Văn Hóa Tết Việt Nam - 3 Miền Kết Nối</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    
     <style>
         :root {
             --primary: #f39c12;
             --accent: #d32f2f;
-            --bg: #ffb84d;
+            --bg: #FFD183;
             --dark: #2c3e50;
             --white: #ffffff;
             color-scheme: light;
         }
-
         body {
             margin: 0; padding: 0;
             font-family: 'Montserrat', sans-serif;
-            background: var(--bg) radial-gradient(circle, #ffcc80 0%, #ffb84d 100%) !important;
+            background: var(--bg) radial-gradient(circle, #ffcc80 0%, #FFD183 100%) !important;
             color: #333 !important; scroll-behavior: smooth;
             overflow-x: hidden;
         }
-
-        /* --- 1. INTRO VIDEO OVERLAY --- */
-        #intro-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 9999; display: flex;
-            justify-content: center; align-items: center; transition: 1s ease;
-        }
-        #intro-overlay video { width: 100%; height: 100%; object-fit: cover; }
-        #skip-btn {
-            position: absolute; bottom: 30px; right: 30px;
-            background: rgba(255,255,255,0.2); color: white;
-            border: 1px solid white; padding: 10px 20px;
-            cursor: pointer; border-radius: 5px; z-index: 10000;
-        }
-        .hide-intro { opacity: 0; pointer-events: none; }
-
-        /* --- 2. HIỆU ỨNG HOA RƠI --- */
+        
         .petal {
-            position: fixed; top: -10%; z-index: 998;
-            user-select: none; pointer-events: none;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-        }
+    position: fixed;
+    top: -20px;
+    z-index: 9999;
+    user-select: none;
+    pointer-events: none;
+    /* Kết hợp cả hiệu ứng rơi và hiệu ứng đung đưa */
+    animation: fall linear forwards, sideSway ease-in-out infinite alternate;
+}
+
+/* Hiệu ứng rơi thẳng xuống */
+@keyframes fall {
+    0% {
+        top: -10%;
+    }
+    100% {
+        top: 110%;
+    }
+}
+
+/* Hiệu ứng đung đưa qua lại */
+@keyframes sideSway {
+    0% {
+        transform: translateX(0px) rotate(0deg);
+    }
+    100% {
+        /* Chỉnh 50px thành số lớn hơn nếu muốn hoa văng xa hơn */
+        transform: translateX(50px) rotate(45deg);
+    }
+}
 
         /* --- 2. THANH MENU (NAV) --- */
         nav { 
@@ -82,65 +84,74 @@ nav ul li a {
 
 nav ul li a:hover { color: var(--accent); }
 
-        /* --- 4. HERO & SEARCH --- */
-        .hero { text-align: center; padding: 60px 20px 20px; color: white; }
-        .hero h1 { font-size: 42px; font-weight: 900; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
-        .search-box {
-            max-width: 600px; margin: 0 auto; background: white;
-            padding: 5px; border-radius: 50px; display: flex; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .search-box input {
-            flex: 1; border: none; padding: 15px 25px; border-radius: 50px; outline: none; font-size: 16px;
-        }
-
-        /* --- 5. SWIPER 3D SLIDER --- */
-        .swiper {width: 100%;padding-top: 50px;padding-bottom: 50px;
-        /* Đảm bảo không có margin lạ làm lệch slide */
-        margin-left: auto; margin-right: auto;}
-        .swiper-slide {
-          background-position: center;background-size: cover;
-          width: 300px; /* Độ rộng ảnh */
-          height: 450px; /* Chiều cao ảnh */
-          border-radius: 20px;
-          /* Quan trọng: Không để slide tự ý thêm margin */
-          margin: 0 !important; 
-        }
-
-        /* --- 6. CONTENT GRID --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .section-title {
             font-size: 28px; font-weight: 900; color: white;
             margin: 50px 0 25px; border-left: 8px solid var(--accent); padding-left: 15px;
         }
-        .grid { 
-          display: flex; 
-          flex-direction: column; /* Xếp các khung theo hàng dọc */
-          gap: 25px; 
-          
-        }
-        .item-card {
-          background: white; 
-          border-radius: 15px; 
-          overflow: hidden;
-          box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
-          transition: 0.3s;
-          width: 100%; /* Đảm bảo luôn rộng 100% container */
-          
-        }
-        .item-card:hover { transform: translateY(-10px); }
-        .item-card img { width: 100%; height: 200px; object-fit: cover; }
-        .item-card .info { padding: 20px; }
-        .item-card h3 { margin: 0; color: var(--accent); font-size: 18px; }
 
-        /* --- 7. AUTHOR SECTION --- */
-        .author-section {
-            background: rgba(255,255,255,0.9); border-radius: 20px;
-            padding: 40px; margin: 60px auto; display: flex; align-items: center; gap: 30px; max-width: 800px;
-        }
-        .author-img { width: 130px; height: 130px; border-radius: 50%; border: 5px solid var(--primary); object-fit: cover; }
+        /* --- CẤU TRÚC DANH SÁCH THÀNH VIÊN --- */
+.grid { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 30px; 
+    align-items: center;
+    width: 100%;
+}
 
-        /* --- 8. FOOTER --- */
-        footer { background: var(--dark); color: white; padding: 60px 20px; text-align: center; }
+.item-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    display: block; 
+    max-width: 850px; 
+    width: 100%;
+    margin: 0 auto;
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(211, 47, 47, 0.2);
+}
+
+.item-card .info {
+    width: 100%; 
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.item-card h3 {
+    color: var(--accent);
+    margin-top: 0;
+    border-bottom: 2px solid #fff5e6;
+    padding-bottom: 10px;
+}
+
+/* CHỈ ẨN ẢNH, KHÔNG ẨN CARD */
+.item-card img {
+    display: none;
+}
+
+/* XÓA BỎ CÁC THIẾT LẬP ZIC-ZAC CŨ GÂY LỖI */
+.grid .item-card:nth-child(even) {
+    display: block !important; /* Đảm bảo luôn hiển thị */
+    flex-direction: unset;
+}
+
+/* Responsive cho điện thoại */
+@media (max-width: 768px) {
+    .item-card { 
+        max-width: 95%;
+    }
+    .item-card .info { 
+        padding: 20px; 
+    }
+}
+
+        /* --- FOOTER --- */
+        footer { background: var(--dark); color: white; padding: 60px 20px; text-align: center; margin-top: 50px; }
         .footer-content {
             max-width: 1200px; margin: 0 auto; display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: left;
@@ -148,42 +159,47 @@ nav ul li a:hover { color: var(--accent); }
         .footer-box h4 { border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
         .social-links a { color: #ccc; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
         .social-links a:hover { color: var(--primary); padding-left: 5px; }
+        .copy-right { margin-top: 40px; opacity: 0.7; font-size: 14px; }
         
-        .logo img {
-    height: 50px;    /* Điều chỉnh chiều cao tùy ý */
-    width: auto;     /* Giữ đúng tỉ lệ ảnh */
-    display: block;  /* Loại bỏ khoảng cách thừa dưới ảnh */
+        .music-player-fixed { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
+#music-toggle {
+    width: 65px; height: 65px; border-radius: 50%; background: #d32f2f;
+    color: white; border: none; font-size: 28px; cursor: pointer;
+    box-shadow: 0 8px 25px rgba(211, 47, 47, 0.5); display: flex; align-items: center; justify-content: center;
 }
+.music-panel {
+    position: absolute; bottom: 85px; right: 0; width: 300px;
+    background: white; padding: 25px; border-radius: 25px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.3); display: none;
+}
+.music-panel.active { display: block; animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.playlist { margin-bottom: 15px; max-height: 150px; overflow-y: auto; }
+.track { 
+    padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; 
+    font-size: 15px; transition: 0.2s; display: flex; align-items: center; color: #333;
+}
+.track:hover { background: #fff5e6; color: #d32f2f; }
+.track.playing { font-weight: 900; color: #d32f2f; background: #fff5e6; }
 
-/* Đảm bảo nav sử dụng flexbox để logo và menu nằm cùng hàng */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
     </style>
 </head>
 <body>
-
     <nav>
-    <div class="logo">
+        <div class="logo">
         <a href="#">
             <img src="https://github.com/vanhoatet3mien/bactrungnam/blob/main/logo.jpg?raw=true" alt="Tết Việt Nam">
         </a>
     </div>
-    <ul>
-        <li><a href="./index.html">TRANG CHỦ</a></li>
-        
-        <li><a href="./indexbac.html">MIỀN BẮC</a></li> 
-        
-        <li><a href="./indextrung.html">MIỀN TRUNG</a></li> 
-        
-        <li><a href="./indexnam.html">MIỀN NAM</a></li> 
-        
-        <li><a href="./indexdoingu.html">GIỚI THIỆU</a></li>
-    </ul>
-</nav>
+        <ul>
+            <li><a href="./index.html" target="main_frame">TRANG CHỦ</a></li>
+            <li><a href="./indexbac.html" target="main_frame">MIỀN BẮC</a></li>
+            <li><a href="./indextrung.html" target="main_frame">MIỀN TRUNG</a></li>
+            <li><a href="./indexnam.html" target="main_frame">MIỀN NAM</a></li>
+            <li><a href="./indexdoingu.html" target="main_frame">GIỚI THIỆU</a></li>
+        </ul>
+    </nav>
 
     <div class="container">
         <div id="doi-ngu">
@@ -316,7 +332,7 @@ nav {
             </p>
         </div>
     </div>
-</div>
+    </div>
 
     <br>
             
@@ -329,6 +345,20 @@ nav {
         <p style="margin-top: 20px; font-weight: bold; color: #b71c1c;">— Thân ái, Đội ngũ thực hiện dự án —</p>
     </div>
 </footer><br><br><br>
+
+    
+    <div class="music-player-fixed">
+    <div class="music-panel" id="music-panel">
+        <h4 style="margin: 0 0 10px 0; color: #d32f2f;">📻 Playlist Tết 2026</h4>
+        <div class="playlist" id="playlist-container"></div>
+        <audio id="main-audio" controls style="width: 100%; height: 40px;"></audio>
+        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+            <label for="music-input" style="font-size: 12px; color: #f39c12; cursor: pointer; font-weight: 700;">📁 TẢI NHẠC TỪ MÁY</label>
+            <input type="file" id="music-input" accept="audio/*" style="display:none;">
+        </div>
+    </div>
+    <button id="music-toggle">🎵</button>
+</div>
 
     <footer>
         <div class="footer-content">
@@ -346,67 +376,36 @@ nav {
         <div class="copy-right">© 2026 VanHoaTet3Mien - Truyền Thống Việt Nam</div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // 1. Xử lý Video Intro
-        const intro = document.getElementById('intro-overlay');
-        const video = document.getElementById('myVideo');
-        const skipBtn = document.getElementById('skip-btn');
-
-        function endIntro() {
-            intro.classList.add('hide-intro');
-            setTimeout(() => { intro.style.display = 'none'; }, 1000);
-        }
-
-        skipBtn.addEventListener('click', endIntro);
-        video.onended = endIntro;
-
-        // 2. Khởi tạo Slide 3D (Coverflow)
-        var swiper = new Swiper(".mySwiper", {
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true, // Bắt buộc phải là true để ảnh chính nằm giữa
-    slidesPerView: "auto", 
-    coverflowEffect: {
-        rotate: 30,      // Độ nghiêng vừa phải
-        stretch: 0,      // Để 0 để khoảng cách 2 bên bằng nhau tuyệt đối
-        depth: 200,      // Tạo độ sâu cho ảnh 2 bên lùi về sau
-        modifier: 1,
-        slideShadows: true,
-    },
-    loop: true,
+      function createPetal() {
+    const petals = ['🌸', '🌼', '🧧'];
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+    petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
     
-    // CẤU HÌNH THEO Ý BẠN:
-    autoplay: {
-        delay: 10000, // 10 giây mới tự chuyển một lần (rất lâu)
-        disableOnInteraction: true, // Khi bạn đã bấm/vuốt, nó sẽ dừng hẳn việc tự động chuyển
-    },
+    // Vị trí xuất hiện ngẫu nhiên
+    petal.style.left = Math.random() * 100 + 'vw';
+    
+    // Thời gian rơi ngẫu nhiên (4s - 7s)
+    const fallDuration = Math.random() * 5 + 10;
+    petal.style.animationDuration = fallDuration + 's, ' + (Math.random() * 2 + 2) + 's';
+    
+    // Kích thước ngẫu nhiên
+    petal.style.fontSize = Math.random() * 10 + 15 + 'px';
+    
+    // Độ mờ ngẫu nhiên để tạo chiều sâu
+    petal.style.opacity = Math.random();
 
-    // Cho phép điều khiển bằng bàn phím hoặc chuột
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true
-    }
-});
+    document.body.appendChild(petal);
 
-        // 3. Hiệu ứng hoa đào rơi
-        function createPetal() {
-            const petals = ['🌸', '🌼', '🧧'];
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-            petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
-            petal.style.fontSize = Math.random() * 10 + 10 + 'px';
-            document.body.appendChild(petal);
-            setTimeout(() => { petal.remove(); }, 6000);
-        }
-        setInterval(createPetal, 400);
+    // Xóa sau khi đã rơi xong (dựa trên fallDuration)
+    setTimeout(() => {
+        petal.remove();
+    }, fallDuration * 10000);
+}
 
+setInterval(createPetal, 1000);
+        
         // Chống chuột phải
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
@@ -424,6 +423,60 @@ document.onkeydown = function(e) {
         return false;
     }
 };
+
+const defaultSongs = [
+    { name: "🌸 Tết Này Con Sẽ Về", src: "tetnayconseve.mp3" },
+    { name: "🌸 Vạn Sự Như Ý", src: "vansunhuy.mp3" },
+    { name: "🌸 Một Năm Mới Bình An", src: "motnammoibinhan.mp3" },
+    { name: "🌸 Tết Đông Đầy", src: "tetdongday.mp3" },
+    { name: "🌸 Tết Ơi Tết À", src: "tetoiteta.mp3" }
+];
+
+const audio = document.getElementById('main-audio');
+const musicToggle = document.getElementById('music-toggle');
+const musicPanel = document.getElementById('music-panel');
+
+// Đóng mở bảng điều khiển
+musicToggle.onclick = () => musicPanel.classList.toggle('active');
+
+// Tạo danh sách bài hát
+function renderPlaylist() {
+    const container = document.getElementById('playlist-container');
+    container.innerHTML = '';
+    defaultSongs.forEach((song, index) => {
+        const div = document.createElement('div');
+        div.className = 'track';
+        div.innerHTML = song.name;
+        div.onclick = () => playTrack(index, div);
+        container.appendChild(div);
+    });
+}
+
+// Chạy bài hát được chọn
+function playTrack(index, element) {
+    audio.src = defaultSongs[index].src;
+    audio.play().catch(e => console.log("Cần tương tác với trang trước khi phát nhạc"));
+    document.querySelectorAll('.track').forEach(t => t.classList.remove('playing'));
+    element.classList.add('playing');
+}
+
+// Xử lý khi tải file nhạc từ máy
+document.getElementById('music-input').onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            audio.src = reader.result;
+            audio.play();
+            document.querySelectorAll('.track').forEach(t => t.classList.remove('playing'));
+        };
+        reader.readAsDataURL(file);
+    }
+};
+
+// Khởi chạy khi tải trang xong
+window.addEventListener('load', renderPlaylist);
+
     </script>
 </body>
 
