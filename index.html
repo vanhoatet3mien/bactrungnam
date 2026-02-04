@@ -307,6 +307,66 @@ nav ul li a:hover { color: var(--accent); }
 .lucky-alert h3 { color: var(--accent); margin: 0 0 10px 0; }
 .lucky-alert p { font-weight: bold; font-size: 18px; }
 .lucky-alert .amount { color: #2ecc71; font-size: 24px; display: block; margin-top: 10px; }
+
+/* Nâng cấp nút Pháo Hoa */
+.btn-fireworks {
+    position: relative;
+    background: linear-gradient(45deg, #ff5f6d, #ffc371); /* Màu gradient hoàng hôn/pháo hoa */
+    color: white;
+    padding: 15px 30px;
+    font-size: 15px;
+    font-weight: 900;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 20px rgba(230, 126, 34, 0.5);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    outline: none;
+    animation: glow-pulse 2s infinite; /* Hiệu ứng hào quang */
+}
+
+/* Hiệu ứng khi di chuột qua */
+.btn-fireworks:hover {
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 95, 109, 0.6);
+    background: linear-gradient(45deg, #ffc371, #ff5f6d);
+}
+
+/* Hiệu ứng tia sáng quét ngang khi hover */
+.btn-fireworks::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(30deg);
+    transition: all 0.75s ease;
+}
+
+.btn-fireworks:hover::after {
+    left: 120%;
+}
+
+/* Hiệu ứng rung rinh nhẹ để gây chú ý */
+@keyframes glow-pulse {
+    0% { box-shadow: 0 0 5px #ff5f6d; }
+    50% { box-shadow: 0 0 25px #ffc371; }
+    100% { box-shadow: 0 0 5px #ff5f6d; }
+}
+
+/* Xử lý link bên trong (nếu bạn vẫn dùng thẻ a) */
+.btn-fireworks a {
+    color: white;
+    text-decoration: none;
+}
     </style>
 </head>
 <body>
@@ -386,9 +446,9 @@ nav ul li a:hover { color: var(--accent); }
     </div>
 
     <div style="text-align: center; margin: 20px 0;">
-    <button class="btn-upload" onclick="launchFireworks()" style="background: #e67e22;">
-        <p><a href="https://lovelys2.vercel.app/firework/index.html?id=N4IgdghgtgpiBcIASEAOqCeACAcjA7lgJowQBOAPgMIAWAXwMZYCMADKwKQsBMAgs1kAIgIFq8AK64AaswoAVQIt4YAOZYZNCGBorRgUrwwWANIBLQON4AFwpJRgZ7wNW3QZPmZZQA2AgQsAlWJIGK8Q0MDAgEoUOIqiGICjeHqqgNN4WABCALcMmoIABwD2waERUTSxzoxCGRQSAK9YAApqekjpqX440BbWtlUAh6a4NICPeOaCdXohgLN4TACDGllhkSp5uIojXmGAg3hgsmSA5Xh6goHK+jTpEM02mgAyAFeVNO6eAKoYZ6shU1E6eryrZV3Cne801BDpLAAWUMrRoHUmORmsSBgE+8LAAETCD0h0yMUCwAHFDOplIIIFgAEqHZybaEODFIQCNeEEnlDBIBLvCYlgwqNybT8e1xFCqAE-PDE5gsToBjvEMFDivL85xUACOMTgrjyaIBCvAxVWuylUvNZdOm2uwEllqyQgGW8cnorwDRSycHSi7YglcoKkt62IxmNZkwVEQD9eHoTqC-qoOVgZapxCFjcq1YtjkKGDGMf1UjVNVgAIotYN2rBUAAvApoqb+etysUtqgObPJfr0VXFZfJcMzyNWJwJqhLQhV5lohTYnB4-CEYkk0n7TEHXGYfAEIkjUmo9Cn7Bnc9Hi4nK5Ya+H87HOCXk93Q9nI4X4+XA7354PW+vq7PG8vR+3N+fF8Px530-3m6vE8-zvAC30fU91y-B8gNvF9v3fJ9IPvQDf1gqCUI-JDQJ-TD-1fHDELw+DwOAuDoNQz9kLAmDKOwhCIKI8jcJA-D6NI9DqIorDWJItCqIIhiWOImjuOErjGIwwihKYqSyMkwS5M45jFIE9j+LYvi6IsNBMFwAhiFISgUHQbA8EIEhyG0ky9PMwyrN0syDMs4yHP0iyjJ00y3LslyvNs5zPJspyPOsxz3PsvzgoioLwt8mKfMCsKEtC7yApS-yQtcjLoqStKsqiuLcsyyLYsS1LivivKSuS-LSvSgqyuywrypylrmqaxqGvqurapq6qqsqsgQAAGhAQwoAgRQYAAZwQABtABdABfIA">🎆 XEM DEMO PHÁO HOA</a></p>
-    </button>
+    <button class="btn-fireworks" onclick="window.open('https://lovelys2.vercel.app/firework/index.html?id=N4IgdghgtgpiBcIASEAOqCeACAcjA7lgJowQBOAPgMIAWAXwMZYCMADKwKQsBMAgs1kAIgIFq8AK64AaswoAVQIt4YAOZYZNCGBorRgUrwwWANIBLQON4AFwpJRgZ7wNW3QZPmZZQA2AgQsAlWJIGK8Q0MDAgEoUOIqiGICjeHqqgNN4WABCALcMmoIABwD2waERUTSxzoxCGRQSAK9YAApqekjpqX440BbWtlUAh6a4NICPeOaCdXohgLN4TACDGllhkSp5uIojXmGAg3hgsmSA5Xh6goHK+jTpEM02mgAyAFeVNO6eAKoYZ6shU1E6eryrZV3Cne801BDpLAAWUMrRoHUmORmsSBgE+8LAAETCD0h0yMUCwAHFDOplIIIFgAEqHZybaEODFIQCNeEEnlDBIBLvCYlgwqNybT8e1xFCqAE-PDE5gsToBjvEMFDivL85xUACOMTgrjyaIBCvAxVWuylUvNZdOm2uwEllqyQgGW8cnorwDRSycHSi7YglcoKkt62IxmNZkwVEQD9eHoTqC-qoOVgZapxCFjcq1YtjkKGDGMf1UjVNVgAIotYN2rBUAAvApoqb+etysUtqgObPJfr0VXFZfJcMzyNWJwJqhLQhV5lohTYnB4-CEYkk0n7TEHXGYfAEIkjUmo9Cn7Bnc9Hi4nK5Ya+H87HOCXk93Q9nI4X4+XA7354PW+vq7PG8vR+3N+fF8Px530-3m6vE8-zvAC30fU91y-B8gNvF9v3fJ9IPvQDf1gqCUI-JDQJ-TD-1fHDELw+DwOAuDoNQz9kLAmDKOwhCIKI8jcJA-D6NI9DqIorDWJItCqIIhiWOImjuOErjGIwwihKYqSyMkwS5M45jFIE9j+LYvi6IsNBMFwAhiFISgUHQbA8EIEhyG0ky9PMwyrN0syDMs4yHP0iyjJ00y3LslyvNs5zPJspyPOsxz3PsvzgoioLwt8mKfMCsKEtC7yApS-yQtcjLoqStKsqiuLcsyyLYsS1LivivKSuS-LSvSgqyuywrypylrmqaxqGvqurapq6qqsqsgQAAGhAQwoAgRQYAAZwQABtABdABfIA', '_blank')">
+    <span>🎆</span> CÙNG XEM PHÁO HOA NHA
+</button>
 </div>
 
     <div class="music-player-fixed">
@@ -769,9 +829,4 @@ function closeLucky() {
 setInterval(createLuckyEnvelope, 10000);
     </script>
 </body>
-
 </html>
-
-
-
-
